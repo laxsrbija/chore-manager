@@ -8,16 +8,16 @@ import lombok.RequiredArgsConstructor;
 public abstract class CrudRepository<T>
 {
 	private final JsonDBTemplate _jsonDBTemplate;
-	private final Class<T> type;
+	private final Class<T> _type;
 
 	public T findById(final String id)
 	{
-		return _jsonDBTemplate.findById(id, type);
+		return _jsonDBTemplate.findById(id, _type);
 	}
 
 	public List<T> findAll()
 	{
-		return _jsonDBTemplate.findAll(type);
+		return _jsonDBTemplate.findAll(_type);
 	}
 
 	public void save(final T data)
@@ -27,6 +27,6 @@ public abstract class CrudRepository<T>
 
 	public void delete(String id)
 	{
-		_jsonDBTemplate.remove(findById(id), type);
+		_jsonDBTemplate.remove(findById(id), _type);
 	}
 }

@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import io.jsondb.JsonDBTemplate;
 import lombok.extern.slf4j.Slf4j;
+import rs.laxsrbija.chores.data.entity.Task;
 import rs.laxsrbija.chores.data.entity.User;
 
 @Slf4j
@@ -25,7 +26,7 @@ public class JsondbConfiguration
 
 	private static void registerCollections(final JsonDBTemplate jsonDBTemplate)
 	{
-		final List<Class<?>> classes = List.of(User.class);
+		final List<Class<?>> classes = List.of(User.class, Task.class);
 
 		for (final Class<?> clazz : classes)
 		{

@@ -28,4 +28,10 @@ public class TestController
 			.build();
 		_userRepository.save(user);
 	}
+
+	@DeleteMapping
+	public void delete(@RequestParam final String id)
+	{
+		_userRepository.delete(id);
+	}
 }
