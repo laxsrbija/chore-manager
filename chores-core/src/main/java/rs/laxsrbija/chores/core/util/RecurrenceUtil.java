@@ -96,7 +96,7 @@ public class RecurrenceUtil
 		}
 		else
 		{
-			throw new ChoreManagerException("Fixed recurrence not set");
+			throw new ChoreManagerException("Fixed recurrence interval not set");
 		}
 
 		return nextRun;

@@ -1,10 +1,12 @@
-package rs.laxsrbija.chores.core.service;
+package rs.laxsrbija.chores.messaging.service;
 
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import rs.laxsrbija.chores.core.service.TaskService;
+import rs.laxsrbija.chores.core.service.UserService;
 import rs.laxsrbija.chores.shared.model.dto.Task;
 import rs.laxsrbija.chores.shared.model.dto.User;
 
