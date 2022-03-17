@@ -21,6 +21,7 @@
 		<module>chores-data</module>
 		<module>chores-webapp</module>
 		<module>chores-shared</module>
+		<module>chores-messaging</module>
 	</modules>
 
 	<properties>

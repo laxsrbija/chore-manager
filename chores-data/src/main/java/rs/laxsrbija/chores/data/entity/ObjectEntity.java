@@ -8,7 +8,8 @@ import lombok.experimental.SuperBuilder;
 @EqualsAndHashCode(callSuper = true)
 @SuperBuilder
 @AllArgsConstructor
-@Document(collection = "users", schemaVersion = "1.0")
-public class User extends BaseEntity
+@Document(collection = "objects", schemaVersion = "1.0")
+public class ObjectEntity extends BaseEntity
 {
+	private String categoryId;
 }

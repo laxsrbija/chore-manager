@@ -1,10 +1,12 @@
 package rs.laxsrbija.chores.shared.model.recurrence;
 
-import java.time.LocalDate;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@Builder
 public class FixedRecurrence implements Recurrence
 {
-	private LocalDate taskDate;
+	private Integer day;
+	private Integer month;
 }

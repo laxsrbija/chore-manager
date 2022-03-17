@@ -1,6 +1,5 @@
-package rs.laxsrbija.chores.data.entity;
+package rs.laxsrbija.chores.shared.model.dto;
 
-import io.jsondb.annotation.Id;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -8,9 +7,8 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
-class BaseEntity
+class BaseDto
 {
-	@Id
 	private String id;
 
 	private String name;

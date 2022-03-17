@@ -3,7 +3,7 @@ package rs.laxsrbija.chores.webapp;
 import java.util.List;
 import org.springframework.web.bind.annotation.*;
 import lombok.RequiredArgsConstructor;
-import rs.laxsrbija.chores.data.entity.User;
+import rs.laxsrbija.chores.data.entity.UserEntity;
 import rs.laxsrbija.chores.data.repository.UserRepository;
 
 @RestController
@@ -13,7 +13,7 @@ public class TestController
 	private final UserRepository _userRepository;
 
 	@GetMapping
-	public List<User> getUsers()
+	public List<UserEntity> getUsers()
 	{
 		return _userRepository.findAll();
 	}
@@ -21,7 +21,7 @@ public class TestController
 	@PostMapping
 	public void save(@RequestParam final String id)
 	{
-		final User user = User.builder()
+		final UserEntity user = UserEntity.builder()
 			.id(id)
 			.name("ASD")
 			.image("dasdasd")
