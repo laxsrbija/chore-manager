@@ -35,6 +35,11 @@
 			<artifactId>chores-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>rs.laxsrbija.chores</groupId>
+			<artifactId>chores-messaging</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
