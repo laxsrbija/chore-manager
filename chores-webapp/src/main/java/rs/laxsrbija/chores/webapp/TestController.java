@@ -24,7 +24,6 @@ public class TestController
 		final UserEntity user = UserEntity.builder()
 			.id(id)
 			.name("ASD")
-			.image("dasdasd")
 			.build();
 		_userRepository.save(user);
 	}

@@ -3,19 +3,23 @@ package rs.laxsrbija.chores.data.entity;
 import java.time.LocalDate;
 import java.util.List;
 import io.jsondb.annotation.Document;
+import io.jsondb.annotation.Id;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 import rs.laxsrbija.chores.shared.model.CompletionHistoryItem;
 import rs.laxsrbija.chores.shared.model.ReminderInfo;
 import rs.laxsrbija.chores.shared.model.recurrence.Recurrence;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
-@SuperBuilder
+@Builder
 @AllArgsConstructor
 @Document(collection = "tasks", schemaVersion = "1.0")
-public class TaskEntity extends BaseEntity
+public class TaskEntity
 {
+	@Id
+	private String id;
+
+	private String name;
+
 	private LocalDate dateCreated;
 
 	private String objectId;

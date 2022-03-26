@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import rs.laxsrbija.chores.core.mapper.TaskMapper;
 import rs.laxsrbija.chores.core.util.RecurrenceUtil;
 import rs.laxsrbija.chores.data.repository.TaskRepository;
+import rs.laxsrbija.chores.shared.model.dto.Object;
 import rs.laxsrbija.chores.shared.model.dto.Task;
 import rs.laxsrbija.chores.shared.model.recurrence.*;
 
@@ -16,13 +17,17 @@ import rs.laxsrbija.chores.shared.model.recurrence.*;
 @RequiredArgsConstructor
 public class TaskService
 {
+	private final ObjectService _objectService;
 	private final TaskRepository _taskRepository;
 	private final TaskMapper _taskMapper;
 
 	public List<Task> getAllTasks()
 	{
 		return _taskRepository.findAll().stream()
-			.map(_taskMapper::toTask)
+			.map(task -> {
+				final Object object = _objectService.getObject(task.getObjectId());
+				return _taskMapper.toTask(task, object);
+			})
 			.collect(Collectors.toList());
 	}
 

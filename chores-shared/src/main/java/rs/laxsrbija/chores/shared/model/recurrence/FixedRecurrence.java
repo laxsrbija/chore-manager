@@ -1,10 +1,12 @@
 package rs.laxsrbija.chores.shared.model.recurrence;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor
 public class FixedRecurrence implements Recurrence
 {
 	private Integer day;

@@ -29,7 +29,7 @@ public class ReminderService
 			return false;
 		}
 
-		final long daysUntilNextRecurrence = TaskService.getDaysUntilNextRecurrence(task);
+		final long daysUntilNextRecurrence = task.getDaysUntilNextRecurrence();
 		final long daysToRemindBeforeRecurrence = task.getReminder().getReminderDate().getNumberOfDays();
 
 		return daysToRemindBeforeRecurrence == daysUntilNextRecurrence;

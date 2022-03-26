@@ -24,7 +24,6 @@ public class TestService
 		final LocalDate date = LocalDate.of(2022, 3, 10);
 		final Task task = Task.builder()
 			.history(List.of(CompletionHistoryItem.builder()
-				.userId("1")
 				.dateCompleted(date)
 				.build()))
 			.reminder(ReminderInfo.builder()

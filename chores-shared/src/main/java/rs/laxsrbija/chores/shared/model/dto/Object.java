@@ -9,5 +9,5 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 public class Object extends BaseDto
 {
-	private String categoryId;
+	private Category category;
 }

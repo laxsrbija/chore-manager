@@ -1,13 +1,13 @@
 package rs.laxsrbija.chores.shared.model.recurrence;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import rs.laxsrbija.chores.shared.model.date.DatePeriod;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
 @SuperBuilder
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class DynamicRecurrence extends DatePeriod implements Recurrence
 {
 

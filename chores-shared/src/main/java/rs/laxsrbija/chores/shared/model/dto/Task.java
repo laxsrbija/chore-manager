@@ -16,9 +16,13 @@ public class Task extends BaseDto
 {
 	private LocalDate dateCreated;
 
-	private String objectId;
+	private Object object;
 
 	private Recurrence recurrence;
+
+	private long daysUntilNextRecurrence;
+
+	private LocalDate nextRecurrence;
 
 	private List<CompletionHistoryItem> history;
 

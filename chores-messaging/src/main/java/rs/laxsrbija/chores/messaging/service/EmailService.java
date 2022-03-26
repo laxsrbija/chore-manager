@@ -8,7 +8,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import rs.laxsrbija.chores.core.service.TaskService;
 import rs.laxsrbija.chores.core.service.UserService;
 import rs.laxsrbija.chores.shared.model.dto.Task;
 import rs.laxsrbija.chores.shared.model.dto.User;
@@ -36,7 +35,7 @@ public class EmailService
 		final MimeMessage message = _mailSender.createMimeMessage();
 		final MimeMessageHelper messageHelper = new MimeMessageHelper(message);
 
-		final String subject = "[CM] " + task.getName() + " - " + TaskService.getNextRecurrence(task);
+		final String subject = "[CM] " + task.getName() + " - " + task.getNextRecurrence();
 		final String text = getReminderText(user, task);
 
 		try
@@ -59,8 +58,8 @@ public class EmailService
 		return "Hi " + user.getName() + ",<br><br>"
 			+ "This is a reminder about the following task:<br>"
 			+ "Task name: <strong>" + task.getName() + "</strong><br>"
-			+ "Due date: <strong>" + TaskService.getNextRecurrence(task) + "</strong> "
-			+ "(in <strong>" + TaskService.getDaysUntilNextRecurrence(task) + " days</strong>)<br><br>"
+			+ "Due date: <strong>" + task.getNextRecurrence() + "</strong> "
+			+ "(in <strong>" + task.getDaysUntilNextRecurrence() + " days</strong>)<br><br>"
 			+ "Chore Manager";
 	}
 }
