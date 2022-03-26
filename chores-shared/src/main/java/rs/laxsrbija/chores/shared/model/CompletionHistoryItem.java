@@ -8,6 +8,5 @@ import lombok.Data;
 @Builder
 public class CompletionHistoryItem
 {
-	private String userId;
 	private LocalDate dateCompleted;
 }
