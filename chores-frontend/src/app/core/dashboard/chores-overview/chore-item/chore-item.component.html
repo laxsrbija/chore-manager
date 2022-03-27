@@ -13,11 +13,9 @@
 			<img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
 		</figure>
 	</div>
-	<div class="column is-2 has-text-right" [ngClass]="{'has-text-danger': (task?.daysUntilNextRecurrence ?? 0) < 0}">
-		{{ (task?.daysUntilNextRecurrence ?? 0) < 0
-		? (task?.daysUntilNextRecurrence ?? 0) * -1
-		: (task?.daysUntilNextRecurrence ?? 0) }} days
-		<span *ngIf="(task?.daysUntilNextRecurrence ?? 0) < 0">ago</span>
+	<div class="column is-2 has-text-right">
+		<span [ngClass]="{'has-text-danger': task?.daysUntilNextRecurrence < 0}">
+			{{ getRelativeDateString() }}</span>
 	</div>
 	<div class="column is-narrow">
 

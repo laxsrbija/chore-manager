@@ -54,7 +54,9 @@ public class TaskService
 	public static LocalDate getNextRecurrence(final Task task)
 	{
 		final LocalDate latestCompletion =
-			task.getHistory() != null ? task.getHistory().get(task.getHistory().size() - 1).getDateCompleted() : null;
+			task.getHistory() != null && !task.getHistory().isEmpty()
+				? task.getHistory().get(task.getHistory().size() - 1).getDateCompleted()
+				: null;
 
 		final Recurrence recurrence = task.getRecurrence();
 		if (recurrence instanceof DynamicRecurrence)
