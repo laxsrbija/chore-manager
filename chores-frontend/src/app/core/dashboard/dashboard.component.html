@@ -14,9 +14,9 @@
 	<div class="container">
 		<div class="columns pb-5">
 			<app-chores-overview class="column m-2 p-4" style="border-radius: 4px; background-color: white"
-			                     [sectionTitle]="'Upcoming chores'"></app-chores-overview>
+			                     [sectionTitle]="'Upcoming chores'" [tasks]="overview?.upcoming"></app-chores-overview>
 			<app-chores-overview class="column m-2 p-4" style="border-radius: 4px; background-color: white"
-			                     [sectionTitle]="'Overdue chores'"></app-chores-overview>
+			                     [sectionTitle]="'Overdue chores'" [tasks]="overview?.overdue"></app-chores-overview>
 		</div>
 	</div>
 </section>

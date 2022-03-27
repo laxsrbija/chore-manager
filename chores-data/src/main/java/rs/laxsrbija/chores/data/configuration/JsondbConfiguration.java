@@ -6,14 +6,13 @@ import org.springframework.context.annotation.Configuration;
 import io.jsondb.JsonDBTemplate;
 import lombok.extern.slf4j.Slf4j;
 import rs.laxsrbija.chores.data.entity.*;
-import rs.laxsrbija.chores.data.entity.ObjectEntity;
 
 @Slf4j
 @Configuration
 public class JsondbConfiguration
 {
 	private static final String STORE_DIRECTORY = "/c/chores/store";
-	private static final String ENTITIES_PACKAGE = "rs.laxsrbija.chores.data.entity";
+	private static final String ENTITIES_PACKAGE = UserEntity.class.getPackageName();
 
 	@Bean
 	public JsonDBTemplate getJsonDBTemplate()

@@ -1,10 +1,10 @@
 <div class="columns is-vcentered">
 	<div class="column">
-		<p class="has-text-weight-semibold">Čišćenje filtera od prašine</p>
+		<p class="has-text-weight-semibold">{{ task?.name }}</p>
 		<nav class="breadcrumb is-small" aria-label="breadcrumbs">
 			<ul>
-				<li><a href="#">Kućni aparati</a></li>
-				<li><a href="#">Odvlaživač</a></li>
+				<li><a href="#">{{ task?.object?.category?.name }}</a></li>
+				<li><a href="#">{{ task?.object?.name }}</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -14,7 +14,7 @@
 		</figure>
 	</div>
 	<div class="column is-2 has-text-right">
-		13 dana
+		{{ task?.daysUntilNextRecurrence }} days
 	</div>
 	<div class="column is-narrow">
 

@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { Task } from "../../../../model/dto/task";
 
 @Component({
-  selector: 'app-chore-item',
-  templateUrl: './chore-item.component.html',
-  styleUrls: ['./chore-item.component.css']
+	selector: 'app-chore-item',
+	templateUrl: './chore-item.component.html',
+	styleUrls: ['./chore-item.component.css']
 })
-export class ChoreItemComponent implements OnInit {
+export class ChoreItemComponent {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+	@Input() task?: Task;
 
 }

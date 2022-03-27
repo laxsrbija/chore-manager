@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,19 +11,21 @@ import { ChoresOverviewComponent } from './core/dashboard/chores-overview/chores
 import { ChoreItemComponent } from './core/dashboard/chores-overview/chore-item/chore-item.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    DashboardComponent,
-    FooterComponent,
-    ChoresOverviewComponent,
-    ChoreItemComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		NavbarComponent,
+		DashboardComponent,
+		FooterComponent,
+		ChoresOverviewComponent,
+		ChoreItemComponent
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		HttpClientModule
+	],
+	providers: [],
+	bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

@@ -1,8 +1,4 @@
 <p class="subtitle" [textContent]="sectionTitle"></p>
-<div class="container">
-	<app-chore-item></app-chore-item>
-	<app-chore-item></app-chore-item>
-	<app-chore-item></app-chore-item>
-	<app-chore-item></app-chore-item>
-	<app-chore-item></app-chore-item>
+<div class="container" *ngFor="let task of tasks">
+	<app-chore-item [task]="task"></app-chore-item>
 </div>
