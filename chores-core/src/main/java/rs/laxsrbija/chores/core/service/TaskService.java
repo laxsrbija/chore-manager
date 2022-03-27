@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 import rs.laxsrbija.chores.core.mapper.TaskMapper;
 import rs.laxsrbija.chores.core.util.RecurrenceUtil;
+import rs.laxsrbija.chores.data.entity.TaskEntity;
 import rs.laxsrbija.chores.data.repository.TaskRepository;
+import rs.laxsrbija.chores.shared.model.CompletionHistoryItem;
 import rs.laxsrbija.chores.shared.model.dto.Object;
 import rs.laxsrbija.chores.shared.model.dto.Task;
 import rs.laxsrbija.chores.shared.model.recurrence.*;
@@ -21,14 +23,32 @@ public class TaskService
 	private final TaskRepository _taskRepository;
 	private final TaskMapper _taskMapper;
 
+	public Task getTask(final String id)
+	{
+		final TaskEntity task = _taskRepository.findById(id);
+		return getTask(task);
+	}
+
 	public List<Task> getAllTasks()
 	{
 		return _taskRepository.findAll().stream()
-			.map(task -> {
-				final Object object = _objectService.getObject(task.getObjectId());
-				return _taskMapper.toTask(task, object);
-			})
+			.map(this::getTask)
 			.collect(Collectors.toList());
+	}
+
+	private Task getTask(final TaskEntity task)
+	{
+		final Object object = _objectService.getObject(task.getObjectId());
+		return _taskMapper.toTask(task, object);
+	}
+
+	public void markComplete(final String id, final LocalDate dateCompleted)
+	{
+		final Task task = getTask(id);
+		task.getHistory().add(CompletionHistoryItem.builder().dateCompleted(dateCompleted).build());
+
+		final TaskEntity taskEntity = _taskMapper.toTaskEntity(task);
+		_taskRepository.save(taskEntity);
 	}
 
 	public static LocalDate getNextRecurrence(final Task task)

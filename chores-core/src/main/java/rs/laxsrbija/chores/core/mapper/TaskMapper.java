@@ -25,4 +25,17 @@ public class TaskMapper
 		task.setNextRecurrence(TaskService.getNextRecurrence(task));
 		return task;
 	}
+
+	public TaskEntity toTaskEntity(final Task task)
+	{
+		return TaskEntity.builder()
+			.id(task.getId())
+			.name(task.getName())
+			.enabled(task.isEnabled())
+			.history(task.getHistory())
+			.recurrence(task.getRecurrence())
+			.reminder(task.getReminder())
+			.objectId(task.getObject().getId())
+			.build();
+	}
 }

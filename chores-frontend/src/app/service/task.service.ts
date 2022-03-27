@@ -13,4 +13,8 @@ export class TaskService {
 	getOverview() {
 		return this.http.get<Overview>('/api/tasks/overview')
 	}
+
+	markComplete(id: string) {
+		return this.http.put('/api/tasks/' + id, undefined);
+	}
 }

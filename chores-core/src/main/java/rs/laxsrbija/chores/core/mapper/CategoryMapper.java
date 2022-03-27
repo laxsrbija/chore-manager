@@ -10,6 +10,7 @@ public class CategoryMapper
 	public Category toCategory(final CategoryEntity category)
 	{
 		return Category.builder()
+			.id(category.getId())
 			.name(category.getName())
 			.build();
 	}

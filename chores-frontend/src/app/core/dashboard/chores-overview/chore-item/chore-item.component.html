@@ -13,14 +13,17 @@
 			<img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
 		</figure>
 	</div>
-	<div class="column is-2 has-text-right">
-		{{ task?.daysUntilNextRecurrence }} days
+	<div class="column is-2 has-text-right" [ngClass]="{'has-text-danger': (task?.daysUntilNextRecurrence ?? 0) < 0}">
+		{{ (task?.daysUntilNextRecurrence ?? 0) < 0
+		? (task?.daysUntilNextRecurrence ?? 0) * -1
+		: (task?.daysUntilNextRecurrence ?? 0) }} days
+		<span *ngIf="(task?.daysUntilNextRecurrence ?? 0) < 0">ago</span>
 	</div>
 	<div class="column is-narrow">
 
 		<div class="field has-addons">
 			<p class="control">
-				<button class="button">
+				<button class="button" (click)="markComplete()">
                     <span class="icon">
                       <i class="fa-solid fa-square-check"></i>
                     </span>

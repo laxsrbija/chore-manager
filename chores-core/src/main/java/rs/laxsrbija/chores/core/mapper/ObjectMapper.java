@@ -11,6 +11,7 @@ public class ObjectMapper
 	public Object toObject(final ObjectEntity object, final Category category)
 	{
 		return Object.builder()
+			.id(object.getId())
 			.name(object.getName())
 			.category(category)
 			.build();
