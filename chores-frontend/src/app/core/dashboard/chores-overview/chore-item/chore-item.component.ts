@@ -16,7 +16,7 @@ export class ChoreItemComponent {
 	}
 
 	markComplete() {
-		if (this.task)
+		if (this.task && this.task.id)
 		{
 			this.taskService.markComplete(this.task.id).subscribe();
 		}

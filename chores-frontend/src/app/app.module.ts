@@ -9,6 +9,9 @@ import { DashboardComponent } from './core/dashboard/dashboard.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { ChoresOverviewComponent } from './core/dashboard/chores-overview/chores-overview.component';
 import { ChoreItemComponent } from './core/dashboard/chores-overview/chore-item/chore-item.component';
+import { CategoriesComponent } from './core/categories/categories.component';
+import { CategoryItemComponent } from './core/categories/category-item/category-item.component';
+import { CategoryModalComponent } from './core/categories/category-modal/category-modal.component';
 
 @NgModule({
 	declarations: [
@@ -17,7 +20,10 @@ import { ChoreItemComponent } from './core/dashboard/chores-overview/chore-item/
 		DashboardComponent,
 		FooterComponent,
 		ChoresOverviewComponent,
-		ChoreItemComponent
+		ChoreItemComponent,
+		CategoriesComponent,
+		CategoryItemComponent,
+		CategoryModalComponent
 	],
 	imports: [
 		BrowserModule,

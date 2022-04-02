@@ -29,7 +29,6 @@ public class OverviewService
 		final List<Task> overdue = tasks.stream()
 			.filter(task -> task.getDaysUntilNextRecurrence() < 0)
 			.sorted(Comparator.comparingLong(Task::getDaysUntilNextRecurrence))
-			.limit(MAX_OVERVIEW_TASK_SIZE)
 			.collect(Collectors.toList());
 
 		return Overview.builder()

@@ -1,0 +1,35 @@
+<div class="modal" [ngClass]="{'is-active': visible}">
+	<div class="modal-background"></div>
+	<div class="modal-card">
+		<header class="modal-card-head">
+			<p class="modal-card-title">{{ category.id ? 'Edit' : 'Create new' }} category</p>
+			<button class="delete" aria-label="close" (click)="hide()"></button>
+		</header>
+		<section class="modal-card-body">
+			<div class="field">
+				<label class="label">Category name</label>
+				<div class="control">
+					<input class="input" type="text"
+					       value="{{category.name}}"
+					       (keyup)="category.name=categoryName.value"
+					       #categoryName>
+				</div>
+			</div>
+			<div class="field">
+				<label class="label">Category image URL</label>
+				<div class="control">
+					<input class="input" type="text"
+					       value="{{category.url}}"
+					       (keyup)="category.url=categoryUrl.value"
+					       #categoryUrl>
+				</div>
+			</div>
+		</section>
+		<footer class="modal-card-foot">
+			<button class="button is-success"
+			        (click)="saveCategory()"
+			        [disabled]="!category.name || !category.url">Save changes</button>
+			<button class="button" (click)="hide()">Cancel</button>
+		</footer>
+	</div>
+</div>

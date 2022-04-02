@@ -1,4 +1,5 @@
 export interface BaseDto {
-	id: string;
-	name: string;
+	id?: string;
+	name?: string;
+	url?: string;
 }
