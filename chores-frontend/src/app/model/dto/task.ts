@@ -1,7 +1,7 @@
 import { BaseDto } from "./base-dto";
-import { Object } from "./object";
+import { Item } from "./item";
 
 export interface Task extends BaseDto {
-	object: Object;
+	object: Item;
 	daysUntilNextRecurrence: number;
 }

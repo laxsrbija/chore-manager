@@ -24,6 +24,7 @@ export class CategoryModalComponent {
 
   saveCategory() {
     this.saveEvent.emit(this.category);
+    this.hide();
   }
 
   hide() {

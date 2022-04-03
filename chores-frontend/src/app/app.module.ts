@@ -12,6 +12,10 @@ import { ChoreItemComponent } from './core/dashboard/chores-overview/chore-item/
 import { CategoriesComponent } from './core/categories/categories.component';
 import { CategoryItemComponent } from './core/categories/category-item/category-item.component';
 import { CategoryModalComponent } from './core/categories/category-modal/category-modal.component';
+import { ItemsComponent } from './core/items/items.component';
+import { ItemComponent } from './core/items/item/item.component';
+import { ItemModalComponent } from './core/items/item-modal/item-modal.component';
+import { TasksComponent } from './core/tasks/tasks.component';
 
 @NgModule({
 	declarations: [
@@ -23,7 +27,11 @@ import { CategoryModalComponent } from './core/categories/category-modal/categor
 		ChoreItemComponent,
 		CategoriesComponent,
 		CategoryItemComponent,
-		CategoryModalComponent
+		CategoryModalComponent,
+		ItemsComponent,
+		ItemComponent,
+		ItemModalComponent,
+		TasksComponent
 	],
 	imports: [
 		BrowserModule,
