@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from "@angular/common/http";
+import { FormsModule } from "@angular/forms";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +17,11 @@ import { ItemsComponent } from './core/items/items.component';
 import { ItemComponent } from './core/items/item/item.component';
 import { ItemModalComponent } from './core/items/item-modal/item-modal.component';
 import { TasksComponent } from './core/tasks/tasks.component';
+import { ListHeaderComponent } from './shared/list-header/list-header.component';
+import { TaskModalComponent } from './core/tasks/task-modal/task-modal.component';
+import { TaskComponent } from "./core/tasks/task/task.component";
+import { TaskShortcutsComponent } from './shared/task-shortcuts/task-shortcuts.component';
+import { ImageUrlInputComponent } from './shared/image-url-input/image-url-input.component';
 
 @NgModule({
 	declarations: [
@@ -31,12 +37,18 @@ import { TasksComponent } from './core/tasks/tasks.component';
 		ItemsComponent,
 		ItemComponent,
 		ItemModalComponent,
-		TasksComponent
+		TasksComponent,
+		ListHeaderComponent,
+		TaskModalComponent,
+		TaskComponent,
+		TaskShortcutsComponent,
+		ImageUrlInputComponent
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
-		HttpClientModule
+		HttpClientModule,
+		FormsModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

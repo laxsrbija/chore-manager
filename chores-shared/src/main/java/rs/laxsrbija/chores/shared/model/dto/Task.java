@@ -14,6 +14,8 @@ import rs.laxsrbija.chores.shared.model.recurrence.Recurrence;
 @AllArgsConstructor
 public class Task extends BaseDto
 {
+	private String description;
+
 	private LocalDate dateCreated;
 
 	private Object object;

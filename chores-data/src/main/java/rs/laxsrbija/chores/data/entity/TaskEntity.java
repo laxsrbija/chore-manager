@@ -20,6 +20,8 @@ public class TaskEntity
 
 	private String name;
 
+	private String description;
+
 	private LocalDate dateCreated;
 
 	private String objectId;

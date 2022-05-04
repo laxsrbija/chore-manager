@@ -1,15 +1,8 @@
-<section style="background-color: white">
-	<div class="container p-4">
-		<div class="columns is-vcentered">
-			<div class="column">
-				<div class="subtitle">Items</div>
-			</div>
-			<div class="column is-narrow">
-				<button class="button is-info is-outlined" (click)="modal.createItem()">Add a new item</button>
-			</div>
-		</div>
-	</div>
-</section>
+<app-list-header
+	headerTitle="Items"
+	buttonLabel="Add a new item"
+	(clickEvent)="modal.createItem()">
+</app-list-header>
 
 <app-item></app-item>
 <app-item></app-item>

@@ -30,6 +30,10 @@ export class ChoreItemComponent {
 
 		const daysUntilNextRecurrence = this.task.daysUntilNextRecurrence;
 
+		if (!daysUntilNextRecurrence) {
+			return "Unknown";
+		}
+
 		if (daysUntilNextRecurrence === 1) {
 			return 'Tomorrow';
 		}

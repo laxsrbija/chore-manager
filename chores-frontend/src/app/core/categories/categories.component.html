@@ -1,15 +1,8 @@
-<section style="background-color: white">
-	<div class="container p-4">
-		<div class="columns is-vcentered">
-			<div class="column">
-				<div class="subtitle">Categories</div>
-			</div>
-			<div class="column is-narrow">
-				<button class="button is-info is-outlined" (click)="modal.createCategory()">Add a new category</button>
-			</div>
-		</div>
-	</div>
-</section>
+<app-list-header
+	headerTitle="Categories"
+	buttonLabel="Add a new category"
+	(clickEvent)="modal.createCategory()">
+</app-list-header>
 
 <app-category-item></app-category-item>
 <app-category-item></app-category-item>

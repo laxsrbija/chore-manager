@@ -10,5 +10,7 @@ import rs.laxsrbija.chores.shared.model.date.DatePeriod;
 public class ReminderInfo
 {
 	private List<String> usersToNotify;
+
+	// Days to remind before the actual due date
 	private DatePeriod reminderDate;
 }
