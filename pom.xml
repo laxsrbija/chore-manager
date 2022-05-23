@@ -17,11 +17,7 @@
 	<name>Chores Manager</name>
 
 	<modules>
-		<module>chores-core</module>
-		<module>chores-data</module>
-		<module>chores-webapp</module>
-		<module>chores-shared</module>
-		<module>chores-messaging</module>
+		<module>chores-backend</module>
 	</modules>
 
 	<properties>

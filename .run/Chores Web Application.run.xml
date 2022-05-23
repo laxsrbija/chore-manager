@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Chores Web Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
     <option name="ACTIVE_PROFILES" />
-    <module name="webapp" />
-    <option name="SPRING_BOOT_MAIN_CLASS" value="rs.laxsrbija.chores.webapp.ChoresWebApplication" />
+    <module name="chores-backend" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="rs.laxsrbija.chores.application.ChoresWebApplication" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
