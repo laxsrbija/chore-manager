@@ -5,18 +5,18 @@ import static rs.laxsrbija.chores.common.Commons.forEach;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import rs.laxsrbija.chores.adapter.out.persistence.PersistenceAdapter;
 import rs.laxsrbija.chores.adapter.out.persistence.entity.TaskEntity;
 import rs.laxsrbija.chores.application.port.out.ItemOutboundPort;
 import rs.laxsrbija.chores.application.port.out.TaskOutboundPort;
 import rs.laxsrbija.chores.application.port.out.UserOutboundPort;
-import rs.laxsrbija.chores.application.util.IdGenerator;
 import rs.laxsrbija.chores.domain.Item;
 import rs.laxsrbija.chores.domain.Task;
 import rs.laxsrbija.chores.domain.User;
 
 @Component
 @RequiredArgsConstructor
-public class TaskPersistenceAdapter implements TaskOutboundPort {
+public class TaskPersistenceAdapter extends PersistenceAdapter<Task> implements TaskOutboundPort {
 
   private final TaskMapper taskMapper;
   private final TaskRepository taskRepository;
@@ -35,13 +35,9 @@ public class TaskPersistenceAdapter implements TaskOutboundPort {
   }
 
   @Override
-  public Task save(final Task object) {
-    IdGenerator.validateId(object);
-
-    final TaskEntity taskEntity = taskMapper.toTaskEntity(object);
+  protected void saveEntity(final Task entity) {
+    final TaskEntity taskEntity = taskMapper.toTaskEntity(entity);
     taskRepository.save(taskEntity);
-
-    return get(object.getId());
   }
 
   @Override
@@ -51,7 +47,7 @@ public class TaskPersistenceAdapter implements TaskOutboundPort {
 
   private Task convertToTask(final TaskEntity taskEntity) {
     final Item item = itemOutboundPort.get(taskEntity.getItemId());
-    final List<User> users = userOutboundPort.getAllUsers();
+    final List<User> users = userOutboundPort.getAll();
 
     return taskMapper.toTask(taskEntity, item, users);
   }

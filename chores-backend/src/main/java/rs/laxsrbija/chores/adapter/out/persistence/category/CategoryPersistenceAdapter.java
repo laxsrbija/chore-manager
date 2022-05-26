@@ -5,14 +5,15 @@ import static rs.laxsrbija.chores.common.Commons.forEach;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import rs.laxsrbija.chores.adapter.out.persistence.PersistenceAdapter;
 import rs.laxsrbija.chores.adapter.out.persistence.entity.CategoryEntity;
 import rs.laxsrbija.chores.application.port.out.CategoryOutboundPort;
-import rs.laxsrbija.chores.application.util.IdGenerator;
 import rs.laxsrbija.chores.domain.Category;
 
 @Component
 @RequiredArgsConstructor
-class CategoryPersistenceAdapter implements CategoryOutboundPort {
+class CategoryPersistenceAdapter extends PersistenceAdapter<Category>
+    implements CategoryOutboundPort {
 
   private CategoryMapper categoryMapper;
   private CategoryRepository categoryRepository;
@@ -29,13 +30,9 @@ class CategoryPersistenceAdapter implements CategoryOutboundPort {
   }
 
   @Override
-  public Category save(final Category category) {
-    IdGenerator.validateId(category);
-
-    final CategoryEntity categoryEntity = categoryMapper.toCategoryEntity(category);
+  protected void saveEntity(final Category entity) {
+    final CategoryEntity categoryEntity = categoryMapper.toCategoryEntity(entity);
     categoryRepository.save(categoryEntity);
-
-    return get(category.getId());
   }
 
   @Override

@@ -22,7 +22,7 @@ class EmailService {
   void sendReminder(final Task task) {
     final List<String> usersToNotify = task.getReminder().getUsersToNotify();
     for (final String userId : usersToNotify) {
-      final User user = userService.getUser(userId);
+      final User user = userService.get(userId);
       remindUser(user, task);
     }
   }

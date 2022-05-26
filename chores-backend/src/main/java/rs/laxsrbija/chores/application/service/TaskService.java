@@ -24,7 +24,7 @@ class TaskService implements TaskInboundPort {
       final String userId,
       final LocalDate dateCompleted) {
     final Task task = get(taskId);
-    final User user = userOutboundPort.getUser(userId);
+    final User user = userOutboundPort.get(userId);
 
     task.getHistory().add(CompletionHistoryItem.builder()
         .user(user)

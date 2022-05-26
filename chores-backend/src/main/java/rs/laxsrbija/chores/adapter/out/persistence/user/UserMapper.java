@@ -15,4 +15,13 @@ class UserMapper {
         .image(userEntity.getImage())
         .build();
   }
+
+  public UserEntity toUserEntity(final User user) {
+    return UserEntity.builder()
+        .id(user.getId())
+        .name(user.getName())
+        .email(user.getEmail())
+        .image(user.getImage())
+        .build();
+  }
 }

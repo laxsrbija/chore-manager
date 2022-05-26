@@ -4,16 +4,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import rs.laxsrbija.chores.adapter.out.persistence.PersistenceAdapter;
 import rs.laxsrbija.chores.adapter.out.persistence.entity.ItemEntity;
 import rs.laxsrbija.chores.application.port.out.CategoryOutboundPort;
 import rs.laxsrbija.chores.application.port.out.ItemOutboundPort;
-import rs.laxsrbija.chores.application.util.IdGenerator;
 import rs.laxsrbija.chores.domain.Category;
 import rs.laxsrbija.chores.domain.Item;
 
 @Component
 @RequiredArgsConstructor
-class ItemPersistenceAdapter implements ItemOutboundPort {
+class ItemPersistenceAdapter extends PersistenceAdapter<Item> implements ItemOutboundPort {
 
   private final ItemRepository itemRepository;
   private final ItemMapper itemMapper;
@@ -37,13 +37,9 @@ class ItemPersistenceAdapter implements ItemOutboundPort {
   }
 
   @Override
-  public Item save(final Item item) {
-    IdGenerator.validateId(item);
-
-    final ItemEntity itemEntity = itemMapper.toItemEntity(item);
+  protected void saveEntity(final Item entity) {
+    final ItemEntity itemEntity = itemMapper.toItemEntity(entity);
     itemRepository.save(itemEntity);
-
-    return get(item.getId());
   }
 
   @Override
