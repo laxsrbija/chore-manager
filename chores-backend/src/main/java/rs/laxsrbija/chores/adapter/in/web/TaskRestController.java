@@ -3,6 +3,8 @@ package rs.laxsrbija.chores.adapter.in.web;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,7 +54,8 @@ public class TaskRestController implements CrudOperations<Task> {
   public Task markComplete(
       @PathVariable final String taskId,
       @RequestParam final String userId,
-      @RequestParam(required = false) final LocalDate dateCompleted) {
+      @DateTimeFormat(iso = ISO.DATE) @RequestParam(required = false)
+          final LocalDate dateCompleted) {
     return taskInboundPort.markComplete(taskId, userId, dateCompleted);
   }
 }
