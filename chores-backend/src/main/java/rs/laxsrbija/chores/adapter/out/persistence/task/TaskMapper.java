@@ -4,13 +4,17 @@ import static rs.laxsrbija.chores.common.Commons.forEach;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 import rs.laxsrbija.chores.adapter.out.persistence.entity.TaskEntity;
 import rs.laxsrbija.chores.adapter.out.persistence.entity.embedded.CompletionHistoryItemEntity;
+import rs.laxsrbija.chores.adapter.out.persistence.entity.embedded.ReminderInfoEntity;
 import rs.laxsrbija.chores.application.util.OccurrenceUtil;
 import rs.laxsrbija.chores.domain.CompletionHistoryItem;
 import rs.laxsrbija.chores.domain.Item;
 import rs.laxsrbija.chores.domain.OccurrenceInfo;
+import rs.laxsrbija.chores.domain.ReminderInfo;
 import rs.laxsrbija.chores.domain.Task;
 import rs.laxsrbija.chores.domain.User;
 
@@ -21,11 +25,12 @@ class TaskMapper {
     final Task task = Task.builder()
         .id(taskEntity.getId())
         .name(taskEntity.getName())
+        .dateCreated(taskEntity.getDateCreated())
         .description(taskEntity.getDescription())
         .enabled(taskEntity.isEnabled())
         .history(forEach(taskEntity.getHistory(), users, this::toCompletionHistoryItem))
         .recurrence(taskEntity.getRecurrence())
-        .reminder(taskEntity.getReminder())
+        .reminder(toReminderInfo(taskEntity.getReminder(), users))
         .item(item)
         .build();
 
@@ -48,7 +53,7 @@ class TaskMapper {
         .enabled(task.isEnabled())
         .history(forEach(task.getHistory(), this::toCompletionHistoryItemEntity))
         .recurrence(task.getRecurrence())
-        .reminder(task.getReminder())
+        .reminder(toReminderInfoEntity(task.getReminder()))
         .itemId(task.getItem().getId())
         .build();
   }
@@ -72,6 +77,30 @@ class TaskMapper {
     return CompletionHistoryItemEntity.builder()
         .dateCompleted(completionHistoryItem.getDateCompleted())
         .userId(completionHistoryItem.getUser().getId())
+        .build();
+  }
+
+  private ReminderInfo toReminderInfo(final ReminderInfoEntity entity, final List<User> users) {
+    final Set<String> usersIdsToNotify = entity.getUsersIdsToNotify();
+    final List<User> usersToNotify =
+        users.stream()
+            .filter(user -> usersIdsToNotify != null && usersIdsToNotify.contains(user.getId()))
+            .toList();
+
+    return ReminderInfo.builder()
+        .usersToNotify(usersToNotify)
+        .reminderDate(entity.getReminderDate())
+        .build();
+  }
+
+  private ReminderInfoEntity toReminderInfoEntity(final ReminderInfo reminderInfo) {
+    final Set<String> userIdsToNotify = reminderInfo.getUsersToNotify().stream()
+        .map(User::getId)
+        .collect(Collectors.toSet());
+
+    return ReminderInfoEntity.builder()
+        .reminderDate(reminderInfo.getReminderDate())
+        .usersIdsToNotify(userIdsToNotify)
         .build();
   }
 }

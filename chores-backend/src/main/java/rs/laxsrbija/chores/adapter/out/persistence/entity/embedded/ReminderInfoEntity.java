@@ -1,15 +1,15 @@
-package rs.laxsrbija.chores.domain;
+package rs.laxsrbija.chores.adapter.out.persistence.entity.embedded;
 
-import java.util.List;
+import java.util.Set;
 import lombok.Builder;
 import lombok.Data;
 import rs.laxsrbija.chores.domain.date.DatePeriod;
 
 @Data
 @Builder
-public class ReminderInfo {
+public class ReminderInfoEntity {
 
-  private List<User> usersToNotify;
+  private Set<String> usersIdsToNotify;
 
   // Days to remind before the actual due date
   private DatePeriod reminderDate;

@@ -45,8 +45,19 @@ class TaskService implements TaskInboundPort {
   }
 
   @Override
-  public Task save(final Task object) {
-    return taskOutboundPort.save(object);
+  public Task save(final Task task) {
+    retainUnmodifiableFields(task);
+    return taskOutboundPort.save(task);
+  }
+
+  private void retainUnmodifiableFields(final Task task) {
+    if (task.getId() == null) {
+      return;
+    }
+
+    final Task storedTask = get(task.getId());
+    task.setHistory(storedTask.getHistory());
+    task.setDateCreated(storedTask.getDateCreated());
   }
 
   @Override

@@ -15,8 +15,8 @@ import rs.laxsrbija.chores.domain.Category;
 class CategoryPersistenceAdapter extends PersistenceAdapter<Category>
     implements CategoryOutboundPort {
 
-  private CategoryMapper categoryMapper;
-  private CategoryRepository categoryRepository;
+  private final CategoryMapper categoryMapper;
+  private final CategoryRepository categoryRepository;
 
   @Override
   public Category get(final String id) {

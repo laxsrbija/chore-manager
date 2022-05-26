@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import rs.laxsrbija.chores.adapter.out.persistence.entity.embedded.CompletionHistoryItemEntity;
-import rs.laxsrbija.chores.domain.ReminderInfo;
+import rs.laxsrbija.chores.adapter.out.persistence.entity.embedded.ReminderInfoEntity;
 import rs.laxsrbija.chores.domain.recurrence.Recurrence;
 
 @Data
@@ -32,7 +32,7 @@ public class TaskEntity {
 
   private List<CompletionHistoryItemEntity> history;
 
-  private ReminderInfo reminder;
+  private ReminderInfoEntity reminder;
 
   private boolean enabled;
 }

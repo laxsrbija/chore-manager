@@ -16,14 +16,12 @@ import rs.laxsrbija.chores.domain.User;
 @RequiredArgsConstructor
 class EmailService {
 
-  private final UserService userService;
   private final JavaMailSender mailSender;
   private final EmailTemplateService emailTemplateService;
 
   public void sendReminder(final Task task) {
-    final List<String> usersToNotify = task.getReminder().getUsersToNotify();
-    for (final String userId : usersToNotify) {
-      final User user = userService.get(userId);
+    final List<User> usersToNotify = task.getReminder().getUsersToNotify();
+    for (final User user : usersToNotify) {
       remindUser(user, task);
     }
   }

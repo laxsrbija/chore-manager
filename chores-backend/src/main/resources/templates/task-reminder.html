@@ -11,6 +11,7 @@
       /
       <span th:text="${task.item.category.name}"></span>)
     </li>
+    <li> Task description: <span th:text="${task.description}"></span></li>
     <li>
       Due date: <strong th:text="${task.occurrence.nextOccurrence}"></strong>
       (in <strong th:text="@{${task.occurrence.daysUntilNextOccurrence} + ' days'}"></strong>)
