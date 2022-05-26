@@ -1,70 +1,56 @@
 package rs.laxsrbija.chores.application.service;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import rs.laxsrbija.chores.adapter.out.persistence.entity.TaskEntity;
-import rs.laxsrbija.chores.adapter.out.persistence.mapper.TaskMapper;
-import rs.laxsrbija.chores.adapter.out.persistence.repository.TaskRepository;
-import rs.laxsrbija.chores.application.util.RecurrenceUtil;
-import rs.laxsrbija.chores.domain.model.CompletionHistoryItem;
-import rs.laxsrbija.chores.domain.model.dto.Object;
-import rs.laxsrbija.chores.domain.model.dto.Task;
-import rs.laxsrbija.chores.domain.model.recurrence.DynamicRecurrence;
-import rs.laxsrbija.chores.domain.model.recurrence.FixedRecurrence;
-import rs.laxsrbija.chores.domain.model.recurrence.Recurrence;
+import rs.laxsrbija.chores.application.port.in.TaskInboundPort;
+import rs.laxsrbija.chores.application.port.out.TaskOutboundPort;
+import rs.laxsrbija.chores.application.port.out.UserOutboundPort;
+import rs.laxsrbija.chores.domain.CompletionHistoryItem;
+import rs.laxsrbija.chores.domain.Task;
+import rs.laxsrbija.chores.domain.User;
 
 @Service
 @RequiredArgsConstructor
-public class TaskService {
+class TaskService implements TaskInboundPort {
 
-  private final ObjectService _objectService;
-  private final TaskRepository _taskRepository;
-  private final TaskMapper _taskMapper;
+  private final TaskOutboundPort taskOutboundPort;
+  private final UserOutboundPort userOutboundPort;
 
-  public static LocalDate getNextRecurrence(final Task task) {
-    final LocalDate latestCompletion =
-        task.getHistory() != null && !task.getHistory().isEmpty()
-            ? task.getHistory().get(task.getHistory().size() - 1).getDateCompleted()
-            : null;
+  @Override
+  public Task markComplete(
+      final String taskId,
+      final String userId,
+      final LocalDate dateCompleted) {
+    final Task task = get(taskId);
+    final User user = userOutboundPort.getUser(userId);
 
-    final Recurrence recurrence = task.getRecurrence();
-    if (recurrence instanceof DynamicRecurrence) {
-      return RecurrenceUtil.getNextRecurrence(latestCompletion, (DynamicRecurrence) recurrence);
-    } else {
-      return RecurrenceUtil.getNextRecurrence(latestCompletion, (FixedRecurrence) recurrence);
-    }
+    task.getHistory().add(CompletionHistoryItem.builder()
+        .user(user)
+        .dateCompleted(dateCompleted)
+        .build());
+
+    return taskOutboundPort.save(task);
   }
 
-  public static long getDaysUntilNextRecurrence(final Task task) {
-    final LocalDate nextRecurrence = getNextRecurrence(task);
-    return ChronoUnit.DAYS.between(LocalDate.now(), nextRecurrence);
+  @Override
+  public Task get(final String id) {
+    return taskOutboundPort.get(id);
   }
 
-  public Task getTask(final String id) {
-    final TaskEntity task = _taskRepository.findById(id);
-    return getTask(task);
+  @Override
+  public List<Task> getAll() {
+    return taskOutboundPort.getAll();
   }
 
-  public List<Task> getAllTasks() {
-    return _taskRepository.findAll().stream()
-        .map(this::getTask)
-        .collect(Collectors.toList());
+  @Override
+  public Task save(final Task object) {
+    return taskOutboundPort.save(object);
   }
 
-  private Task getTask(final TaskEntity task) {
-    final Object object = _objectService.getObject(task.getObjectId());
-    return _taskMapper.toTask(task, object);
-  }
-
-  public void markComplete(final String id, final LocalDate dateCompleted) {
-    final Task task = getTask(id);
-    task.getHistory().add(CompletionHistoryItem.builder().dateCompleted(dateCompleted).build());
-
-    final TaskEntity taskEntity = _taskMapper.toTaskEntity(task);
-    _taskRepository.save(taskEntity);
+  @Override
+  public void delete(final String id) {
+    taskOutboundPort.delete(id);
   }
 }

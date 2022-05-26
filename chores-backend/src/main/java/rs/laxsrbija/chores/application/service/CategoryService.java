@@ -1,21 +1,35 @@
 package rs.laxsrbija.chores.application.service;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import rs.laxsrbija.chores.adapter.out.persistence.entity.CategoryEntity;
-import rs.laxsrbija.chores.adapter.out.persistence.mapper.CategoryMapper;
-import rs.laxsrbija.chores.adapter.out.persistence.repository.CategoryRepository;
-import rs.laxsrbija.chores.domain.model.dto.Category;
+import rs.laxsrbija.chores.application.port.in.CategoryInboundPort;
+import rs.laxsrbija.chores.application.port.out.CategoryOutboundPort;
+import rs.laxsrbija.chores.domain.Category;
 
 @Service
 @RequiredArgsConstructor
-public class CategoryService {
+class CategoryService implements CategoryInboundPort {
 
-  private final CategoryRepository _categoryRepository;
-  private final CategoryMapper _categoryMapper;
+  private final CategoryOutboundPort categoryOutboundPort;
 
-  public Category getCategory(final String id) {
-    final CategoryEntity categoryEntity = _categoryRepository.findById(id);
-    return _categoryMapper.toCategory(categoryEntity);
+  @Override
+  public Category get(final String id) {
+    return categoryOutboundPort.get(id);
+  }
+
+  @Override
+  public List<Category> getAll() {
+    return categoryOutboundPort.getAll();
+  }
+
+  @Override
+  public Category save(final Category object) {
+    return categoryOutboundPort.save(object);
+  }
+
+  @Override
+  public void delete(final String id) {
+    categoryOutboundPort.delete(id);
   }
 }

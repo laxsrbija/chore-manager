@@ -5,19 +5,21 @@ import io.jsondb.annotation.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
 @AllArgsConstructor
-@Document(collection = "users", schemaVersion = "1.0")
-public class UserEntity {
+@NoArgsConstructor
+@Document(collection = "objects", schemaVersion = "1.0")
+public class ItemEntity {
 
   @Id
   private String id;
 
   private String name;
 
-  private String email;
-
   private String image;
+
+  private String categoryId;
 }

@@ -8,30 +8,30 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import rs.laxsrbija.chores.domain.model.dto.Task;
-import rs.laxsrbija.chores.domain.model.dto.User;
+import rs.laxsrbija.chores.domain.Task;
+import rs.laxsrbija.chores.domain.User;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class EmailService {
+class EmailService {
 
-  private final UserService _userService;
-  private final JavaMailSender _mailSender;
+  private final UserService userService;
+  private final JavaMailSender mailSender;
 
-  public void sendReminder(final Task task) {
+  void sendReminder(final Task task) {
     final List<String> usersToNotify = task.getReminder().getUsersToNotify();
     for (final String userId : usersToNotify) {
-      final User user = _userService.getUser(userId);
+      final User user = userService.getUser(userId);
       remindUser(user, task);
     }
   }
 
   private void remindUser(final User user, final Task task) {
-    final MimeMessage message = _mailSender.createMimeMessage();
+    final MimeMessage message = mailSender.createMimeMessage();
     final MimeMessageHelper messageHelper = new MimeMessageHelper(message);
 
-    final String subject = "[CM] " + task.getName() + " - " + task.getNextRecurrence();
+    final String subject = "[CM] " + task.getName() + " - " + task.getNextOcurrence();
     final String text = getReminderText(user, task);
 
     try {
@@ -43,15 +43,15 @@ public class EmailService {
       log.error("Unable to create an email reminder", e);
     }
 
-    _mailSender.send(message);
+    mailSender.send(message);
   }
 
   private String getReminderText(final User user, final Task task) {
     return "Hi " + user.getName() + ",<br><br>"
         + "This is a reminder about the following task:<br>"
         + "Task name: <strong>" + task.getName() + "</strong><br>"
-        + "Due date: <strong>" + task.getNextRecurrence() + "</strong> "
-        + "(in <strong>" + task.getDaysUntilNextRecurrence() + " days</strong>)<br><br>"
+        + "Due date: <strong>" + task.getNextOcurrence() + "</strong> "
+        + "(in <strong>" + task.getDaysUntilNextOcurrence() + " days</strong>)<br><br>"
         + "Chore Manager";
   }
 }

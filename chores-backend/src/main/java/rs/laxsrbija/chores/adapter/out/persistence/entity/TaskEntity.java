@@ -7,9 +7,9 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import rs.laxsrbija.chores.domain.model.CompletionHistoryItem;
-import rs.laxsrbija.chores.domain.model.ReminderInfo;
-import rs.laxsrbija.chores.domain.model.recurrence.Recurrence;
+import rs.laxsrbija.chores.adapter.out.persistence.entity.embedded.CompletionHistoryItemEntity;
+import rs.laxsrbija.chores.domain.ReminderInfo;
+import rs.laxsrbija.chores.domain.recurrence.Recurrence;
 
 @Data
 @Builder
@@ -26,11 +26,11 @@ public class TaskEntity {
 
   private LocalDate dateCreated;
 
-  private String objectId;
+  private String itemId;
 
   private Recurrence recurrence;
 
-  private List<CompletionHistoryItem> history;
+  private List<CompletionHistoryItemEntity> history;
 
   private ReminderInfo reminder;
 

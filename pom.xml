@@ -23,6 +23,7 @@
 	<properties>
 		<java.version>11</java.version>
 		<jsondb-core.version>1.0.106</jsondb-core.version>
+		<springdoc-openapi-ui.version>1.6.8</springdoc-openapi-ui.version>
 	</properties>
 
 	<dependencyManagement>
@@ -31,6 +32,11 @@
 				<groupId>io.jsondb</groupId>
 				<artifactId>jsondb-core</artifactId>
 				<version>${jsondb-core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-ui</artifactId>
+				<version>${springdoc-openapi-ui.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

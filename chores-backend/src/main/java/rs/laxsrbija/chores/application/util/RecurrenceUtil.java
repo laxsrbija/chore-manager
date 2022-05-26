@@ -3,14 +3,14 @@ package rs.laxsrbija.chores.application.util;
 import java.time.LocalDate;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import rs.laxsrbija.chores.domain.exception.ChoreManagerException;
-import rs.laxsrbija.chores.domain.model.recurrence.DynamicRecurrence;
-import rs.laxsrbija.chores.domain.model.recurrence.FixedRecurrence;
+import rs.laxsrbija.chores.application.exception.ChoreManagerException;
+import rs.laxsrbija.chores.domain.recurrence.DynamicRecurrence;
+import rs.laxsrbija.chores.domain.recurrence.FixedRecurrence;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RecurrenceUtil {
 
-  public static LocalDate getNextRecurrence(final LocalDate latestCompletion,
+  public static LocalDate getNextOccurrence(final LocalDate latestCompletion,
       final DynamicRecurrence dynamicRecurrence) {
     if (latestCompletion == null) {
       return LocalDate.now();
@@ -22,7 +22,8 @@ public class RecurrenceUtil {
   // day only - every nth day each month
   // month only - every 1st day each month
   // day and month - every year on the exact date
-  public static LocalDate getNextRecurrence(final LocalDate latestCompletion,
+  public static LocalDate getNextOccurrence(
+      final LocalDate latestCompletion,
       final FixedRecurrence fixedRecurrence) {
     final Integer day = fixedRecurrence.getDay();
     final Integer month = fixedRecurrence.getMonth();
