@@ -20,14 +20,14 @@ class OverviewService {
     final List<Task> tasks = taskService.getAll();
 
     final List<Task> upcoming = tasks.stream()
-        .filter(task -> task.getDaysUntilNextOcurrence() >= 0)
-        .sorted(Comparator.comparingLong(Task::getDaysUntilNextOcurrence))
+        .filter(task -> task.getOccurrence().getDaysUntilNextOccurrence() >= 0)
+        .sorted(Comparator.comparingLong(task -> task.getOccurrence().getDaysUntilNextOccurrence()))
         .limit(MAX_OVERVIEW_TASK_SIZE)
         .collect(Collectors.toList());
 
     final List<Task> overdue = tasks.stream()
-        .filter(task -> task.getDaysUntilNextOcurrence() < 0)
-        .sorted(Comparator.comparingLong(Task::getDaysUntilNextOcurrence))
+        .filter(task -> task.getOccurrence().getDaysUntilNextOccurrence() < 0)
+        .sorted(Comparator.comparingLong(task -> task.getOccurrence().getDaysUntilNextOccurrence()))
         .collect(Collectors.toList());
 
     return Overview.builder()

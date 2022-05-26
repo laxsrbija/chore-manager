@@ -2,6 +2,7 @@ package rs.laxsrbija.chores.adapter.out.persistence.task;
 
 import static rs.laxsrbija.chores.common.Commons.forEach;
 
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.stereotype.Component;
 import rs.laxsrbija.chores.adapter.out.persistence.entity.TaskEntity;
@@ -9,6 +10,7 @@ import rs.laxsrbija.chores.adapter.out.persistence.entity.embedded.CompletionHis
 import rs.laxsrbija.chores.application.util.OccurrenceUtil;
 import rs.laxsrbija.chores.domain.CompletionHistoryItem;
 import rs.laxsrbija.chores.domain.Item;
+import rs.laxsrbija.chores.domain.OccurrenceInfo;
 import rs.laxsrbija.chores.domain.Task;
 import rs.laxsrbija.chores.domain.User;
 
@@ -27,8 +29,13 @@ class TaskMapper {
         .item(item)
         .build();
 
-    task.setDaysUntilNextOcurrence(OccurrenceUtil.getDaysUntilNextOccurrence(task));
-    task.setNextOcurrence(OccurrenceUtil.getNextOccurrence(task));
+    final OccurrenceInfo occurrenceInfo =
+        OccurrenceInfo.builder()
+            .daysUntilNextOccurrence(OccurrenceUtil.getDaysUntilNextOccurrence(task))
+            .nextOccurrence(OccurrenceUtil.getNextOccurrence(task))
+            .build();
+    task.setOccurrence(occurrenceInfo);
+
     return task;
   }
 
@@ -36,6 +43,7 @@ class TaskMapper {
     return TaskEntity.builder()
         .id(task.getId())
         .name(task.getName())
+        .dateCreated(task.getDateCreated() == null ? LocalDate.now() : task.getDateCreated())
         .description(task.getDescription())
         .enabled(task.isEnabled())
         .history(forEach(task.getHistory(), this::toCompletionHistoryItemEntity))

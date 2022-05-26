@@ -24,9 +24,7 @@ public class Task extends BaseDto {
 
   private Recurrence recurrence;
 
-  private long daysUntilNextOcurrence;
-
-  private LocalDate nextOcurrence;
+  private OccurrenceInfo occurrence;
 
   private List<CompletionHistoryItem> history;
 

@@ -28,7 +28,7 @@ class TaskService implements TaskInboundPort {
 
     task.getHistory().add(CompletionHistoryItem.builder()
         .user(user)
-        .dateCompleted(dateCompleted)
+        .dateCompleted(dateCompleted == null ? LocalDate.now() : dateCompleted)
         .build());
 
     return taskOutboundPort.save(task);

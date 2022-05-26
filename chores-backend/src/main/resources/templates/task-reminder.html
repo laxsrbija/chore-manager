@@ -1,0 +1,27 @@
+<p>
+  Hi <span th:text="${user.name}"></span>,
+</p>
+
+<p>
+  This is a reminder about the following task:<br>
+  <ul>
+    <li>
+      Task name: <strong th:text="${task.name}"></strong>
+      (<span th:text="${task.item.name}"></span>
+      /
+      <span th:text="${task.item.category.name}"></span>)
+    </li>
+    <li>
+      Due date: <strong th:text="${task.occurrence.nextOccurrence}"></strong>
+      (in <strong th:text="@{${task.occurrence.daysUntilNextOccurrence} + ' days'}"></strong>)
+    </li>
+  </ul>
+</p>
+
+<p>
+  Once finished,
+  <a th:href="@{${server} + '/complete?userId=' + ${user.id} + '&taskId=' + ${task.id}}">
+    click here to mark it as complete</a>.
+</p>
+
+Chore Manager

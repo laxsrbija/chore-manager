@@ -22,7 +22,7 @@ import rs.laxsrbija.chores.domain.Task;
 @RequestMapping(path = "tasks", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TaskRestController implements CrudOperations<Task> {
 
-  public TaskInboundPort taskInboundPort;
+  public final TaskInboundPort taskInboundPort;
 
   @Override
   @GetMapping("{id}")
@@ -53,7 +53,6 @@ public class TaskRestController implements CrudOperations<Task> {
       @PathVariable final String taskId,
       @RequestParam final String userId,
       @RequestParam(required = false) final LocalDate dateCompleted) {
-    return taskInboundPort.markComplete(taskId, userId,
-        dateCompleted == null ? LocalDate.now() : dateCompleted);
+    return taskInboundPort.markComplete(taskId, userId, dateCompleted);
   }
 }

@@ -18,8 +18,9 @@ class EmailService {
 
   private final UserService userService;
   private final JavaMailSender mailSender;
+  private final EmailTemplateService emailTemplateService;
 
-  void sendReminder(final Task task) {
+  public void sendReminder(final Task task) {
     final List<String> usersToNotify = task.getReminder().getUsersToNotify();
     for (final String userId : usersToNotify) {
       final User user = userService.get(userId);
@@ -31,8 +32,9 @@ class EmailService {
     final MimeMessage message = mailSender.createMimeMessage();
     final MimeMessageHelper messageHelper = new MimeMessageHelper(message);
 
-    final String subject = "[CM] " + task.getName() + " - " + task.getNextOcurrence();
-    final String text = getReminderText(user, task);
+    final String subject =
+        "[CM] " + task.getName() + " - " + task.getOccurrence().getNextOccurrence();
+    final String text = emailTemplateService.parseEmailTemplate(task, user);
 
     try {
       messageHelper.setFrom("Chore Manager <cm@example.com>");
@@ -44,14 +46,5 @@ class EmailService {
     }
 
     mailSender.send(message);
-  }
-
-  private String getReminderText(final User user, final Task task) {
-    return "Hi " + user.getName() + ",<br><br>"
-        + "This is a reminder about the following task:<br>"
-        + "Task name: <strong>" + task.getName() + "</strong><br>"
-        + "Due date: <strong>" + task.getNextOcurrence() + "</strong> "
-        + "(in <strong>" + task.getDaysUntilNextOcurrence() + " days</strong>)<br><br>"
-        + "Chore Manager";
   }
 }

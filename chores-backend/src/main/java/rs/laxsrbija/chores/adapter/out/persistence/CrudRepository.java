@@ -2,7 +2,9 @@ package rs.laxsrbija.chores.adapter.out.persistence;
 
 import io.jsondb.JsonDBTemplate;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import rs.laxsrbija.chores.application.exception.ChoreManagerException;
 
 @RequiredArgsConstructor
 public abstract class CrudRepository<E> {
@@ -11,7 +13,8 @@ public abstract class CrudRepository<E> {
   private final Class<E> type;
 
   public E findById(final String id) {
-    return jsonDBTemplate.findById(id, type);
+    return Optional.ofNullable(jsonDBTemplate.findById(id, type))
+        .orElseThrow(() -> new ChoreManagerException("Entity with ID '" + id + "' not found"));
   }
 
   public List<E> findAll() {
