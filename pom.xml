@@ -21,7 +21,7 @@
 	</modules>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<jsondb-core.version>1.0.106</jsondb-core.version>
 		<springdoc-openapi-ui.version>1.6.8</springdoc-openapi-ui.version>
 	</properties>
