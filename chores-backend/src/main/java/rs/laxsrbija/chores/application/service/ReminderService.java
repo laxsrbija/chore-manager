@@ -30,6 +30,6 @@ class ReminderService {
   void checkAllTasksForReminders() {
     taskService.getAll().stream()
         .filter(ReminderService::shouldRemind)
-        .forEach(emailService::sendReminder);
+        .forEach(emailService::sendTaskReminder);
   }
 }

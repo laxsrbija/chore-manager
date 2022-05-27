@@ -17,6 +17,7 @@ class TaskService implements TaskInboundPort {
 
   private final TaskOutboundPort taskOutboundPort;
   private final UserOutboundPort userOutboundPort;
+  private final EmailService emailService;
 
   @Override
   public Task markComplete(
@@ -31,7 +32,10 @@ class TaskService implements TaskInboundPort {
         .dateCompleted(dateCompleted == null ? LocalDate.now() : dateCompleted)
         .build());
 
-    return taskOutboundPort.save(task);
+    final Task updatedTask = taskOutboundPort.save(task);
+    emailService.sendTaskCompleteByDifferentUserNotification(updatedTask, user);
+
+    return updatedTask;
   }
 
   @Override

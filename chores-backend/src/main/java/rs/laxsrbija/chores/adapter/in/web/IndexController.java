@@ -26,7 +26,9 @@ public class IndexController {
             "user", userInboundPort.get(userId));
     model.addAllAttributes(attributes);
 
-    taskInboundPort.markComplete(taskId, userId, null);
+    // Do work in background
+    new Thread(() -> taskInboundPort.markComplete(taskId, userId, null)).start();
+
     return "task-complete";
   }
 }
