@@ -1,4 +1,4 @@
-package rs.laxsrbija.chores.adapter.in.web;
+package rs.laxsrbija.chores.adapter.in.web.rest;
 
 import java.time.LocalDate;
 import java.util.List;

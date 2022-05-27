@@ -1,4 +1,4 @@
-package rs.laxsrbija.chores.adapter.in.web;
+package rs.laxsrbija.chores.adapter.in.web.rest;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -10,38 +10,38 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import rs.laxsrbija.chores.application.port.in.UserInboundPort;
+import rs.laxsrbija.chores.application.port.in.CategoryInboundPort;
 import rs.laxsrbija.chores.common.CrudOperations;
-import rs.laxsrbija.chores.domain.User;
+import rs.laxsrbija.chores.domain.Category;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "users", produces = MediaType.APPLICATION_JSON_VALUE)
-public class UserRestController implements CrudOperations<User> {
+@RequestMapping(path = "categories", produces = MediaType.APPLICATION_JSON_VALUE)
+public class CategoryRestController implements CrudOperations<Category> {
 
-  public final UserInboundPort userInboundPort;
+  public final CategoryInboundPort categoryInboundPort;
 
   @Override
   @GetMapping("{id}")
-  public User get(@PathVariable final String id) {
-    return userInboundPort.get(id);
+  public Category get(@PathVariable final String id) {
+    return categoryInboundPort.get(id);
   }
 
   @Override
   @GetMapping
-  public List<User> getAll() {
-    return userInboundPort.getAll();
+  public List<Category> getAll() {
+    return categoryInboundPort.getAll();
   }
 
   @Override
   @PutMapping
-  public User save(@RequestBody final User user) {
-    return userInboundPort.save(user);
+  public Category save(@RequestBody final Category category) {
+    return categoryInboundPort.save(category);
   }
 
   @Override
   @DeleteMapping("{id}")
   public void delete(@PathVariable final String id) {
-    userInboundPort.delete(id);
+    categoryInboundPort.delete(id);
   }
 }

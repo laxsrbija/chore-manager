@@ -85,7 +85,7 @@ class TaskMapper {
     final List<User> usersToNotify =
         users.stream()
             .filter(user -> usersIdsToNotify != null && usersIdsToNotify.contains(user.getId()))
-            .toList();
+            .collect(Collectors.toList());
 
     return ReminderInfo.builder()
         .usersToNotify(usersToNotify)

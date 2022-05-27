@@ -1,4 +1,4 @@
-package rs.laxsrbija.chores.adapter.in.web;
+package rs.laxsrbija.chores.adapter.in.web.rest;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
