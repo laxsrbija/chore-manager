@@ -19,15 +19,16 @@ class ReminderService {
       return false;
     }
 
-    final long daysUntilNextRecurrence = task.getOccurrence().getDaysUntilNextOccurrence();
-    final long daysToRemindBeforeRecurrence =
+    final long daysUntilNextOccurrence = task.getOccurrence().getDaysUntilNextOccurrence();
+    final long daysToRemindBeforeOccurrence =
         task.getReminder().getReminderDate().getNumberOfDays();
 
-    return daysToRemindBeforeRecurrence == daysUntilNextRecurrence;
+    return daysToRemindBeforeOccurrence == daysUntilNextOccurrence;
   }
 
   @Scheduled(cron = "${chores.reminder.cron:0 0 7 * * ?}")
   void checkAllTasksForReminders() {
+    log.info("Starting the daily reminder");
     taskService.getAll().stream()
         .filter(ReminderService::shouldRemind)
         .forEach(emailService::sendTaskReminder);
