@@ -1,14 +1,16 @@
 <app-chores-overview
   [sectionTitle]="'Overdue chores'"
-  [tasks]="overview?.overdue">
+  [tasks]="overview?.overdue"
+  (markComplete)="modal.openModal($event)">
 </app-chores-overview>
 
 <app-chores-overview
   [sectionTitle]="'Upcoming chores'"
-  [tasks]="overview?.upcoming">
+  [tasks]="overview?.upcoming"
+  (markComplete)="modal.openModal($event)">
 </app-chores-overview>
 
-<section>
+<section class="my-5">
   <div class="container">
     <nav class="level">
       <div class="level-item has-text-centered">
@@ -39,4 +41,4 @@
   </div>
 </section>
 
-<app-complete-task-modal (changesSaved)="loadData()"></app-complete-task-modal>
+<app-complete-task-modal #modal (changesSaved)="loadData()"></app-complete-task-modal>

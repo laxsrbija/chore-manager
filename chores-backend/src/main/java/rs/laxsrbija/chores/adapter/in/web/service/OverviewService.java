@@ -16,8 +16,6 @@ import rs.laxsrbija.chores.domain.Task;
 @RequiredArgsConstructor
 public class OverviewService {
 
-  public static final int MAX_OVERVIEW_TASK_SIZE = 10;
-
   private final TaskInboundPort taskInboundPort;
   private final ItemInboundPort itemInboundPort;
   private final CategoryInboundPort categoryInboundPort;
@@ -30,7 +28,6 @@ public class OverviewService {
         .filter(Task::isEnabled)
         .filter(task -> task.getOccurrence().getDaysUntilNextOccurrence() >= 0)
         .sorted(Comparator.comparingLong(task -> task.getOccurrence().getDaysUntilNextOccurrence()))
-        .limit(MAX_OVERVIEW_TASK_SIZE)
         .collect(Collectors.toList());
 
     final List<Task> overdue = tasks.stream()

@@ -1,31 +1,33 @@
-<div class="columns is-vcentered pb-6">
-  <div class="column">
-    <p class="has-text-weight-semibold is-size-4-mobile">{{ task?.name }}</p>
-    <nav aria-label="breadcrumbs" class="breadcrumb is-small">
-      <ul>
-        <li><a href="#" class="is-size-6-mobile">{{ task?.item?.category?.name }}</a></li>
-        <li><a href="#" class="is-size-6-mobile">{{ task?.item?.name }}</a></li>
-      </ul>
-    </nav>
-  </div>
-  <div class="column is-narrow is-full-mobile">
-    <div class="columns is-vcentered is-mobile">
-      <div *ngFor="let user of task?.reminder?.usersToNotify">
-        <div class="column is-narrow">
-          <figure class="image is-32x32">
-            <img [src]="user.image" class="is-rounded">
-          </figure>
+<div class="mt-5">
+  <div class="columns is-vcentered">
+    <div class="column">
+      <p class="has-text-weight-semibold is-size-5-mobile">{{ task?.name }}</p>
+      <nav aria-label="breadcrumbs" class="breadcrumb is-small">
+        <ul>
+          <li><a href="#" class="is-size-6-mobile">{{ task?.item?.category?.name }}</a></li>
+          <li><a href="#" class="is-size-6-mobile">{{ task?.item?.name }}</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="column is-narrow is-full-mobile">
+      <div class="columns is-vcentered is-mobile">
+        <div *ngFor="let user of task?.reminder?.usersToNotify">
+          <div class="column is-narrow pr-0">
+            <figure class="image is-32x32">
+              <img [src]="user.image" class="is-rounded">
+            </figure>
+          </div>
         </div>
-      </div>
-      <div class="column is-3-tablet has-text-right">
+        <div class="column is-narrow-tablet has-text-right pl-6">
 		<span [ngClass]="{'has-text-danger': task?.occurrence.daysUntilNextOccurrence < 0}">
 			{{ getRelativeDateString() }}</span>
-      </div>
-      <div class="column is-narrow">
-        <app-task-shortcuts
-          (markComplete)="markComplete.emit(task && task.id ? task.id : '')"></app-task-shortcuts>
+        </div>
+        <div class="column is-narrow">
+          <app-task-shortcuts
+            (markComplete)="markComplete.emit(task && task.id ? task.id : '')"></app-task-shortcuts>
+        </div>
       </div>
     </div>
   </div>
-
+  <hr class="m-0">
 </div>

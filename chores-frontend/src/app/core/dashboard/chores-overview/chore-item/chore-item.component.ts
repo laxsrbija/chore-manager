@@ -35,7 +35,10 @@ export class ChoreItemComponent {
       return 'Yesterday';
     }
 
-    return Math.abs(daysUntilNextOccurrence) + ' days' + (daysUntilNextOccurrence < 0 ? ' ago' : '');
+    return (daysUntilNextOccurrence > 0 ? 'In ' : '')
+      + Math.abs(daysUntilNextOccurrence)
+      + ' days'
+      + (daysUntilNextOccurrence < 0 ? ' ago' : '');
   }
 
   print() {
