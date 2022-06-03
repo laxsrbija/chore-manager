@@ -14,6 +14,7 @@ import {
 } from './shared/complete-task-modal/complete-task-modal.component';
 import {TaskShortcutsComponent} from "./shared/task-shortcuts/task-shortcuts.component";
 import {FormsModule} from "@angular/forms";
+import { MarkCompleteComponent } from './core/mark-complete/mark-complete.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {FormsModule} from "@angular/forms";
     ChoresOverviewComponent,
     ChoreItemComponent,
     CompleteTaskModalComponent,
-    TaskShortcutsComponent
+    TaskShortcutsComponent,
+    MarkCompleteComponent
   ],
   imports: [
     BrowserModule,
