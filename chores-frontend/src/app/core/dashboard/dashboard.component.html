@@ -1,53 +1,42 @@
-<section class="section">
-	<div class="container">
-		<h1 class="title">
-			Hello
-		</h1>
-		<p class="subtitle">
-			Welcome to the <strong>Chore Manager</strong>
-		</p>
-	</div>
-</section>
+<app-chores-overview
+  [sectionTitle]="'Overdue chores'"
+  [tasks]="overview?.overdue">
+</app-chores-overview>
 
+<app-chores-overview
+  [sectionTitle]="'Upcoming chores'"
+  [tasks]="overview?.upcoming">
+</app-chores-overview>
 
 <section>
-	<div class="container">
-		<div class="columns pb-5">
-			<app-chores-overview class="column m-2 p-4" style="border-radius: 4px; background-color: white"
-			                     [sectionTitle]="'Upcoming chores'" [tasks]="overview?.upcoming"></app-chores-overview>
-			<app-chores-overview class="column m-2 p-4" style="border-radius: 4px; background-color: white"
-			                     [sectionTitle]="'Overdue chores'" [tasks]="overview?.overdue"></app-chores-overview>
-		</div>
-	</div>
+  <div class="container">
+    <nav class="level">
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">Tasks</p>
+          <p class="title">{{ overview?.taskCount }}</p>
+        </div>
+      </div>
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">Items</p>
+          <p class="title">{{ overview?.itemCount }}</p>
+        </div>
+      </div>
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">Categories</p>
+          <p class="title">{{ overview?.categoryCount }}</p>
+        </div>
+      </div>
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">Users</p>
+          <p class="title">{{ overview?.userCount }}</p>
+        </div>
+      </div>
+    </nav>
+  </div>
 </section>
 
-<section>
-	<div class="container">
-		<nav class="level">
-			<div class="level-item has-text-centered">
-				<div>
-					<p class="heading">Tasks</p>
-					<p class="title">941</p>
-				</div>
-			</div>
-			<div class="level-item has-text-centered">
-				<div>
-					<p class="heading">Items</p>
-					<p class="title">520</p>
-				</div>
-			</div>
-			<div class="level-item has-text-centered">
-				<div>
-					<p class="heading">Categories</p>
-					<p class="title">120</p>
-				</div>
-			</div>
-			<div class="level-item has-text-centered">
-				<div>
-					<p class="heading">Users</p>
-					<p class="title">2</p>
-				</div>
-			</div>
-		</nav>
-	</div>
-</section>
+<app-complete-task-modal (changesSaved)="loadData()"></app-complete-task-modal>

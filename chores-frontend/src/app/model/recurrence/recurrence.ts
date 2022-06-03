@@ -1,3 +1,3 @@
 export interface Recurrence {
-	type: string;
+  type: string;
 }

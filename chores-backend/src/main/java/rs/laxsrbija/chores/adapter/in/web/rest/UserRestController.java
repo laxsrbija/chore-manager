@@ -16,7 +16,7 @@ import rs.laxsrbija.chores.domain.User;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "users", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "api/users", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserRestController implements CrudOperations<User> {
 
   public final UserInboundPort userInboundPort;

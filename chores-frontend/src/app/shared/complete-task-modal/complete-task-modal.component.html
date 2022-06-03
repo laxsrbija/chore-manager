@@ -1,0 +1,38 @@
+<div [ngClass]="{'is-active': visible}" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Mark complete</p>
+      <button (click)="hide()" aria-label="close" class="delete"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="field">
+        <label class="label">Date completed</label>
+        <div class="control">
+          <input #completed (keyup)="dateCompleted=completed.value"
+                 class="input"
+                 type="text"
+                 value="{{dateCompleted}}">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Completed by</label>
+        <div *ngFor="let user of users" class="control">
+          <label class="radio">
+            <input [(ngModel)]="userId" [value]="user.id" id="{{user.id}}"
+                   name="date-completed" type="radio">
+            {{user.name}}
+          </label>
+        </div>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button (click)="markComplete()"
+              [disabled]="!dateCompleted || !userId"
+              [ngClass]="{'is-loading': loading}"
+              class="button is-success">Save
+      </button>
+      <button (click)="hide()" class="button">Cancel</button>
+    </footer>
+  </div>
+</div>

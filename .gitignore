@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+/chores-frontend/node/
+/chores-frontend/.angular/

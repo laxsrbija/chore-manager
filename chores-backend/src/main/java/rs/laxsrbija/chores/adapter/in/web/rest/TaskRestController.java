@@ -21,7 +21,7 @@ import rs.laxsrbija.chores.domain.Task;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "tasks", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "api/tasks", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TaskRestController implements CrudOperations<Task> {
 
   public final TaskInboundPort taskInboundPort;

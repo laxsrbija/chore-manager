@@ -16,7 +16,7 @@ import rs.laxsrbija.chores.domain.Category;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "categories", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "api/categories", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CategoryRestController implements CrudOperations<Category> {
 
   public final CategoryInboundPort categoryInboundPort;

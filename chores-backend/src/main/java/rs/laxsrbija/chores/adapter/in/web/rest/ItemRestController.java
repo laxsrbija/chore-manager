@@ -16,7 +16,7 @@ import rs.laxsrbija.chores.domain.Item;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "items", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "api/items", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ItemRestController implements CrudOperations<Item> {
 
   private final ItemInboundPort itemInboundPort;

@@ -1,23 +1,31 @@
-<div class="columns is-vcentered">
-	<div class="column">
-		<p class="has-text-weight-semibold">{{ task?.name }}</p>
-		<nav class="breadcrumb is-small" aria-label="breadcrumbs">
-			<ul>
-				<li><a href="#">{{ task?.object?.category?.name }}</a></li>
-				<li><a href="#">{{ task?.object?.name }}</a></li>
-			</ul>
-		</nav>
-	</div>
-	<div class="column is-narrow">
-		<figure class="image is-32x32">
-			<img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
-		</figure>
-	</div>
-	<div class="column is-2 has-text-right">
-		<span [ngClass]="{'has-text-danger': task?.daysUntilNextRecurrence < 0}">
+<div class="columns is-vcentered pb-6">
+  <div class="column">
+    <p class="has-text-weight-semibold is-size-4-mobile">{{ task?.name }}</p>
+    <nav aria-label="breadcrumbs" class="breadcrumb is-small">
+      <ul>
+        <li><a href="#" class="is-size-6-mobile">{{ task?.item?.category?.name }}</a></li>
+        <li><a href="#" class="is-size-6-mobile">{{ task?.item?.name }}</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="column is-narrow is-full-mobile">
+    <div class="columns is-vcentered is-mobile">
+      <div *ngFor="let user of task?.reminder?.usersToNotify">
+        <div class="column is-narrow">
+          <figure class="image is-32x32">
+            <img [src]="user.image" class="is-rounded">
+          </figure>
+        </div>
+      </div>
+      <div class="column is-3-tablet has-text-right">
+		<span [ngClass]="{'has-text-danger': task?.occurrence.daysUntilNextOccurrence < 0}">
 			{{ getRelativeDateString() }}</span>
-	</div>
-	<div class="column is-narrow">
-		<app-task-shortcuts></app-task-shortcuts>
-	</div>
+      </div>
+      <div class="column is-narrow">
+        <app-task-shortcuts
+          (markComplete)="markComplete.emit(task && task.id ? task.id : '')"></app-task-shortcuts>
+      </div>
+    </div>
+  </div>
+
 </div>

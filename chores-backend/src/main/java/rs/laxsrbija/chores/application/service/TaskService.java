@@ -32,10 +32,8 @@ class TaskService implements TaskInboundPort {
         .dateCompleted(dateCompleted == null ? LocalDate.now() : dateCompleted)
         .build());
 
-    final Task updatedTask = taskOutboundPort.save(task);
-    emailService.sendTaskCompleteByDifferentUserNotification(updatedTask, user);
-
-    return updatedTask;
+    emailService.sendTaskCompleteByDifferentUserNotification(task, user);
+    return taskOutboundPort.save(task);
   }
 
   @Override

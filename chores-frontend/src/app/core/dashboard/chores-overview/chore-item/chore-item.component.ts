@@ -1,51 +1,44 @@
-import { Component, Input } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
-import { Task } from "../../../../model/dto/task";
-import { TaskService } from "../../../../service/task.service";
+import {Task} from "../../../../model/dto/task";
 
 @Component({
-	selector: 'app-chore-item',
-	templateUrl: './chore-item.component.html',
-	styleUrls: ['./chore-item.component.css']
+  selector: 'app-chore-item',
+  templateUrl: './chore-item.component.html',
+  styleUrls: ['./chore-item.component.css']
 })
 export class ChoreItemComponent {
 
-	@Input() task?: Task;
+  @Input() task?: Task;
+  @Output() markComplete = new EventEmitter<string>();
 
-	constructor(private taskService: TaskService) {
-	}
+  getRelativeDateString() {
+    if (!this.task) {
+      return '';
+    }
 
-	markComplete() {
-		if (this.task && this.task.id)
-		{
-			this.taskService.markComplete(this.task.id).subscribe();
-		}
-	}
+    const daysUntilNextOccurrence = this.task.occurrence ? this.task.occurrence.daysUntilNextOccurrence : 0;
 
-	getRelativeDateString() {
-		if (!this.task)
-		{
-			return '';
-		}
+    if (!daysUntilNextOccurrence) {
+      return "Unknown";
+    }
 
-		const daysUntilNextRecurrence = this.task.daysUntilNextRecurrence;
+    if (daysUntilNextOccurrence === 1) {
+      return 'Tomorrow';
+    }
 
-		if (!daysUntilNextRecurrence) {
-			return "Unknown";
-		}
+    if (daysUntilNextOccurrence === 0) {
+      return 'Today';
+    }
 
-		if (daysUntilNextRecurrence === 1) {
-			return 'Tomorrow';
-		}
+    if (daysUntilNextOccurrence === -1) {
+      return 'Yesterday';
+    }
 
-		if (daysUntilNextRecurrence === 0) {
-			return 'Today';
-		}
+    return Math.abs(daysUntilNextOccurrence) + ' days' + (daysUntilNextOccurrence < 0 ? ' ago' : '');
+  }
 
-		if (daysUntilNextRecurrence === -1) {
-			return 'Yesterday';
-		}
-
-		return Math.abs(daysUntilNextRecurrence) + ' days' + (daysUntilNextRecurrence < 0 ? ' ago' : '');
-	}
+  print() {
+    console.log("AD");
+  }
 }

@@ -18,6 +18,7 @@
 
 	<modules>
 		<module>chores-backend</module>
+		<module>chores-frontend</module>
 	</modules>
 
 	<properties>

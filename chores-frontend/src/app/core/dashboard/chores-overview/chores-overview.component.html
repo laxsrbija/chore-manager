@@ -1,4 +1,12 @@
-<p class="subtitle" [textContent]="sectionTitle"></p>
-<div class="container" *ngFor="let task of tasks">
-	<app-chore-item [task]="task"></app-chore-item>
-</div>
+<section [ngClass]="{'is-hidden': tasks?.length === 0}" class="py-6">
+  <div class="container">
+    <div class="columns pb-5">
+      <div class="column px-4" style="border-radius: 4px; background-color: white">
+        <p [textContent]="sectionTitle" class="subtitle pt-2"></p>
+        <div *ngFor="let task of tasks" class="container">
+          <app-chore-item (markComplete)="markComplete.emit($event)" [task]="task"></app-chore-item>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

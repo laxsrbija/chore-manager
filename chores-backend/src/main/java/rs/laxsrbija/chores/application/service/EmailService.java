@@ -1,6 +1,7 @@
 package rs.laxsrbija.chores.application.service;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -18,6 +19,7 @@ import rs.laxsrbija.chores.domain.User;
 class EmailService {
 
   private static final String EMAIL_SUBJECT_PREFIX = "[CM] ";
+  private static final int NUMBER_OF_RETRIES = 10;
 
   private final JavaMailSender mailSender;
   private final EmailTemplateService emailTemplateService;
@@ -59,6 +61,25 @@ class EmailService {
       log.error("Unable to create an email reminder", e);
     }
 
-    mailSender.send(message);
+    sendEmailWithRetries(message);
+  }
+
+  private void sendEmailWithRetries(final MimeMessage message) {
+    for (int currentAttempt = 1; currentAttempt <= NUMBER_OF_RETRIES; ++currentAttempt) {
+      try {
+        mailSender.send(message);
+        return;
+      } catch (final Exception e) {
+        try {
+          TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException ex) {
+          throw new RuntimeException(ex);
+        }
+
+        log.warn("Failed to send the email message: Attempt number " + currentAttempt);
+      }
+    }
+
+    log.error("Failed to send the email message after " + NUMBER_OF_RETRIES + " attempts");
   }
 }
