@@ -31,7 +31,7 @@
 							"node_modules/bulma/css/bulma.min.css"
 						],
 						"scripts": [
-							"node_modules/@fortawesome/fontawesome-free/js/all.js"
+							"node_modules/@fortawesome/fontawesome-free/js/all.min.js"
 						]
 					},
 					"configurations": {

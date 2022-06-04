@@ -12,6 +12,8 @@ export class ChoreItemComponent {
   @Input() task?: Task;
   @Output() markComplete = new EventEmitter<string>();
 
+  isExpanded: boolean = false;
+
   getRelativeDateString() {
     if (!this.task) {
       return '';
@@ -41,7 +43,16 @@ export class ChoreItemComponent {
       + (daysUntilNextOccurrence < 0 ? ' ago' : '');
   }
 
-  print() {
-    console.log("AD");
+  getLastCompleted() {
+    if (!this.task || !this.task.history) {
+      return 'Never';
+    }
+
+    return this.task.history[this.task.history.length - 1].dateCompleted;
   }
+
+  toggleDetails() {
+    this.isExpanded = !this.isExpanded;
+  }
+
 }

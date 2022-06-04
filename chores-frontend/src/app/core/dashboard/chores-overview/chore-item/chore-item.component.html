@@ -1,5 +1,5 @@
 <div class="mt-5">
-  <div class="columns is-vcentered">
+  <div class="columns is-vcentered" (click)="toggleDetails()">
     <div class="column">
       <p class="has-text-weight-semibold is-size-5-mobile">{{ task?.name }}</p>
       <nav aria-label="breadcrumbs" class="breadcrumb is-small">
@@ -19,15 +19,85 @@
           </div>
         </div>
         <div class="column is-narrow-tablet has-text-right pl-6">
-		<span [ngClass]="{'has-text-danger': task?.occurrence.daysUntilNextOccurrence < 0}">
-			{{ getRelativeDateString() }}</span>
+          <span
+            [ngClass]="{
+              'has-text-danger': task?.occurrence.daysUntilNextOccurrence < 0,
+              'has-text-weight-semibold': task?.occurrence.daysUntilNextOccurrence <= 1
+            }">
+            {{ getRelativeDateString() }}
+          </span>
         </div>
-        <div class="column is-narrow">
-          <app-task-shortcuts
-            (markComplete)="markComplete.emit(task && task.id ? task.id : '')"></app-task-shortcuts>
+        <div class="column is-narrow pl-5">
+          <div>
+            <span
+              (click)="markComplete.emit(task ? task.id : '')"
+              class="icon is-medium has-text-success is-clickable">
+              <i class="fa-solid fa-lg fa-list-check"></i>
+            </span>
+            <span
+              class="icon is-medium is-clickable ml-3">
+              <i [class]="isExpanded ? 'fa-solid fa-angle-up' : 'fa-solid fa-angle-right'"></i>
+            </span>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+  <div
+    class="mb-5 p-3"
+    style="background-color: #f5f5f5; border-radius: 4px"
+    [ngClass]="{'is-hidden': !isExpanded}">
+    <div class="block">
+      <div>
+        <span class="icon-text">
+          <span class="icon">
+              <i class="fa-solid fa-pencil"></i>
+          </span>
+          <span class="has-text-weight-semibold">Description</span>
+        </span>
+      </div>
+      <div>
+        {{task?.description}}
+      </div>
+    </div>
+    <div class="block">
+      <div>
+        <span class="icon-text">
+          <span class="icon">
+              <i class="fa-solid fa-flag-checkered"></i>
+          </span>
+          <span class="has-text-weight-semibold">Last completed</span>
+        </span>
+      </div>
+      <div>
+        {{getLastCompleted()}}
+      </div>
+    </div>
+    <div class="block">
+      <div>
+        <span class="icon-text">
+          <span class="icon">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+          </span>
+          <span class="has-text-weight-semibold">Completion history</span>
+        </span>
+      </div>
+      <div class="m-2 mt-3">
+        <div class="media pl-4" *ngFor="let completionHistory of task?.history.slice().reverse()">
+          <div class="media-left">
+            <figure class="image is-16x16">
+              <img [src]="completionHistory.user.image" class="is-rounded">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-7">{{completionHistory.user.name}}</p>
+            <p class="subtitle is-7">{{completionHistory.dateCompleted}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <hr class="m-0">
 </div>
