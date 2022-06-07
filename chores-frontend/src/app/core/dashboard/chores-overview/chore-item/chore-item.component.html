@@ -1,5 +1,5 @@
 <div class="mt-5">
-  <div class="columns is-vcentered" (click)="toggleDetails()">
+  <div class="columns is-vcentered">
     <div class="column">
       <p class="has-text-weight-semibold is-size-5-mobile">{{ task?.name }}</p>
       <nav aria-label="breadcrumbs" class="breadcrumb is-small">
@@ -34,11 +34,15 @@
               class="icon is-medium has-text-success is-clickable">
               <i class="fa-solid fa-lg fa-list-check"></i>
             </span>
-            <span [ngClass]="{'is-hidden': isExpanded}"
+            <span
+              (click)="toggleDetails()"
+              [ngClass]="{'is-hidden': isExpanded}"
               class="icon is-medium is-clickable ml-3">
               <i class="fa-solid fa-angle-right"></i>
             </span>
-            <span [ngClass]="{'is-hidden': !isExpanded}"
+            <span
+              (click)="toggleDetails()"
+              [ngClass]="{'is-hidden': !isExpanded}"
               class="icon is-medium is-clickable ml-3">
               <i class="fa-solid fa-angle-up"></i>
             </span>

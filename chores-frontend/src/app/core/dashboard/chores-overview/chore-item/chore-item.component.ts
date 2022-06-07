@@ -44,11 +44,11 @@ export class ChoreItemComponent {
   }
 
   getLastCompleted() {
-    if (!this.task || !this.task.history) {
-      return 'Never';
+    if (this.task && this.task.history && this.task.history.length > 0) {
+      return this.task.history[this.task.history.length - 1].dateCompleted;
     }
 
-    return this.task.history[this.task.history.length - 1].dateCompleted;
+    return 'Never';
   }
 
   toggleDetails() {
