@@ -1,7 +1,8 @@
 <div class="mt-5">
   <div class="columns is-vcentered">
     <div class="column">
-      <p class="has-text-weight-semibold is-size-5-mobile">{{ task?.name }}</p>
+      <p class="has-text-weight-semibold is-size-5-mobile"
+         [ngClass]="{'disabled': !task?.enabled}">{{ task?.name }}</p>
       <nav aria-label="breadcrumbs" class="breadcrumb is-small">
         <ul>
           <li><a href="#" class="is-size-6-mobile">{{ task?.item?.category?.name }}</a></li>
@@ -24,14 +25,15 @@
               'has-text-danger': task?.occurrence.daysUntilNextOccurrence < 0,
               'has-text-weight-semibold': task?.occurrence.daysUntilNextOccurrence <= 1
             }">
-            {{ getRelativeDateString() }}
+            {{ getNextOccurrence() }}
           </span>
         </div>
         <div class="column is-narrow pl-5">
           <div>
             <span
               (click)="markComplete.emit(task ? task.id : '')"
-              class="icon is-medium has-text-success is-clickable">
+              [ngClass]="task?.enabled ? 'has-text-success' : 'has-text-danger'"
+              class="icon is-medium is-clickable">
               <i class="fa-solid fa-lg fa-list-check"></i>
             </span>
             <span

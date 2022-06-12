@@ -10,4 +10,5 @@ export interface Task extends BaseDto {
   occurrence?: OccurrenceInfo;
   reminder?: ReminderInfo;
   history: CompletionHistoryItem[];
+  enabled: boolean;
 }

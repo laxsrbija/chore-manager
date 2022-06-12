@@ -15,6 +15,7 @@ public class Overview {
 
   private List<Task> upcoming;
   private List<Task> overdue;
+  private List<Task> disabled;
 
   private int taskCount;
   private int itemCount;

@@ -36,9 +36,15 @@ public class OverviewService {
         .sorted(Comparator.comparingLong(task -> task.getOccurrence().getDaysUntilNextOccurrence()))
         .collect(Collectors.toList());
 
+    final List<Task> disabled = tasks.stream()
+        .filter(task -> !task.isEnabled())
+        .sorted(Comparator.comparing(Task::getName))
+        .collect(Collectors.toList());
+
     return Overview.builder()
         .upcoming(upcoming)
         .overdue(overdue)
+        .disabled(disabled)
         .taskCount(tasks.size())
         .itemCount(itemInboundPort.getAll().size())
         .categoryCount(categoryInboundPort.getAll().size())

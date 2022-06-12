@@ -14,15 +14,19 @@ export class ChoreItemComponent {
 
   isExpanded: boolean = false;
 
-  getRelativeDateString() {
+  getNextOccurrence() {
     if (!this.task) {
       return '';
+    }
+
+    if (!this.task.enabled) {
+      return 'Disabled';
     }
 
     const daysUntilNextOccurrence = this.task.occurrence ? this.task.occurrence.daysUntilNextOccurrence : 0;
 
     if (!daysUntilNextOccurrence) {
-      return "Unknown";
+      return 'Unknown';
     }
 
     if (daysUntilNextOccurrence === 1) {
