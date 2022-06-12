@@ -25,7 +25,7 @@ export class ChoreItemComponent {
 
     const daysUntilNextOccurrence = this.task.occurrence ? this.task.occurrence.daysUntilNextOccurrence : 0;
 
-    if (!daysUntilNextOccurrence) {
+    if (!daysUntilNextOccurrence && this.task.history.length === 0) {
       return 'Unknown';
     }
 
