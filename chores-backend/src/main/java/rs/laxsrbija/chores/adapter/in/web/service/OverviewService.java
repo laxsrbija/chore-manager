@@ -16,6 +16,9 @@ import rs.laxsrbija.chores.domain.Task;
 @RequiredArgsConstructor
 public class OverviewService {
 
+  private static final Comparator<Task> OCCURRENCE_COMPARATOR =
+      Comparator.comparingLong(task -> task.getOccurrence().getDaysUntilNextOccurrence());
+
   private final TaskInboundPort taskInboundPort;
   private final ItemInboundPort itemInboundPort;
   private final CategoryInboundPort categoryInboundPort;
@@ -24,17 +27,19 @@ public class OverviewService {
   public Overview getOverview() {
     final List<Task> tasks = taskInboundPort.getAll();
 
-    final List<Task> upcoming = tasks.stream()
-        .filter(Task::isEnabled)
-        .filter(task -> task.getOccurrence().getDaysUntilNextOccurrence() >= 0)
-        .sorted(Comparator.comparingLong(task -> task.getOccurrence().getDaysUntilNextOccurrence()))
-        .collect(Collectors.toList());
+    final List<Task> upcoming =
+        tasks.stream()
+            .filter(Task::isEnabled)
+            .filter(task -> task.getOccurrence().getDaysUntilNextOccurrence() >= 0)
+            .sorted(OCCURRENCE_COMPARATOR.thenComparingInt(task -> task.getHistory().size()))
+            .collect(Collectors.toList());
 
-    final List<Task> overdue = tasks.stream()
-        .filter(Task::isEnabled)
-        .filter(task -> task.getOccurrence().getDaysUntilNextOccurrence() < 0)
-        .sorted(Comparator.comparingLong(task -> task.getOccurrence().getDaysUntilNextOccurrence()))
-        .collect(Collectors.toList());
+    final List<Task> overdue =
+        tasks.stream()
+            .filter(Task::isEnabled)
+            .filter(task -> task.getOccurrence().getDaysUntilNextOccurrence() < 0)
+            .sorted(OCCURRENCE_COMPARATOR)
+            .collect(Collectors.toList());
 
     final List<Task> disabled = tasks.stream()
         .filter(task -> !task.isEnabled())
