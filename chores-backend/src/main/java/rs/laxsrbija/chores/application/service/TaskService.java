@@ -3,10 +3,12 @@ package rs.laxsrbija.chores.application.service;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import rs.laxsrbija.chores.application.port.in.TaskInboundPort;
 import rs.laxsrbija.chores.application.port.out.TaskOutboundPort;
 import rs.laxsrbija.chores.application.port.out.UserOutboundPort;
+import rs.laxsrbija.chores.application.util.ListUtil;
 import rs.laxsrbija.chores.domain.CompletionHistoryItem;
 import rs.laxsrbija.chores.domain.Task;
 import rs.laxsrbija.chores.domain.User;
@@ -19,18 +21,22 @@ class TaskService implements TaskInboundPort {
   private final UserOutboundPort userOutboundPort;
   private final EmailService emailService;
 
+  @Value("${chores.history.size:5}")
+  private int historySize;
+
   @Override
   public Task markComplete(
-      final String taskId,
-      final String userId,
-      final LocalDate dateCompleted) {
+      final String taskId, final String userId, final LocalDate dateCompleted) {
     final Task task = get(taskId);
     final User user = userOutboundPort.get(userId);
 
-    task.getHistory().add(CompletionHistoryItem.builder()
-        .user(user)
-        .dateCompleted(dateCompleted == null ? LocalDate.now() : dateCompleted)
-        .build());
+    final List<CompletionHistoryItem> completionHistory = task.getHistory();
+    completionHistory.add(
+        CompletionHistoryItem.builder()
+            .user(user)
+            .dateCompleted(dateCompleted == null ? LocalDate.now() : dateCompleted)
+            .build());
+    task.setHistory(ListUtil.trimList(completionHistory, historySize));
 
     emailService.sendTaskCompleteByDifferentUserNotification(task, user);
     return taskOutboundPort.save(task);
