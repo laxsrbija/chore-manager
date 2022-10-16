@@ -4,3 +4,9 @@ services:
     ports:
       - "1080:1080"
       - "1025:1025"
+  chore-manager:
+    build: .
+    ports:
+      - 8080:8080
+    volumes:
+      - ./resources/dev-data:/opt/chore-manager/resources

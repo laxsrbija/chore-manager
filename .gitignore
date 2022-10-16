@@ -35,3 +35,4 @@ build/
 
 /chores-frontend/node/
 /chores-frontend/.angular/
+/resources/dev-data/db/lock/
