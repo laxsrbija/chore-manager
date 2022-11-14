@@ -2,7 +2,6 @@ package rs.laxsrbija.chores.application.service;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
@@ -37,8 +36,7 @@ class EmailService {
   public void sendTaskCompleteByDifferentUserNotification(final Task task, final User user) {
     final List<User> otherUsers =
         task.getReminder().getUsersToNotify().stream()
-            .filter(userToNotify -> !userToNotify.getId().equals(user.getId()))
-            .collect(Collectors.toList());
+            .filter(userToNotify -> !userToNotify.getId().equals(user.getId())).toList();
     final String subject = task.getName() + " completed by " + user.getName();
 
     for (final User otherUser : otherUsers) {
@@ -72,7 +70,7 @@ class EmailService {
       } catch (final Exception e) {
         try {
           TimeUnit.SECONDS.sleep(5);
-        } catch (InterruptedException ex) {
+        } catch (final InterruptedException ex) {
           throw new RuntimeException(ex);
         }
 

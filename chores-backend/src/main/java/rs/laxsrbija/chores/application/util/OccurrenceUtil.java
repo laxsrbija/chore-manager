@@ -20,8 +20,8 @@ public class OccurrenceUtil {
             : null;
 
     final Recurrence recurrence = task.getRecurrence();
-    if (recurrence instanceof DynamicRecurrence) {
-      return getNextOccurrence(latestCompletion, (DynamicRecurrence) recurrence);
+    if (recurrence instanceof DynamicRecurrence dynamicRecurrence) {
+      return getNextOccurrence(latestCompletion, dynamicRecurrence);
     } else {
       return getNextOccurrence(latestCompletion, (FixedRecurrence) recurrence);
     }
@@ -92,7 +92,7 @@ public class OccurrenceUtil {
       } else {
         nextRun = LocalDate.of(latestCompletion.getYear(), month, day);
 
-        if (nextRun.compareTo(latestCompletion) < 0) {
+        if (latestCompletion.getYear() == now.getYear()) {
           return nextRun.plusYears(1);
         }
       }
