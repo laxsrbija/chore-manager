@@ -21,4 +21,6 @@ public class Overview {
   private int itemCount;
   private int categoryCount;
   private int userCount;
+
+  private String build;
 }

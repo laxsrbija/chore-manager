@@ -126,6 +126,12 @@
               <finalName>chore-manager</finalName>
             </configuration>
           </execution>
+          <execution>
+            <id>build-info</id>
+            <goals>
+              <goal>build-info</goal>
+            </goals>
+          </execution>
         </executions>
       </plugin>
     </plugins>

@@ -9,4 +9,6 @@ export interface Overview {
   itemCount: number;
   categoryCount: number;
   userCount: number;
+
+  build: string;
 }
