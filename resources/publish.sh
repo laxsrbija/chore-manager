@@ -3,7 +3,7 @@
 IMAGE="laxsrbija/chore-manager:latest"
 
 echo "Building the project..."
-(cd .. && ./mvnw clean package)
+(cd .. && ./mvnw clean install)
 
 echo "Building the Docker image..."
 (cd .. && docker build -t $IMAGE .)
