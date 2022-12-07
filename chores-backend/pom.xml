@@ -72,6 +72,7 @@
           <groupId>rs.laxsrbija.chores</groupId>
           <artifactId>chores-frontend</artifactId>
           <version>${project.version}</version>
+          <type>pom</type>
         </dependency>
       </dependencies>
       <build>
