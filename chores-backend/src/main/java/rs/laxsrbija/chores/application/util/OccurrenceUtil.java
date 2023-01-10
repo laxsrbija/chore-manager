@@ -41,63 +41,82 @@ public class OccurrenceUtil {
     return latestCompletion.plusDays(dynamicRecurrence.getNumberOfDays());
   }
 
-  // day only - every nth day each month
-  // month only - every 1st day each month
-  // day and month - every year on the exact date
   private static LocalDate getNextOccurrence(
       final LocalDate latestCompletion, final FixedRecurrence fixedRecurrence) {
     final Integer day = fixedRecurrence.getDay();
     final Integer month = fixedRecurrence.getMonth();
 
+    if (day != null && month == null) {
+      // day only - every nth day each month
+      return handleTasksRecurringOnSpecificDays(latestCompletion, day);
+    } else if (day == null && month != null) {
+      // month only - every 1st day each month
+      return handleTasksRecurringOnSpecificMonths(latestCompletion, month);
+    } else if (day != null) {
+      // day and month - every year on the exact date
+      return handleTasksRecurringOnSpecificDates(latestCompletion, day, month);
+    } else {
+      throw new ChoreManagerException("Fixed recurrence interval not set");
+    }
+  }
+
+  private static LocalDate handleTasksRecurringOnSpecificDays(
+      final LocalDate latestCompletion, final Integer day) {
     final LocalDate nextRun;
     final LocalDate now = LocalDate.now();
 
-    if (day != null && month == null) {
-      if (latestCompletion == null) {
-        nextRun = LocalDate.of(now.getYear(), now.getMonth(), day);
+    if (latestCompletion == null) {
+      nextRun = LocalDate.of(now.getYear(), now.getMonth(), day);
 
-        if (nextRun.compareTo(now) < 0) {
-          return nextRun.plusMonths(1);
-        }
-      } else {
-        nextRun =
-            LocalDate.of(latestCompletion.getYear(), latestCompletion.getMonth(), day)
-                .plusMonths(1L);
-
-        if (nextRun.compareTo(latestCompletion) < 0) {
-          return nextRun.plusMonths(1);
-        }
-      }
-    } else if (day == null && month != null) {
-      if (latestCompletion == null) {
-        nextRun = LocalDate.of(now.getYear(), month, 1);
-
-        if (nextRun.compareTo(now) < 0) {
-          return nextRun.plusYears(1);
-        }
-      } else {
-        nextRun = LocalDate.of(latestCompletion.getYear(), month, 1);
-
-        if (nextRun.compareTo(latestCompletion) < 0) {
-          return nextRun.plusYears(1);
-        }
-      }
-    } else if (day != null) {
-      if (latestCompletion == null) {
-        nextRun = LocalDate.of(now.getYear(), month, day);
-
-        if (nextRun.compareTo(now) < 0) {
-          return nextRun.plusYears(1);
-        }
-      } else {
-        nextRun = LocalDate.of(latestCompletion.getYear(), month, day);
-
-        if (latestCompletion.getYear() == now.getYear()) {
-          return nextRun.plusYears(1);
-        }
+      if (nextRun.isBefore(now)) {
+        return LocalDate.of(now.getYear(), now.getMonth().plus(1), day);
       }
     } else {
-      throw new ChoreManagerException("Fixed recurrence interval not set");
+      nextRun = LocalDate.of(latestCompletion.getYear(), latestCompletion.getMonth().plus(1), day);
+
+      if (nextRun.isBefore(latestCompletion)) {
+        return nextRun.plusMonths(1);
+      }
+    }
+
+    return nextRun;
+  }
+
+  private static LocalDate handleTasksRecurringOnSpecificMonths(
+      final LocalDate latestCompletion, final Integer month) {
+    final LocalDate nextRun;
+    final LocalDate now = LocalDate.now();
+
+    if (latestCompletion == null) {
+      nextRun = LocalDate.of(now.getYear(), month, 1);
+
+      if (nextRun.isBefore(now)) {
+        return LocalDate.of(now.getYear() + 1, month, 1);
+      }
+    } else {
+      nextRun = LocalDate.of(latestCompletion.getYear(), month, 1);
+
+      if (nextRun.isBefore(latestCompletion)) {
+        return LocalDate.of(latestCompletion.getYear() + 1, month, 1);
+      }
+    }
+
+    return nextRun;
+  }
+
+  private static LocalDate handleTasksRecurringOnSpecificDates(
+      final LocalDate latestCompletion, final Integer day, final Integer month) {
+    final LocalDate nextRun;
+    final LocalDate now = LocalDate.now();
+
+    if (latestCompletion == null) {
+      nextRun = LocalDate.of(now.getYear(), month, day);
+
+      if (nextRun.isBefore(now)) {
+        return nextRun.plusYears(1);
+      }
+    } else {
+      return LocalDate.of(latestCompletion.getYear() + 1, month, day);
     }
 
     return nextRun;
