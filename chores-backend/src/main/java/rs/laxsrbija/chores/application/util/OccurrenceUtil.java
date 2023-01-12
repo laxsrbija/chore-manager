@@ -69,10 +69,11 @@ public class OccurrenceUtil {
       nextRun = LocalDate.of(now.getYear(), now.getMonth(), day);
 
       if (nextRun.isBefore(now)) {
-        return LocalDate.of(now.getYear(), now.getMonth().plus(1), day);
+        return LocalDate.of(now.getYear(), now.getMonth(), day).plusMonths(1);
       }
     } else {
-      nextRun = LocalDate.of(latestCompletion.getYear(), latestCompletion.getMonth().plus(1), day);
+      nextRun =
+          LocalDate.of(latestCompletion.getYear(), latestCompletion.getMonth(), day).plusMonths(1);
 
       if (nextRun.isBefore(latestCompletion)) {
         return nextRun.plusMonths(1);
