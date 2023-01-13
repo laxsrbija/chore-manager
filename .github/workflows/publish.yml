@@ -13,6 +13,6 @@ jobs:
         uses: elgohr/Publish-Docker-Github-Action@v5
         with:
           name: laxsrbija/chore-manager
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
           tags: "latest"
