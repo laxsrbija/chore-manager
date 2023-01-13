@@ -4,6 +4,8 @@ name: Build and push Docker image
 #  push:
 #    branches: [ master ]
 
+on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
