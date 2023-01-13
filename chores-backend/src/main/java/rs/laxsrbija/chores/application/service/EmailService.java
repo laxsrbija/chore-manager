@@ -36,7 +36,8 @@ class EmailService {
   public void sendTaskCompleteByDifferentUserNotification(final Task task, final User user) {
     final List<User> otherUsers =
         task.getReminder().getUsersToNotify().stream()
-            .filter(userToNotify -> !userToNotify.getId().equals(user.getId())).toList();
+            .filter(userToNotify -> !userToNotify.getId().equals(user.getId()))
+            .toList();
     final String subject = task.getName() + " completed by " + user.getName();
 
     for (final User otherUser : otherUsers) {
@@ -71,7 +72,8 @@ class EmailService {
         try {
           TimeUnit.SECONDS.sleep(5);
         } catch (final InterruptedException ex) {
-          throw new RuntimeException(ex);
+          Thread.currentThread().interrupt();
+          throw new IllegalStateException(ex);
         }
 
         log.warn("Failed to send the email message: Attempt number " + currentAttempt);

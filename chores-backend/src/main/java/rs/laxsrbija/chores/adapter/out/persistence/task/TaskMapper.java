@@ -22,17 +22,18 @@ import rs.laxsrbija.chores.domain.User;
 class TaskMapper {
 
   public Task toTask(final TaskEntity taskEntity, final Item item, final List<User> users) {
-    final Task task = Task.builder()
-        .id(taskEntity.getId())
-        .name(taskEntity.getName())
-        .dateCreated(taskEntity.getDateCreated())
-        .description(taskEntity.getDescription())
-        .enabled(taskEntity.isEnabled())
-        .history(forEach(taskEntity.getHistory(), users, this::toCompletionHistoryItem))
-        .recurrence(taskEntity.getRecurrence())
-        .reminder(toReminderInfo(taskEntity.getReminder(), users))
-        .item(item)
-        .build();
+    final Task task =
+        Task.builder()
+            .id(taskEntity.getId())
+            .name(taskEntity.getName())
+            .dateCreated(taskEntity.getDateCreated())
+            .description(taskEntity.getDescription())
+            .enabled(taskEntity.isEnabled())
+            .history(forEach(taskEntity.getHistory(), users, this::toCompletionHistoryItem))
+            .recurrence(taskEntity.getRecurrence())
+            .reminder(toReminderInfo(taskEntity.getReminder(), users))
+            .item(item)
+            .build();
 
     final OccurrenceInfo occurrenceInfo =
         OccurrenceInfo.builder()
@@ -59,12 +60,12 @@ class TaskMapper {
   }
 
   private CompletionHistoryItem toCompletionHistoryItem(
-      final CompletionHistoryItemEntity completionHistoryItemEntity,
-      final List<User> users) {
-    final User completionUser = users.stream()
-        .filter(user -> user.getId().equals(completionHistoryItemEntity.getUserId()))
-        .findFirst()
-        .orElse(null);
+      final CompletionHistoryItemEntity completionHistoryItemEntity, final List<User> users) {
+    final User completionUser =
+        users.stream()
+            .filter(user -> user.getId().equals(completionHistoryItemEntity.getUserId()))
+            .findFirst()
+            .orElse(null);
 
     return CompletionHistoryItem.builder()
         .dateCompleted(completionHistoryItemEntity.getDateCompleted())
@@ -85,7 +86,7 @@ class TaskMapper {
     final List<User> usersToNotify =
         users.stream()
             .filter(user -> usersIdsToNotify != null && usersIdsToNotify.contains(user.getId()))
-            .collect(Collectors.toList());
+            .toList();
 
     return ReminderInfo.builder()
         .usersToNotify(usersToNotify)
@@ -94,9 +95,8 @@ class TaskMapper {
   }
 
   private ReminderInfoEntity toReminderInfoEntity(final ReminderInfo reminderInfo) {
-    final Set<String> userIdsToNotify = reminderInfo.getUsersToNotify().stream()
-        .map(User::getId)
-        .collect(Collectors.toSet());
+    final Set<String> userIdsToNotify =
+        reminderInfo.getUsersToNotify().stream().map(User::getId).collect(Collectors.toSet());
 
     return ReminderInfoEntity.builder()
         .reminderDate(reminderInfo.getReminderDate())

@@ -1,7 +1,6 @@
 package rs.laxsrbija.chores.adapter.out.persistence.item;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import rs.laxsrbija.chores.adapter.out.persistence.PersistenceAdapter;
@@ -29,11 +28,12 @@ class ItemPersistenceAdapter extends PersistenceAdapter<Item> implements ItemOut
   @Override
   public List<Item> getAll() {
     return itemRepository.findAll().stream()
-        .map(itemEntity -> {
-          final Category category = categoryOutboundPort.get(itemEntity.getCategoryId());
-          return itemMapper.toItem(itemEntity, category);
-        })
-        .collect(Collectors.toList());
+        .map(
+            itemEntity -> {
+              final Category category = categoryOutboundPort.get(itemEntity.getCategoryId());
+              return itemMapper.toItem(itemEntity, category);
+            })
+        .toList();
   }
 
   @Override
