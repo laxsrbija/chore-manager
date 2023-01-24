@@ -12,6 +12,5 @@
 
   <artifactId>chore-manager-core</artifactId>
   <name>Chore Manager :: Core</name>
-  <packaging>pom</packaging>
 
 </project>

@@ -12,6 +12,17 @@
 
   <artifactId>chore-manager-rest-adapter</artifactId>
   <name>Chore Manager :: REST Adapter</name>
-  <packaging>pom</packaging>
+
+  <dependencies>
+    <dependency>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+    </dependency>
+  </dependencies>
 
 </project>

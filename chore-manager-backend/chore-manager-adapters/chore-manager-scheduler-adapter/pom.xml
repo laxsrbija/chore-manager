@@ -10,8 +10,8 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>chore-manager-db-adapter</artifactId>
-  <name>Chore Manager :: DB Adapter</name>
+  <artifactId>chore-manager-scheduler-adapter</artifactId>
+  <name>Chore Manager :: Scheduler Adapter</name>
 
   <dependencies>
     <dependency>
