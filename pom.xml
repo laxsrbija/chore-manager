@@ -1,46 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--suppress PyInterpreter -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
     <version>3.0.2</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
+    <relativePath/> <!-- lookup parent from repository -->
+  </parent>
 
-	<groupId>rs.laxsrbija.chores</groupId>
-	<artifactId>chores-parent</artifactId>
-	<packaging>pom</packaging>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Chores Manager</name>
+  <groupId>net.lazars.chores</groupId>
+  <artifactId>chores-parent</artifactId>
+  <packaging>pom</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Chore Manager</name>
 
-	<modules>
-		<module>chores-backend</module>
-		<module>chores-frontend</module>
-	</modules>
+  <modules>
+    <module>chore-manager-backend</module>
+    <module>chore-manager-frontend</module>
+  </modules>
 
-	<properties>
-		<java.version>17</java.version>
-		<jsondb-core.version>1.0.106</jsondb-core.version>
-		<springdoc-openapi-starter.version>2.0.2</springdoc-openapi-starter.version>
+  <properties>
+    <java.version>17</java.version>
+    <jsondb-core.version>1.0.106</jsondb-core.version>
+    <springdoc-openapi-starter.version>2.0.2</springdoc-openapi-starter.version>
 
-		<node.version>v16.15.0</node.version>
-		<npm.version>8.5.5</npm.version>
+    <node.version>v16.15.0</node.version>
+    <npm.version>8.5.5</npm.version>
 
-		<maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
-		<frontend-maven-plugin.version>1.12.0</frontend-maven-plugin.version>
+    <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
+    <frontend-maven-plugin.version>1.12.0</frontend-maven-plugin.version>
 
-		<sonar.organization>laxsrbija</sonar.organization>
-		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-	</properties>
+    <sonar.organization>laxsrbija</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+  </properties>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>io.jsondb</groupId>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.jsondb</groupId>
 				<artifactId>jsondb-core</artifactId>
 				<version>${jsondb-core.version}</version>
 			</dependency>

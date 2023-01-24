@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>chores-parent</artifactId>
+    <groupId>net.lazars.chores</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>chore-manager-backend</artifactId>
+  <name>Chore Manager :: Backend</name>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>chore-manager-adapters</module>
+    <module>chore-manager-application</module>
+    <module>chore-manager-core</module>
+  </modules>
+
+</project>

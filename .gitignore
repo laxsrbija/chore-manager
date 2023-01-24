@@ -33,6 +33,6 @@ build/
 .vscode/
 
 
-/chores-frontend/node/
-/chores-frontend/.angular/
+/chore-manager-frontend/node/
+/chore-manager-frontend/.angular/
 /resources/dev-data/db/lock/

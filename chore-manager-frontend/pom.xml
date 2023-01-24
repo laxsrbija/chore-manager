@@ -6,12 +6,12 @@
 
   <parent>
     <artifactId>chores-parent</artifactId>
-    <groupId>rs.laxsrbija.chores</groupId>
+    <groupId>net.lazars.chores</groupId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>chores-frontend</artifactId>
-  <name>Chores Manager :: Frontend</name>
+  <artifactId>chore-manager-frontend</artifactId>
+  <name>Chore Manager :: Frontend</name>
   <packaging>pom</packaging>
 
   <build>
