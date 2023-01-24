@@ -20,4 +20,12 @@
     <module>chore-manager-core</module>
   </modules>
 
+  <dependencies>
+    <dependency>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <optional>true</optional>
+    </dependency>
+  </dependencies>
+
 </project>
