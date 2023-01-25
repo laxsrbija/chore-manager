@@ -19,5 +19,7 @@ public class UserDocument {
 
   private String email;
 
+  private String encodedPassword;
+
   private String image;
 }

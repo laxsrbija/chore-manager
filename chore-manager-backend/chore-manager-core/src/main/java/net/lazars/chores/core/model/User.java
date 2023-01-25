@@ -14,4 +14,6 @@ import lombok.experimental.SuperBuilder;
 public class User extends BaseModel {
 
   private String email;
+
+  private String encodedPassword;
 }

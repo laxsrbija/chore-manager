@@ -1,7 +1,9 @@
 package net.lazars.chores.core.service;
 
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import net.lazars.chores.core.exception.ChoreManagerException;
 import net.lazars.chores.core.model.User;
 import net.lazars.chores.core.port.in.UserService;
 import net.lazars.chores.core.port.out.UserRepository;
@@ -29,5 +31,17 @@ class UserServiceImpl implements UserService {
   @Override
   public void delete(final String id) {
     userRepository.delete(id);
+  }
+
+  @Override
+  public Optional<User> findByEmail(final String email) {
+    final List<User> matchingUsers =
+        getAll().stream().filter(user -> user.getEmail().equals(email)).toList();
+
+    if (matchingUsers.size() > 1) {
+      throw new ChoreManagerException("More that one user with email '" + email + "'");
+    }
+
+    return matchingUsers.isEmpty() ? Optional.empty() : Optional.of(matchingUsers.get(0));
   }
 }
