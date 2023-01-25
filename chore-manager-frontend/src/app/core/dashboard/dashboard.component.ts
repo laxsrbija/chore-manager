@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TaskService} from "../../service/task.service";
 import {Overview} from "../../model/dto/overview";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +12,7 @@ export class DashboardComponent implements OnInit {
 
   overview?: Overview;
 
-  constructor(private taskService: TaskService) {
+  constructor(private taskService: TaskService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -19,7 +20,11 @@ export class DashboardComponent implements OnInit {
   }
 
   loadData() {
-    this.taskService.getOverview().subscribe(result => this.overview = result);
+    this.taskService.getOverview().subscribe(
+      {
+        next: (result) => this.overview = result,
+        error: () => this.router.navigate(['/login'], {})
+      });
   }
 
 }

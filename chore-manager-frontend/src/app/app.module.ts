@@ -13,6 +13,7 @@ import {
 } from './shared/complete-task-modal/complete-task-modal.component';
 import {FormsModule} from "@angular/forms";
 import {MarkCompleteComponent} from './core/mark-complete/mark-complete.component';
+import { LoginComponent } from './core/login/login.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {MarkCompleteComponent} from './core/mark-complete/mark-complete.componen
     ChoresOverviewComponent,
     ChoreItemComponent,
     CompleteTaskModalComponent,
-    MarkCompleteComponent
+    MarkCompleteComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
