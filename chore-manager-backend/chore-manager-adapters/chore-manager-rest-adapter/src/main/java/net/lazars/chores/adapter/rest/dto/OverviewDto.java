@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.lazars.chores.core.model.Task;
 
 @Data
 @Builder
@@ -13,9 +12,9 @@ import net.lazars.chores.core.model.Task;
 @NoArgsConstructor
 public class OverviewDto {
 
-  private List<Task> upcoming;
-  private List<Task> overdue;
-  private List<Task> disabled;
+  private List<TaskDto> upcoming;
+  private List<TaskDto> overdue;
+  private List<TaskDto> disabled;
 
   private int taskCount;
   private int itemCount;

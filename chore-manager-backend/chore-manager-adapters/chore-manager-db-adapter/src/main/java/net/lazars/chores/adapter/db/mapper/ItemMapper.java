@@ -1,6 +1,6 @@
 package net.lazars.chores.adapter.db.mapper;
 
-import net.lazars.chores.adapter.db.entity.ItemEntity;
+import net.lazars.chores.adapter.db.entity.ItemDocument;
 import net.lazars.chores.core.model.Category;
 import net.lazars.chores.core.model.Item;
 import org.springframework.stereotype.Component;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ItemMapper {
 
-  public Item toItem(final ItemEntity itemEntity, final Category category) {
+  public Item toItem(final ItemDocument itemEntity, final Category category) {
     return Item.builder()
         .id(itemEntity.getId())
         .name(itemEntity.getName())
@@ -17,8 +17,8 @@ public class ItemMapper {
         .build();
   }
 
-  public ItemEntity toItemEntity(final Item item) {
-    return ItemEntity.builder()
+  public ItemDocument toItemDocument(final Item item) {
+    return ItemDocument.builder()
         .id(item.getId())
         .name(item.getName())
         .image(item.getImage())

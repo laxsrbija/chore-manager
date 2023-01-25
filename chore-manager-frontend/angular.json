@@ -3,7 +3,7 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"chores-frontend": {
+		"chore-manager-frontend": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:application": {
@@ -17,7 +17,7 @@
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser",
 					"options": {
-						"outputPath": "dist/chores-frontend",
+						"outputPath": "dist/chore-manager-frontend",
 						"index": "src/index.html",
 						"main": "src/main.ts",
 						"polyfills": "src/polyfills.ts",
@@ -71,10 +71,10 @@
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"configurations": {
 						"production": {
-							"browserTarget": "chores-frontend:build:production"
+							"browserTarget": "chore-manager-frontend:build:production"
 						},
 						"development": {
-							"browserTarget": "chores-frontend:build:development"
+							"browserTarget": "chore-manager-frontend:build:development"
 						}
 					},
 					"defaultConfiguration": "development"
@@ -82,7 +82,7 @@
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"browserTarget": "chores-frontend:build"
+						"browserTarget": "chore-manager-frontend:build"
 					}
 				},
 				"test": {
@@ -105,5 +105,5 @@
 			}
 		}
 	},
-	"defaultProject": "chores-frontend"
+	"defaultProject": "chore-manager-frontend"
 }

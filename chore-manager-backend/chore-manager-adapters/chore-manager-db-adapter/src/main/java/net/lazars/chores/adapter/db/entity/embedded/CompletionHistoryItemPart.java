@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CompletionHistoryItemEntity {
+public class CompletionHistoryItemPart {
 
   private String userId;
   private LocalDate dateCompleted;

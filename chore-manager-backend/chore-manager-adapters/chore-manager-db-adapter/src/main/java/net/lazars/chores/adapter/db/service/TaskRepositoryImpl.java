@@ -1,10 +1,10 @@
 package net.lazars.chores.adapter.db.service;
 
-import static net.lazars.chores.core.util.Commons.forEach;
+import static net.lazars.chores.core.util.ListUtil.forEach;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import net.lazars.chores.adapter.db.entity.TaskEntity;
+import net.lazars.chores.adapter.db.entity.TaskDocument;
 import net.lazars.chores.adapter.db.mapper.TaskMapper;
 import net.lazars.chores.adapter.db.repository.TaskJsondbRepository;
 import net.lazars.chores.core.model.Item;
@@ -26,7 +26,7 @@ public class TaskRepositoryImpl extends EntityRepository<Task> implements TaskRe
 
   @Override
   public Task get(final String id) {
-    final TaskEntity taskEntity = taskRepository.findById(id);
+    final TaskDocument taskEntity = taskRepository.findById(id);
     return convertToTask(taskEntity);
   }
 
@@ -37,7 +37,7 @@ public class TaskRepositoryImpl extends EntityRepository<Task> implements TaskRe
 
   @Override
   protected void saveEntity(final Task entity) {
-    final TaskEntity taskEntity = taskMapper.toTaskEntity(entity);
+    final TaskDocument taskEntity = taskMapper.toTaskDocument(entity);
     taskRepository.save(taskEntity);
   }
 
@@ -46,7 +46,7 @@ public class TaskRepositoryImpl extends EntityRepository<Task> implements TaskRe
     taskRepository.delete(id);
   }
 
-  private Task convertToTask(final TaskEntity taskEntity) {
+  private Task convertToTask(final TaskDocument taskEntity) {
     final Item item = itemService.get(taskEntity.getItemId());
     final List<User> users = userService.getAll();
 

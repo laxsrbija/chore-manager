@@ -1,4 +1,4 @@
-package net.lazars.chores.core.model.date;
+package net.lazars.chores.adapter.rest.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,10 +7,13 @@ import lombok.experimental.SuperBuilder;
 
 @Data
 @SuperBuilder
-@NoArgsConstructor
 @AllArgsConstructor
-public class DatePeriod {
+@NoArgsConstructor
+public abstract class BaseDto {
 
-  private int frequency;
-  private DateUnit dateUnit;
+  private String id;
+
+  private String name;
+
+  private String image;
 }

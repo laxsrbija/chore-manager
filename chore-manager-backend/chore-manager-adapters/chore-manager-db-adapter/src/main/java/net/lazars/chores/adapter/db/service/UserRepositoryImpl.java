@@ -1,10 +1,10 @@
 package net.lazars.chores.adapter.db.service;
 
-import static net.lazars.chores.core.util.Commons.forEach;
+import static net.lazars.chores.core.util.ListUtil.forEach;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import net.lazars.chores.adapter.db.entity.UserEntity;
+import net.lazars.chores.adapter.db.entity.UserDocument;
 import net.lazars.chores.adapter.db.mapper.UserMapper;
 import net.lazars.chores.adapter.db.repository.UserJsondbRepository;
 import net.lazars.chores.core.model.User;
@@ -20,7 +20,7 @@ class UserRepositoryImpl extends EntityRepository<User> implements UserRepositor
 
   @Override
   public User get(final String id) {
-    final UserEntity userEntity = userRepository.findById(id);
+    final UserDocument userEntity = userRepository.findById(id);
     return userMapper.toUser(userEntity);
   }
 
@@ -31,7 +31,7 @@ class UserRepositoryImpl extends EntityRepository<User> implements UserRepositor
 
   @Override
   protected void saveEntity(final User entity) {
-    final UserEntity userEntity = userMapper.toUserEntity(entity);
+    final UserDocument userEntity = userMapper.toUserDocument(entity);
     userRepository.save(userEntity);
   }
 

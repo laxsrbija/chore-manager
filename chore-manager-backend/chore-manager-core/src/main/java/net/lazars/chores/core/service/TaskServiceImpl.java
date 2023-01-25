@@ -15,12 +15,11 @@ import net.lazars.chores.core.util.ListUtil;
 @RequiredArgsConstructor
 class TaskServiceImpl implements TaskService {
 
+  private static final int HISTORY_SIZE = 5;
+
   private final TaskRepository taskRepository;
   private final UserService userOutboundPort;
   private final EmailSender emailSender;
-
-  //  @Value("${chores.history.size:5}") FIXME
-  private int historySize = 5;
 
   @Override
   public Task markComplete(
@@ -34,7 +33,7 @@ class TaskServiceImpl implements TaskService {
             .user(user)
             .dateCompleted(dateCompleted == null ? LocalDate.now() : dateCompleted)
             .build());
-    task.setHistory(ListUtil.trimList(completionHistory, historySize));
+    task.setHistory(ListUtil.trimList(completionHistory, HISTORY_SIZE));
 
     emailSender.sendTaskCompleteByDifferentUserNotification(task, user);
     return taskRepository.save(task);

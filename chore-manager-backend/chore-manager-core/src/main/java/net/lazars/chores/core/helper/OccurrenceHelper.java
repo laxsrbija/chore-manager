@@ -9,6 +9,7 @@ import net.lazars.chores.core.model.Task;
 import net.lazars.chores.core.model.recurrence.DynamicRecurrence;
 import net.lazars.chores.core.model.recurrence.FixedRecurrence;
 import net.lazars.chores.core.model.recurrence.Recurrence;
+import net.lazars.chores.core.util.Commons;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class OccurrenceHelper {
@@ -38,7 +39,7 @@ public class OccurrenceHelper {
       return LocalDate.now();
     }
 
-    return latestCompletion.plusDays(dynamicRecurrence.getNumberOfDays());
+    return latestCompletion.plusDays(Commons.getNumberOfDays(dynamicRecurrence));
   }
 
   private static LocalDate getNextOccurrence(

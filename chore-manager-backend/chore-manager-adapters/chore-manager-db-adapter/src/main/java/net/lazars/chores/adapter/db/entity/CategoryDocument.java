@@ -10,7 +10,7 @@ import lombok.Data;
 @Builder
 @AllArgsConstructor
 @Document(collection = "categories", schemaVersion = "1.0")
-public class CategoryEntity {
+public class CategoryDocument {
 
   @Id
   private String id;

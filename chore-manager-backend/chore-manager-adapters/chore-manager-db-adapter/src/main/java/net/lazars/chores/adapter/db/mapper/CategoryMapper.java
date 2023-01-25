@@ -1,13 +1,13 @@
 package net.lazars.chores.adapter.db.mapper;
 
-import net.lazars.chores.adapter.db.entity.CategoryEntity;
+import net.lazars.chores.adapter.db.entity.CategoryDocument;
 import net.lazars.chores.core.model.Category;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CategoryMapper {
 
-  public Category toCategory(final CategoryEntity category) {
+  public Category toCategory(final CategoryDocument category) {
     return Category.builder()
         .id(category.getId())
         .name(category.getName())
@@ -15,8 +15,8 @@ public class CategoryMapper {
         .build();
   }
 
-  public CategoryEntity toCategoryEntity(final Category category) {
-    return CategoryEntity.builder()
+  public CategoryDocument toCategoryDocument(final Category category) {
+    return CategoryDocument.builder()
         .id(category.getId())
         .name(category.getName())
         .image(category.getImage())

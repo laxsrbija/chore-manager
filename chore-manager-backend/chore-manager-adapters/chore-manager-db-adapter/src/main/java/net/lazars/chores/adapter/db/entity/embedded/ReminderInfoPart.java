@@ -7,7 +7,7 @@ import net.lazars.chores.core.model.date.DatePeriod;
 
 @Data
 @Builder
-public class ReminderInfoEntity {
+public class ReminderInfoPart {
 
   private Set<String> usersIdsToNotify;
 

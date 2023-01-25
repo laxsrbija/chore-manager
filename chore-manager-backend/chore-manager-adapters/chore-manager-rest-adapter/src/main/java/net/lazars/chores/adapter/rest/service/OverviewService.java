@@ -1,9 +1,12 @@
 package net.lazars.chores.adapter.rest.service;
 
+import static net.lazars.chores.core.util.ListUtil.forEach;
+
 import java.util.Comparator;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import net.lazars.chores.adapter.rest.dto.OverviewDto;
+import net.lazars.chores.adapter.rest.mapper.DtoMapper;
 import net.lazars.chores.core.model.Task;
 import net.lazars.chores.core.port.in.CategoryService;
 import net.lazars.chores.core.port.in.ItemService;
@@ -49,9 +52,9 @@ public class OverviewService {
             .toList();
 
     return OverviewDto.builder()
-        .upcoming(upcoming)
-        .overdue(overdue)
-        .disabled(disabled)
+        .upcoming(forEach(upcoming, DtoMapper.INSTANCE::toTaskDto))
+        .overdue(forEach(overdue, DtoMapper.INSTANCE::toTaskDto))
+        .disabled(forEach(disabled, DtoMapper.INSTANCE::toTaskDto))
         .taskCount(tasks.size())
         .itemCount(itemInboundPort.getAll().size())
         .categoryCount(categoryService.getAll().size())

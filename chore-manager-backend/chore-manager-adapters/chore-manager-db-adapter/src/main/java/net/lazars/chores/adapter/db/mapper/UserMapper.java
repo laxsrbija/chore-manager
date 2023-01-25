@@ -1,13 +1,13 @@
 package net.lazars.chores.adapter.db.mapper;
 
-import net.lazars.chores.adapter.db.entity.UserEntity;
+import net.lazars.chores.adapter.db.entity.UserDocument;
 import net.lazars.chores.core.model.User;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper {
 
-  public User toUser(final UserEntity userEntity) {
+  public User toUser(final UserDocument userEntity) {
     return User.builder()
         .id(userEntity.getId())
         .name(userEntity.getName())
@@ -16,8 +16,8 @@ public class UserMapper {
         .build();
   }
 
-  public UserEntity toUserEntity(final User user) {
-    return UserEntity.builder()
+  public UserDocument toUserDocument(final User user) {
+    return UserDocument.builder()
         .id(user.getId())
         .name(user.getName())
         .email(user.getEmail())

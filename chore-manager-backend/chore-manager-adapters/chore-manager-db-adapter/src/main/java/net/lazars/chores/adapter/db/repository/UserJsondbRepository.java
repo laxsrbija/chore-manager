@@ -1,13 +1,13 @@
 package net.lazars.chores.adapter.db.repository;
 
 import io.jsondb.JsonDBTemplate;
-import net.lazars.chores.adapter.db.entity.UserEntity;
+import net.lazars.chores.adapter.db.entity.UserDocument;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserJsondbRepository extends CrudRepository<UserEntity> {
+public class UserJsondbRepository extends CrudRepository<UserDocument> {
 
   public UserJsondbRepository(final JsonDBTemplate jsonDBTemplate) {
-    super(jsonDBTemplate, UserEntity.class);
+    super(jsonDBTemplate, UserDocument.class);
   }
 }

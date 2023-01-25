@@ -1,7 +1,11 @@
 package net.lazars.chores.adapter.rest.controller;
 
+import static net.lazars.chores.core.util.ListUtil.forEach;
+
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import net.lazars.chores.adapter.rest.dto.ItemDto;
+import net.lazars.chores.adapter.rest.mapper.DtoMapper;
 import net.lazars.chores.core.model.Item;
 import net.lazars.chores.core.port.CrudOperations;
 import net.lazars.chores.core.port.in.ItemService;
@@ -17,26 +21,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "api/items", produces = MediaType.APPLICATION_JSON_VALUE)
-public class ItemRestController implements CrudOperations<Item> {
+public class ItemRestController implements CrudOperations<ItemDto> {
 
   private final ItemService itemService;
 
   @Override
   @GetMapping("{id}")
-  public Item get(@PathVariable final String id) {
-    return itemService.get(id);
+  public ItemDto get(@PathVariable final String id) {
+    return DtoMapper.INSTANCE.toItemDto(itemService.get(id));
   }
 
   @Override
   @GetMapping
-  public List<Item> getAll() {
-    return itemService.getAll();
+  public List<ItemDto> getAll() {
+    return forEach(itemService.getAll(), DtoMapper.INSTANCE::toItemDto);
   }
 
   @Override
   @PutMapping
-  public Item save(@RequestBody final Item object) {
-    return itemService.save(object);
+  public ItemDto save(@RequestBody final ItemDto itemDto) {
+    final Item item = DtoMapper.INSTANCE.toItem(itemDto);
+    return DtoMapper.INSTANCE.toItemDto(itemService.save(item));
   }
 
   @Override

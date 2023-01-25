@@ -2,7 +2,7 @@ package net.lazars.chores.adapter.db.service;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import net.lazars.chores.adapter.db.entity.ItemEntity;
+import net.lazars.chores.adapter.db.entity.ItemDocument;
 import net.lazars.chores.adapter.db.mapper.ItemMapper;
 import net.lazars.chores.adapter.db.repository.ItemJsondbRepository;
 import net.lazars.chores.core.model.Category;
@@ -21,7 +21,7 @@ class ItemRepositoryImpl extends EntityRepository<Item> implements ItemRepositor
 
   @Override
   public Item get(final String id) {
-    final ItemEntity itemEntity = itemRepository.findById(id);
+    final ItemDocument itemEntity = itemRepository.findById(id);
     final Category category = categoryService.get(itemEntity.getCategoryId());
     return itemMapper.toItem(itemEntity, category);
   }
@@ -39,7 +39,7 @@ class ItemRepositoryImpl extends EntityRepository<Item> implements ItemRepositor
 
   @Override
   protected void saveEntity(final Item entity) {
-    final ItemEntity itemEntity = itemMapper.toItemEntity(entity);
+    final ItemDocument itemEntity = itemMapper.toItemDocument(entity);
     itemRepository.save(itemEntity);
   }
 

@@ -1,7 +1,11 @@
 package net.lazars.chores.adapter.rest.controller;
 
+import static net.lazars.chores.core.util.ListUtil.forEach;
+
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import net.lazars.chores.adapter.rest.dto.CategoryDto;
+import net.lazars.chores.adapter.rest.mapper.DtoMapper;
 import net.lazars.chores.core.model.Category;
 import net.lazars.chores.core.port.CrudOperations;
 import net.lazars.chores.core.port.in.CategoryService;
@@ -17,26 +21,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "api/categories", produces = MediaType.APPLICATION_JSON_VALUE)
-public class CategoryRestController implements CrudOperations<Category> {
+public class CategoryRestController implements CrudOperations<CategoryDto> {
 
   public final CategoryService categoryService;
 
   @Override
   @GetMapping("{id}")
-  public Category get(@PathVariable final String id) {
-    return categoryService.get(id);
+  public CategoryDto get(@PathVariable final String id) {
+    return DtoMapper.INSTANCE.toCategoryDto(categoryService.get(id));
   }
 
   @Override
   @GetMapping
-  public List<Category> getAll() {
-    return categoryService.getAll();
+  public List<CategoryDto> getAll() {
+    return forEach(categoryService.getAll(), DtoMapper.INSTANCE::toCategoryDto);
   }
 
   @Override
   @PutMapping
-  public Category save(@RequestBody final Category category) {
-    return categoryService.save(category);
+  public CategoryDto save(@RequestBody final CategoryDto categoryDto) {
+    final Category category = DtoMapper.INSTANCE.toCategory(categoryDto);
+    return DtoMapper.INSTANCE.toCategoryDto(categoryService.save(category));
   }
 
   @Override

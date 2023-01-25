@@ -1,10 +1,10 @@
 package net.lazars.chores.adapter.db.service;
 
-import static net.lazars.chores.core.util.Commons.forEach;
+import static net.lazars.chores.core.util.ListUtil.forEach;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import net.lazars.chores.adapter.db.entity.CategoryEntity;
+import net.lazars.chores.adapter.db.entity.CategoryDocument;
 import net.lazars.chores.adapter.db.mapper.CategoryMapper;
 import net.lazars.chores.adapter.db.repository.CategoryJsondbRepository;
 import net.lazars.chores.core.model.Category;
@@ -21,7 +21,7 @@ class CategoryRepositoryImpl extends EntityRepository<Category>
 
   @Override
   public Category get(final String id) {
-    final CategoryEntity categoryEntity = categoryJsondbRepository.findById(id);
+    final CategoryDocument categoryEntity = categoryJsondbRepository.findById(id);
     return categoryMapper.toCategory(categoryEntity);
   }
 
@@ -32,7 +32,7 @@ class CategoryRepositoryImpl extends EntityRepository<Category>
 
   @Override
   protected void saveEntity(final Category entity) {
-    final CategoryEntity categoryEntity = categoryMapper.toCategoryEntity(entity);
+    final CategoryDocument categoryEntity = categoryMapper.toCategoryDocument(entity);
     categoryJsondbRepository.save(categoryEntity);
   }
 

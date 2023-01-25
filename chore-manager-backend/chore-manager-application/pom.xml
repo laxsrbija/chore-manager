@@ -67,7 +67,7 @@
                   <outputDirectory>${project.build.directory}/classes/resources/</outputDirectory>
                   <resources>
                     <resource>
-                      <directory>${project.parent.basedir}/chore-manager-frontend/dist/chores-frontend/</directory>
+                      <directory>../../chore-manager-frontend/dist/chore-manager-frontend/</directory>
                     </resource>
                   </resources>
                 </configuration>

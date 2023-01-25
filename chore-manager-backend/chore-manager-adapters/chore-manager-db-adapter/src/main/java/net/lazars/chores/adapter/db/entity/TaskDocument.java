@@ -7,15 +7,15 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import net.lazars.chores.adapter.db.entity.embedded.CompletionHistoryItemEntity;
-import net.lazars.chores.adapter.db.entity.embedded.ReminderInfoEntity;
-import net.lazars.chores.core.model.recurrence.Recurrence;
+import net.lazars.chores.adapter.db.entity.embedded.CompletionHistoryItemPart;
+import net.lazars.chores.adapter.db.entity.embedded.ReminderInfoPart;
+import net.lazars.chores.adapter.db.entity.embedded.recurrence.RecurrencePart;
 
 @Data
 @Builder
 @AllArgsConstructor
 @Document(collection = "tasks", schemaVersion = "1.0")
-public class TaskEntity {
+public class TaskDocument {
 
   @Id
   private String id;
@@ -28,11 +28,11 @@ public class TaskEntity {
 
   private String itemId;
 
-  private Recurrence recurrence;
+  private RecurrencePart recurrence;
 
-  private List<CompletionHistoryItemEntity> history;
+  private List<CompletionHistoryItemPart> history;
 
-  private ReminderInfoEntity reminder;
+  private ReminderInfoPart reminder;
 
   private boolean enabled;
 }
