@@ -41,7 +41,7 @@ public class SecurityConfiguration {
         .authenticated()
         .and()
         .formLogin()
-        // .loginPage("/#/login") TODO Add a frontend login page
+        .loginPage("/#/login")
         .permitAll()
         .and()
         .build();

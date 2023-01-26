@@ -1,9 +1,41 @@
-<form action="/login" method="post">
-  <label><b>Username</b></label>
-  <input type="text" placeholder="Enter Username" name="username" required>
-
-  <label><b>Password</b></label>
-  <input type="password" placeholder="Enter Password" name="password" required>
-
-  <button type="submit">Login</button>
-</form>
+<section class="hero is-primary is-halfheight">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-5-tablet is-4-desktop is-3-widescreen">
+          <form method="post" action="/login" class="box">
+            <div class="field">
+              <label for="email" class="label">Email</label>
+              <div class="control has-icons-left">
+                <input type="email" name="email" id="email" placeholder="user@example.com"
+                       class="input" required>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-envelope"></i>
+                </span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="password" class="label">Password</label>
+              <div class="control has-icons-left">
+                <input type="password" name="password" id="password" placeholder="*******"
+                       class="input" required>
+                <span class="icon is-small is-left">
+                  <i class="fa fa-lock"></i>
+                </span>
+              </div>
+            </div>
+            <div class="field">
+              <label for="remember-me" class="checkbox">
+                <input type="checkbox" name="remember-me" id="remember-me" checked>
+                Remember me
+              </label>
+            </div>
+            <div class="field">
+              <button type="submit" class="button is-success">Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
