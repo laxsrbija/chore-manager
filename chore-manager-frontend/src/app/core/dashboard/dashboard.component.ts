@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit {
 
   overview?: Overview;
 
-  constructor(private taskService: TaskService, private router: Router) {
+  constructor(private taskService: TaskService) {
   }
 
   ngOnInit(): void {
@@ -20,11 +20,6 @@ export class DashboardComponent implements OnInit {
   }
 
   loadData() {
-    this.taskService.getOverview().subscribe(
-      {
-        next: (result) => this.overview = result,
-        error: () => this.router.navigate(['/login'], {})
-      });
+    this.taskService.getOverview().subscribe(result => this.overview = result);
   }
-
 }

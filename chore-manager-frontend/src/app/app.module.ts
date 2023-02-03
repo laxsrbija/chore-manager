@@ -14,6 +14,7 @@ import {
 import {FormsModule} from "@angular/forms";
 import {MarkCompleteComponent} from './core/mark-complete/mark-complete.component';
 import { LoginComponent } from './core/login/login.component';
+import {CookieService} from "ngx-cookie-service";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { LoginComponent } from './core/login/login.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

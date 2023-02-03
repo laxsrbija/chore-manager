@@ -2,21 +2,36 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Overview} from "../model/dto/overview";
 import {Task} from "../model/dto/task";
+import {AccountService} from "./account.service";
+import {Router} from "@angular/router";
+import {EMPTY} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private accountService: AccountService, private router: Router) {
   }
 
   getOverview() {
-    return this.http.get<Overview>('/api/overview')
+    const loginHeaders = this.accountService.httpOptions;
+    if (loginHeaders) {
+      return this.http.get<Overview>('/api/overview', loginHeaders);
+    } else {
+      this.router.navigate(['/login'], {}).then();
+      return EMPTY;
+    }
   }
 
   getTask(taskId: string) {
-    return this.http.get<Task>('/api/tasks/' + taskId);
+    const loginHeaders = this.accountService.httpOptions;
+    if (loginHeaders) {
+      return this.http.get<Task>('/api/tasks/' + taskId, loginHeaders);
+    } else {
+      this.router.navigate(['/login'], {}).then();
+      return EMPTY;
+    }
   }
 
   markComplete(taskId: string, userId: string, dateCompleted?: string) {
@@ -30,9 +45,16 @@ export class TaskService {
       params = params.append('dateCompleted', dateCompleted);
     }
 
-    return this.http.patch<Task>('/api/tasks/' + taskId, undefined, {
-        params: params
-      }
-    );
+    const loginHeaders = this.accountService.httpOptions;
+    if (loginHeaders) {
+      return this.http.patch<Task>('/api/tasks/' + taskId, undefined, {
+          params: params,
+          headers: loginHeaders.headers
+        }
+      );
+    } else {
+      this.router.navigate(['/login'], {}).then();
+      return EMPTY;
+    }
   }
 }
