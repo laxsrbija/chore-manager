@@ -1,6 +1,6 @@
 ![](./resources/logo.png)
 
-## About The Project
+## About the project
 
 ![](./resources/chore-manager.png)
 
