@@ -24,15 +24,15 @@
 
   <properties>
     <java.version>17</java.version>
-    <jsondb-core.version>1.0.106</jsondb-core.version>
+    <jsondb-core.version>1.0.115-j11</jsondb-core.version>
     <springdoc-openapi-starter.version>2.0.2</springdoc-openapi-starter.version>
     <mapstruct.version>1.5.3.Final</mapstruct.version>
 
     <node.version>v16.15.0</node.version>
     <npm.version>8.5.5</npm.version>
 
-    <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
-    <frontend-maven-plugin.version>1.12.0</frontend-maven-plugin.version>
+    <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
+    <frontend-maven-plugin.version>1.12.1</frontend-maven-plugin.version>
 
     <sonar.organization>laxsrbija</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -63,7 +63,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
+        <version>3.10.1</version>
         <configuration>
           <source>${maven.compiler.source}</source>
           <target>${maven.compiler.target}</target>
