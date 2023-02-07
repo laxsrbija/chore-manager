@@ -20,7 +20,7 @@
 		"@fortawesome/fontawesome-free": "^6.1.1",
 		"bulma": "^0.9.4",
 		"ngx-cookie-service": "^13.2.1",
-		"rxjs": "~7.5.7",
+		"rxjs": "~7.8.0",
 		"tslib": "^2.3.1",
 		"zone.js": "~0.11.8"
 	},
