@@ -4,7 +4,7 @@ import static net.lazars.chores.core.util.ListUtil.forEach;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import net.lazars.chores.adapter.rest.dto.UserDto;
+import net.lazars.chores.adapter.rest.dto.CompleteUserDto;
 import net.lazars.chores.adapter.rest.mapper.DtoMapper;
 import net.lazars.chores.core.model.User;
 import net.lazars.chores.core.port.CrudOperations;
@@ -21,27 +21,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "api/users", produces = MediaType.APPLICATION_JSON_VALUE)
-public class UserRestController implements CrudOperations<UserDto> {
+public class UserRestController implements CrudOperations<CompleteUserDto> {
 
-  public final UserService userService;
+  private final UserService userService;
 
   @Override
   @GetMapping("{id}")
-  public UserDto get(@PathVariable final String id) {
-    return DtoMapper.INSTANCE.toUserDto(userService.get(id));
+  public CompleteUserDto get(@PathVariable final String id) {
+    return DtoMapper.INSTANCE.toCompleteUserDto(userService.get(id));
   }
 
   @Override
   @GetMapping
-  public List<UserDto> getAll() {
-    return forEach(userService.getAll(), DtoMapper.INSTANCE::toUserDto);
+  public List<CompleteUserDto> getAll() {
+    return forEach(userService.getAll(), DtoMapper.INSTANCE::toCompleteUserDto);
   }
 
   @Override
   @PutMapping
-  public UserDto save(@RequestBody final UserDto userDto) {
+  public CompleteUserDto save(@RequestBody final CompleteUserDto userDto) {
     final User user = DtoMapper.INSTANCE.toUser(userDto);
-    return DtoMapper.INSTANCE.toUserDto(userService.save(user));
+    return DtoMapper.INSTANCE.toCompleteUserDto(userService.save(user));
   }
 
   @Override

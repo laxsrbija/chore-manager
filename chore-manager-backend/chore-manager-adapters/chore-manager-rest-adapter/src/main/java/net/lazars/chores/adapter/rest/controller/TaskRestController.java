@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "api/tasks", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TaskRestController implements CrudOperations<TaskDto> {
 
-  public final TaskService taskService;
+  private final TaskService taskService;
 
   @Override
   @GetMapping("{id}")

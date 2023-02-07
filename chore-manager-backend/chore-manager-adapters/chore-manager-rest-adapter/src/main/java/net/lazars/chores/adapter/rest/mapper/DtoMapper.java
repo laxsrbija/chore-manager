@@ -1,6 +1,7 @@
 package net.lazars.chores.adapter.rest.mapper;
 
 import net.lazars.chores.adapter.rest.dto.CategoryDto;
+import net.lazars.chores.adapter.rest.dto.CompleteUserDto;
 import net.lazars.chores.adapter.rest.dto.ItemDto;
 import net.lazars.chores.adapter.rest.dto.TaskDto;
 import net.lazars.chores.adapter.rest.dto.UserDto;
@@ -38,7 +39,9 @@ public interface DtoMapper {
   @Mapping(source = "recurrence", target = "recurrence", qualifiedByName = "toRecurrenceDto")
   TaskDto toTaskDto(Task task);
 
-  User toUser(UserDto userDto);
+  User toUser(CompleteUserDto userDto);
+
+  CompleteUserDto toCompleteUserDto(User user);
 
   UserDto toUserDto(User user);
 
