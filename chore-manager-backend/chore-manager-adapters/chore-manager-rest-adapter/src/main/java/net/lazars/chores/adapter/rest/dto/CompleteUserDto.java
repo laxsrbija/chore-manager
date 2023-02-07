@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto extends BaseDto {
+public class CompleteUserDto extends UserDto {
 
-  private String email;
+  private String encodedPassword;
 }

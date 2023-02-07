@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "api/categories", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CategoryRestController implements CrudOperations<CategoryDto> {
 
-  public final CategoryService categoryService;
+  private final CategoryService categoryService;
 
   @Override
   @GetMapping("{id}")
