@@ -33,6 +33,8 @@ A sample configuration can be found [here](chore-manager-backend/chore-manager-a
 
 ### Updates
 
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/laxsrbija/chore-manager/publish.yml?label=deployment&style=for-the-badge)
+
 Chore Manager utilises a rolling release; the `main` branch is considered stable, 
 and each new push will publish a new Docker image.
 
