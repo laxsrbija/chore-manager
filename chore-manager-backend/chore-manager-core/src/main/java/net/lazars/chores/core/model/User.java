@@ -20,4 +20,6 @@ public class User extends BaseModel {
   private String encodedPassword;
 
   private List<Permission> permissions = new ArrayList<>();
+
+  private List<Household> households = new ArrayList<>();
 }

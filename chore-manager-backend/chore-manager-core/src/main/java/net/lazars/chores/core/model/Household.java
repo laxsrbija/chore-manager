@@ -9,7 +9,4 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Category extends BaseModel {
-
-  private Household household;
-}
+public class Household extends BaseModel {}
