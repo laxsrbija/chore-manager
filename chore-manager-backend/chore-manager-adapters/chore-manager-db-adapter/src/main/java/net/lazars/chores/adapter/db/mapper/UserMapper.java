@@ -1,5 +1,6 @@
 package net.lazars.chores.adapter.db.mapper;
 
+import java.util.List;
 import net.lazars.chores.adapter.db.entity.UserDocument;
 import net.lazars.chores.core.model.User;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ public class UserMapper {
         .email(userEntity.getEmail())
         .encodedPassword(userEntity.getEncodedPassword())
         .image(userEntity.getImage())
+        .permissions(userEntity.getPermissions() != null ? userEntity.getPermissions() : List.of())
         .build();
   }
 
@@ -24,6 +26,7 @@ public class UserMapper {
         .email(user.getEmail())
         .encodedPassword(user.getEncodedPassword())
         .image(user.getImage())
+        .permissions(user.getPermissions())
         .build();
   }
 }

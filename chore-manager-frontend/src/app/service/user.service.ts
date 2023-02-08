@@ -16,7 +16,7 @@ export class UserService {
   getAllUsers() {
     const loginHeaders = this.accountService.httpOptions;
     if (loginHeaders) {
-      return this.http.get<User[]>('/api/users', loginHeaders);
+      return this.http.get<User[]>('/api/service/account/users', loginHeaders);
     } else {
       this.router.navigate(['/login'], {}).then();
       return EMPTY;
@@ -26,7 +26,7 @@ export class UserService {
   getUser(userId: string) {
     const loginHeaders = this.accountService.httpOptions;
     if (loginHeaders) {
-      return this.http.get<User>('/api/users/' + userId, loginHeaders);
+      return this.http.get<User>('/api/service/account/users/' + userId, loginHeaders);
     } else {
       this.router.navigate(['/login'], {}).then();
       return EMPTY;

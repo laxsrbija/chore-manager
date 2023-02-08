@@ -17,7 +17,7 @@ export class TaskService {
   getOverview() {
     const loginHeaders = this.accountService.httpOptions;
     if (loginHeaders) {
-      return this.http.get<Overview>('/api/overview', loginHeaders);
+      return this.http.get<Overview>('/api/service/overview', loginHeaders);
     } else {
       this.router.navigate(['/login'], {}).then();
       return EMPTY;
@@ -27,7 +27,7 @@ export class TaskService {
   getTask(taskId: string) {
     const loginHeaders = this.accountService.httpOptions;
     if (loginHeaders) {
-      return this.http.get<Task>('/api/tasks/' + taskId, loginHeaders);
+      return this.http.get<Task>('/api/rest/tasks/' + taskId, loginHeaders);
     } else {
       this.router.navigate(['/login'], {}).then();
       return EMPTY;
@@ -47,7 +47,7 @@ export class TaskService {
 
     const loginHeaders = this.accountService.httpOptions;
     if (loginHeaders) {
-      return this.http.patch<Task>('/api/tasks/' + taskId, undefined, {
+      return this.http.patch<Task>('/api/rest/tasks/' + taskId, undefined, {
           params: params,
           headers: loginHeaders.headers
         }

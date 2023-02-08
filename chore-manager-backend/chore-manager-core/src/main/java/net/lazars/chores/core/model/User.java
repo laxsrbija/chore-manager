@@ -1,5 +1,7 @@
 package net.lazars.chores.core.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,4 +18,6 @@ public class User extends BaseModel {
   private String email;
 
   private String encodedPassword;
+
+  private List<Permission> permissions = new ArrayList<>();
 }

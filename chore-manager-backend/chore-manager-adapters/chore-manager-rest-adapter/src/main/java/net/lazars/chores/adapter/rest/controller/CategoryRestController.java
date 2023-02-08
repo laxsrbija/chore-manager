@@ -10,6 +10,7 @@ import net.lazars.chores.core.model.Category;
 import net.lazars.chores.core.port.CrudOperations;
 import net.lazars.chores.core.port.in.CategoryService;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "api/categories", produces = MediaType.APPLICATION_JSON_VALUE)
+@PreAuthorize("hasAuthority('MANAGE')")
+@RequestMapping(path = "/api/rest/categories", produces = MediaType.APPLICATION_JSON_VALUE)
 public class CategoryRestController implements CrudOperations<CategoryDto> {
 
   private final CategoryService categoryService;

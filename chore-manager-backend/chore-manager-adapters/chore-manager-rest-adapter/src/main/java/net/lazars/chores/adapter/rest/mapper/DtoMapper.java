@@ -41,6 +41,7 @@ public interface DtoMapper {
 
   User toUser(CompleteUserDto userDto);
 
+  @Named("toCompleteUserDto")
   CompleteUserDto toCompleteUserDto(User user);
 
   UserDto toUserDto(User user);

@@ -16,13 +16,12 @@ export class AccountService {
   constructor(private http: HttpClient, private cookieService: CookieService) {
     const key = this.cookieService.get(this.cookieKey);
     if (key) {
-      console.log(key);
       this.httpOptions = this.getHeaders(key);
     }
   }
 
   login(httpOptions: any) {
-    return this.http.post<void>('/api/account/login', {}, httpOptions);
+    return this.http.post<void>('/api/service/account/login', {}, httpOptions);
   }
 
   getHeaders(key: string) {

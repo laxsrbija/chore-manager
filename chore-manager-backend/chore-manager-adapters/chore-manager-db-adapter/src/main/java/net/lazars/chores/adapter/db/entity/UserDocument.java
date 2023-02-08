@@ -2,9 +2,11 @@ package net.lazars.chores.adapter.db.entity;
 
 import io.jsondb.annotation.Document;
 import io.jsondb.annotation.Id;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import net.lazars.chores.core.model.Permission;
 
 @Data
 @Builder
@@ -22,4 +24,6 @@ public class UserDocument {
   private String encodedPassword;
 
   private String image;
+
+  private List<Permission> permissions;
 }

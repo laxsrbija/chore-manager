@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import net.lazars.chores.core.port.in.UserService;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,6 +27,10 @@ public class UserAuthenticationService implements UserDetailsService {
                 User.builder()
                     .username(user.getEmail())
                     .password(user.getEncodedPassword())
+                    .authorities(
+                        user.getPermissions().stream()
+                            .map(permission -> new SimpleGrantedAuthority(permission.name()))
+                            .toList())
                     .build())
         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
   }
@@ -35,10 +40,11 @@ public class UserAuthenticationService implements UserDetailsService {
 
     private String username;
     private String password;
+    private List<? extends GrantedAuthority> authorities;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-      return List.of();
+      return authorities;
     }
 
     @Override

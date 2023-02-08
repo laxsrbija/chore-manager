@@ -13,6 +13,7 @@ import net.lazars.chores.core.port.in.TaskService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "api/tasks", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/api/rest/tasks", produces = MediaType.APPLICATION_JSON_VALUE)
 public class TaskRestController implements CrudOperations<TaskDto> {
 
   private final TaskService taskService;
@@ -44,6 +45,7 @@ public class TaskRestController implements CrudOperations<TaskDto> {
 
   @Override
   @PutMapping
+  @PreAuthorize("hasAuthority('MANAGE')")
   public TaskDto save(@RequestBody final TaskDto taskDto) {
     final Task task = DtoMapper.INSTANCE.toTask(taskDto);
     return DtoMapper.INSTANCE.toTaskDto(taskService.save(task));
@@ -51,6 +53,7 @@ public class TaskRestController implements CrudOperations<TaskDto> {
 
   @Override
   @DeleteMapping("{id}")
+  @PreAuthorize("hasAuthority('MANAGE')")
   public void delete(@PathVariable final String id) {
     taskService.delete(id);
   }
