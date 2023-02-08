@@ -36,7 +36,7 @@ public class UserAuthenticationService implements UserDetailsService {
   }
 
   @Builder
-  private static class User implements UserDetails {
+  public static class User implements UserDetails {
 
     private String username;
     private String password;

@@ -21,7 +21,7 @@ export class AccountService {
   }
 
   login(httpOptions: any) {
-    return this.http.post<void>('/api/service/account/login', {}, httpOptions);
+    return this.http.post<void>('/api/service/account', {}, httpOptions);
   }
 
   getHeaders(key: string) {
