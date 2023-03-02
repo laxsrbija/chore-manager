@@ -7,9 +7,10 @@
 
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
-        <li><a href="#" class="nav-link px-2 link-light">Inventory</a></li>
-        <li><a href="#" class="nav-link px-2 link-light">Customers</a></li>
-        <li><a href="#" class="nav-link px-2 link-light">Products</a></li>
+        <li><a href="#" class="nav-link px-2 link-light">Households</a></li>
+        <li><a href="#" class="nav-link px-2 link-light">Categories</a></li>
+        <li><a href="#" class="nav-link px-2 link-light">Items</a></li>
+        <li><a href="#" class="nav-link px-2 link-light">Tasks</a></li>
       </ul>
 
       <button type="button" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 btn btn-outline-light">API Documentation</button>
@@ -57,8 +58,8 @@
 
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Dropdown link</a></li>
-                <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Configure completion</a></li>
+                <li><a class="dropdown-item" href="#">Task information</a></li>
               </ul>
             </div>
           </div>
@@ -192,3 +193,35 @@
     </small>
   </div>
 </main>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="mb-4">
+          <label for="exampleFormControlInput1" class="form-label">Date completed</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1" value="2023-01-01">
+        </div>
+        <div>
+          <label for="flexRadioDefault1" class="form-label">Completed by</label>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+            <label class="form-check-label" for="flexRadioDefault1">
+              Charles
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+            <label class="form-check-label" for="flexRadioDefault2">
+              Michelle
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-success">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
