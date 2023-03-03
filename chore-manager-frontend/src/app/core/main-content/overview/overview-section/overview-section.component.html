@@ -1,0 +1,48 @@
+<div class="my-3 p-3 bg-body rounded shadow-sm" [class.d-none]="!tasks">
+  <h6 class="pb-2 mb-2 text-muted">{{sectionTitle}}</h6>
+  <div class="container">
+
+    <div class="row align-items-center border-bottom py-3"
+         [class.border-bottom]="tasks && indexOfTask !== tasks.length - 1"
+         *ngFor="let task of tasks; let indexOfTask = index;">
+      <div class="col mb-3 mb-md-0">
+        <div><strong><span class="badge rounded-pill bg-secondary">Home</span> {{task.name}}
+        </strong></div>
+        <div class="small text-muted">{{task.item.category.name}} · {{task.item.name}}</div>
+      </div>
+
+      <div class="w-100 d-md-none d-sm-block"></div>
+
+      <div class="col-auto text-end me-3-md">
+        <img [src]="user.image" width="38" height="38"
+             [alt]="user.name"
+             class="rounded-circle border border-2 border-white"
+             *ngFor="let user of task.reminder.usersToNotify; let indexOfUser = index;"
+             [class.offset-user-image]="indexOfUser">
+      </div>
+
+      <div class="col-md-2 col text-end">
+        <div class="pe-md-3">{{task | occurrence}}</div>
+      </div>
+
+      <div class="col-auto">
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-outline-success">
+            <i class="bi bi-clipboard-check-fill"></i>
+          </button>
+
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-outline-success dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                     data-bs-target="#exampleModal">Complete...</a></li>
+              <li><a class="dropdown-item" href="#">Task information</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,7 +8,9 @@ import {MainContentComponent} from './core/main-content/main-content.component';
 import {LoginComponent} from './core/login/login.component';
 import {FooterComponent} from './shared/footer/footer.component';
 import {NavbarComponent} from './shared/navbar/navbar.component';
-import { OccurrencePipe } from './util/occurrence.pipe';
+import {OccurrencePipe} from './util/occurrence.pipe';
+import {HttpClientModule} from "@angular/common/http";
+import { OverviewSectionComponent } from './core/main-content/overview/overview-section/overview-section.component';
 
 @NgModule({
   declarations: [
@@ -18,11 +20,13 @@ import { OccurrencePipe } from './util/occurrence.pipe';
     LoginComponent,
     FooterComponent,
     NavbarComponent,
-    OccurrencePipe
+    OccurrencePipe,
+    OverviewSectionComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
