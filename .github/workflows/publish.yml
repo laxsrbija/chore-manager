@@ -1,6 +1,9 @@
-name: Publish Docker image nightly
-      
-on: workflow_dispatch
+name: Build and push Docker image
+
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build:
