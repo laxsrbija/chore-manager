@@ -1,19 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {OverviewComponent} from "./core/main-content/overview/overview.component";
+import {DashboardComponent} from "./core/dashboard/dashboard.component";
+import {MarkCompleteComponent} from "./core/mark-complete/mark-complete.component";
 import {LoginComponent} from "./core/login/login.component";
-import {MainContentComponent} from "./core/main-content/main-content.component";
 
 const routes: Routes = [
-  {
-    path: '', component: MainContentComponent,
-    children: [
-      {
-        path: '',
-        component: OverviewComponent
-      }
-    ]
-  },
+  {path: '', component: DashboardComponent},
+  {path: 'complete', component: MarkCompleteComponent},
   {path: 'login', component: LoginComponent}
 ];
 
