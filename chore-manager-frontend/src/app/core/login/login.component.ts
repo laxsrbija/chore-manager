@@ -1,11 +1,13 @@
 import {Component} from '@angular/core';
-import {AccountService} from "../../service/account.service";
+import {AuthService} from "../../service/auth.service";
 import {Router} from "@angular/router";
+import {RequestsService} from "../../service/requests.service";
+import {HttpHeaders} from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
 
@@ -13,17 +15,28 @@ export class LoginComponent {
   email = "";
   password = "";
 
-  constructor(private accountService: AccountService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private requestsService: RequestsService) {
   }
 
   login() {
     const key = btoa(this.email + ':' + this.password)
-    const httpOptions = this.accountService.getHeaders(key);
-    this.accountService.login(httpOptions).subscribe(
+    const httpOptions = {
+      headers: new HttpHeaders(
+        {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          'Authorization': 'Basic ' + key,
+        }
+      )
+    };
+
+    this.requestsService.accountWithOptions(httpOptions).subscribe(
       {
         next: () => {
-          this.accountService.httpOptions = httpOptions;
-          this.accountService.storeKey(key);
+          this.authService.storeAuthToken(key);
           this.router.navigate(['/'], {}).then();
         },
         error: () => {

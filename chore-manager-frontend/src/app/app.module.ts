@@ -1,32 +1,36 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {HttpClientModule} from "@angular/common/http";
+
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {NavbarComponent} from './core/navbar/navbar.component';
-import {DashboardComponent} from './core/dashboard/dashboard.component';
-import {FooterComponent} from './core/footer/footer.component';
-import {ChoresOverviewComponent} from './core/dashboard/chores-overview/chores-overview.component';
-import {ChoreItemComponent} from './core/dashboard/chores-overview/chore-item/chore-item.component';
+import {OverviewComponent} from './core/main-content/overview/overview.component';
+import {MainContentComponent} from './core/main-content/main-content.component';
+import {LoginComponent} from './core/login/login.component';
+import {FooterComponent} from './shared/footer/footer.component';
+import {NavbarComponent} from './shared/navbar/navbar.component';
+import {OccurrencePipe} from './util/occurrence.pipe';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {
-  CompleteTaskModalComponent
-} from './shared/complete-task-modal/complete-task-modal.component';
-import {FormsModule} from "@angular/forms";
-import {MarkCompleteComponent} from './core/mark-complete/mark-complete.component';
-import { LoginComponent } from './core/login/login.component';
+  OverviewSectionComponent
+} from './core/main-content/overview/overview-section/overview-section.component';
+import {AuthInterceptor} from "./service/auth.interceptor";
 import {CookieService} from "ngx-cookie-service";
+import {FormsModule} from "@angular/forms";
+import { CompletionModalComponent } from './core/main-content/overview/completion-modal/completion-modal.component';
+import { InstantCompletionComponent } from './core/main-content/overview/overview-section/instant-completion/instant-completion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    DashboardComponent,
+    OverviewComponent,
+    MainContentComponent,
+    LoginComponent,
     FooterComponent,
-    ChoresOverviewComponent,
-    ChoreItemComponent,
-    CompleteTaskModalComponent,
-    MarkCompleteComponent,
-    LoginComponent
+    NavbarComponent,
+    OccurrencePipe,
+    OverviewSectionComponent,
+    CompletionModalComponent,
+    InstantCompletionComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +38,10 @@ import {CookieService} from "ngx-cookie-service";
     HttpClientModule,
     FormsModule
   ],
-  providers: [CookieService],
+  providers: [
+    CookieService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

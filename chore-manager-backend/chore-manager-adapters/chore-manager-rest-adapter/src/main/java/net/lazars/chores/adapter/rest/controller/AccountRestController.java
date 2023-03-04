@@ -1,11 +1,14 @@
 package net.lazars.chores.adapter.rest.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import net.lazars.chores.adapter.rest.dto.UserDto;
+import net.lazars.chores.adapter.rest.mapper.DtoMapper;
+import net.lazars.chores.adapter.rest.service.AuthService;
+import net.lazars.chores.core.model.User;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -13,9 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "api/account", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AccountRestController {
 
-  @PostMapping("login")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void login() {
-    // The session was created by accessing this endpoint
+  private static final DtoMapper MAPPER = DtoMapper.INSTANCE;
+
+  private final AuthService authService;
+
+  @PostMapping
+  public UserDto account(final Authentication authentication) {
+    final User user = authService.getCurrentUser(authentication);
+    return MAPPER.toUserDto(user);
   }
 }

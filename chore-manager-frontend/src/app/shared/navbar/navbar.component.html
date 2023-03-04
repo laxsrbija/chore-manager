@@ -1,0 +1,32 @@
+<nav class="navbar p-3 mb-4 navbar-expand-lg text-bg-dark navbar-dark border-bottom">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a href="/" class="navbar-brand align-items-center mb-2 me-lg-2 mb-lg-0 text-dark text-decoration-none">
+      <img class="bi me-2" src="assets/icon-white.png" alt="" height="36">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+        <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
+        <li><a href="#" class="nav-link px-2 link-light">Households</a></li>
+        <li><a href="#" class="nav-link px-2 link-light">Categories</a></li>
+        <li><a href="#" class="nav-link px-2 link-light">Items</a></li>
+        <li><a href="#" class="nav-link px-2 link-light">Tasks</a></li>
+      </ul>
+    </div>
+
+    <div class="dropdown">
+      <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <img [src]="authService.user?.image" alt="" width="38" height="38" class="rounded-circle" style="border: 1px solid white">
+      </a>
+      <ul class="dropdown-menu text-small">
+        <li><a class="dropdown-item" href="#">New task</a></li>
+        <li><a class="dropdown-item" href="#">API documentation</a></li>
+        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#">Sign out</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
