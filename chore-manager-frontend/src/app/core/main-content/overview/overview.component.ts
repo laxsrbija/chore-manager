@@ -15,6 +15,10 @@ export class OverviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadOverview();
+  }
+
+  loadOverview() {
     this.requestsService.getOverview().subscribe(overview => this.overview = overview);
   }
 }

@@ -1,12 +1,19 @@
 <main class="container">
 
   <app-overview-section sectionTitle="Overdue chores"
-                        [tasks]="overview?.overdue"></app-overview-section>
+                        [tasks]="overview?.overdue"
+                        (completeTask)="modal.openModal($event)"
+                        (instantlyCompleteTask)="loadOverview()"></app-overview-section>
 
   <app-overview-section sectionTitle="Upcoming chores"
-                        [tasks]="overview?.upcoming"></app-overview-section>
+                        [tasks]="overview?.upcoming"
+                        (completeTask)="modal.openModal($event)"
+                        (instantlyCompleteTask)="loadOverview()"></app-overview-section>
 
   <app-overview-section sectionTitle="Disabled chores"
-                        [tasks]="overview?.disabled"></app-overview-section>
+                        [tasks]="overview?.disabled"
+                        (completeTask)="modal.openModal($event)"
+                        (instantlyCompleteTask)="loadOverview()"></app-overview-section>
 
 </main>
+<app-completion-modal #modal (changesSaved)="loadOverview()"></app-completion-modal>

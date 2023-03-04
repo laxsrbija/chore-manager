@@ -1,0 +1,36 @@
+<div class="modal fade" id="taskCompletionModal" tabindex="-1"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="mb-4">
+          <label for="dateCompleted" class="form-label">Date completed</label>
+          <input type="email" class="form-control" id="dateCompleted" [(ngModel)]="dateCompleted"
+                 value="2023-01-01">
+        </div>
+        <label class="form-label">Completed by</label>
+        <div *ngFor="let user of users">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="{{user.id}}"
+                   [value]="user.id" [checked]="user.id === authService.user?.id"
+                   [(ngModel)]="userId">
+            <label class="form-check-label" [for]="user.id">
+              {{user.name}}
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" #close>Cancel
+        </button>
+        <button type="button" class="btn btn-success w-50" (click)="completeTask()"
+                [disabled]="saving">
+          <span [class.d-none]="saving">Save changes</span>
+          <span [class.d-none]="!saving">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading...
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>

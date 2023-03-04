@@ -16,6 +16,8 @@ import {
 import {AuthInterceptor} from "./service/auth.interceptor";
 import {CookieService} from "ngx-cookie-service";
 import {FormsModule} from "@angular/forms";
+import { CompletionModalComponent } from './core/main-content/overview/completion-modal/completion-modal.component';
+import { InstantCompletionComponent } from './core/main-content/overview/overview-section/instant-completion/instant-completion.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import {FormsModule} from "@angular/forms";
     FooterComponent,
     NavbarComponent,
     OccurrencePipe,
-    OverviewSectionComponent
+    OverviewSectionComponent,
+    CompletionModalComponent,
+    InstantCompletionComponent
   ],
   imports: [
     BrowserModule,
