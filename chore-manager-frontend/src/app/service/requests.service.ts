@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Overview} from "../model/dto/overview";
+import {User} from "../model/dto/user";
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +11,15 @@ export class RequestsService {
   constructor(private http: HttpClient) {
   }
 
-  getOverview() {
-    const loginHeaders = {
-      headers: new HttpHeaders(
-        {
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest',
-          'Authorization': 'Basic Y2hhcmxlc0BleGFtcGxlLmNvbTpkZW1v',
-        }
-      )
-    };
+  account() {
+    return this.http.post<User>('/api/account', {});
+  }
 
-    return this.http.get<Overview>('/api/overview', loginHeaders);
+  accountWithOptions(httpOptions: any) {
+    return this.http.post<any>('/api/account', {}, httpOptions);
+  }
+
+  getOverview() {
+    return this.http.get<Overview>('/api/overview');
   }
 }

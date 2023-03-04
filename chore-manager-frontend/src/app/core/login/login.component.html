@@ -1,23 +1,35 @@
-<div class="text-center">
-  <main class="form-signin w-25 m-auto bg-body rounded shadow-sm mt-5 p-4">
+<div class="row text-center">
+  <main class="col col-md-3 m-auto bg-body rounded shadow-sm mt-5 p-4">
     <form>
-      <img class="my-4" src="https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo.svg"
-           alt="" width="72" height="57">
-      <h1 class="h3 mb-5 fw-normal">Account Login</h1>
+      <img class="my-4 opacity-75" src="assets/icon-dark.png"
+           alt="" height="100">
 
-      <div class="form-floating">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-        <label for="floatingInput">
+      <h1 class="h3 fw-bold">Chore Manager</h1>
+      <h5 class="h5 mb-5 text-muted">Account Login</h5>
+
+      <div class="alert alert-danger fw-bold" role="alert" [class.d-none]="!failed">
+        <i class="bi bi-exclamation-triangle-fill"></i> Invalid credentials
+      </div>
+
+      <div class="form-floating mb-2">
+        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="email"
+               placeholder=""
+               required autofocus>
+        <label for="email">
           <i class="bi bi-envelope-at me-1"></i> Email address</label>
       </div>
+
       <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">
+        <input type="password" class="form-control" id="password" name="password"
+               [(ngModel)]="password"
+               required placeholder="">
+        <label for="password">
           <i class="bi bi-shield-lock me-1"></i>
           Password</label>
       </div>
 
-      <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">Sign in</button>
+      <button class="w-100 btn btn-lg btn-dark mt-4 mb-2" type="submit" (click)="login()">Sign in
+      </button>
     </form>
   </main>
 </div>

@@ -9,8 +9,13 @@ import {LoginComponent} from './core/login/login.component';
 import {FooterComponent} from './shared/footer/footer.component';
 import {NavbarComponent} from './shared/navbar/navbar.component';
 import {OccurrencePipe} from './util/occurrence.pipe';
-import {HttpClientModule} from "@angular/common/http";
-import { OverviewSectionComponent } from './core/main-content/overview/overview-section/overview-section.component';
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {
+  OverviewSectionComponent
+} from './core/main-content/overview/overview-section/overview-section.component';
+import {AuthInterceptor} from "./service/auth.interceptor";
+import {CookieService} from "ngx-cookie-service";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -26,9 +31,13 @@ import { OverviewSectionComponent } from './core/main-content/overview/overview-
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    CookieService,
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
