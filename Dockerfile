@@ -5,7 +5,7 @@ COPY . .
 
 RUN mvn clean package
 
-FROM eclipse-temurin:17-jre
+FROM eclipse-temurin:17.0.6_10-jre
 
 WORKDIR /opt/chore-manager
 COPY --from=build /tmp/chore-manager-backend/chore-manager-application/target/chore-manager.jar .
