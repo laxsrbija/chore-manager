@@ -1,8 +1,9 @@
-![](./resources/logo.png)
+<p align="center">
+<img src="chore-manager-frontend/src/assets/icon.png" width="150">
+</p>
+
 
 ## About the project
-
-![](./resources/chore-manager.png)
 
 Chore Manager is a project that aims to help you keep track of your recurring 
 household tasks. The application allows users to create a customized list of chores, 
@@ -71,4 +72,4 @@ Alternative notification providers can also be added (e.g. [ntfy](https://github
 ## License
 
 Distributed under the MIT License. See [LICENSE](LICENSE) for more information.  
-Icon by Adrien Coquet from Noun Project.
+Icon by [alimasykurm](https://thenounproject.com/alimasykurm/) from Noun Project.
