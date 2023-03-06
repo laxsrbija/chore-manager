@@ -14,6 +14,12 @@
           (click)="completeTask.emit(task?.id)"><i class="bi bi-check-circle text-muted"></i>
         Complete...
       </li>
+      <li class="dropdown-item" data-bs-toggle="modal"
+          data-bs-target="#taskDetailsModal"
+          (click)="showTaskDetails.emit(task)"><i
+        class="bi bi-info-circle text-muted"></i>
+        Task details
+      </li>
       <li class="dropdown-item" [class.disabled]="!task?.history" data-bs-toggle="modal"
           data-bs-target="#taskCompletionHistoryModal"
           (click)="showCompletionHistory.emit(task?.history)"><i

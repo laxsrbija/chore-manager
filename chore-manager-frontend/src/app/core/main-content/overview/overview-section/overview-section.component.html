@@ -29,6 +29,7 @@
         <app-instant-completion [task]="task"
                                 (changesSaved)="instantlyCompleteTask.emit()"
                                 (completeTask)="completeTask.emit($event)"
+                                (showTaskDetails)="showTaskDetails.emit($event)"
                                 (showCompletionHistory)="showCompletionHistory.emit($event)"></app-instant-completion>
       </div>
     </div>

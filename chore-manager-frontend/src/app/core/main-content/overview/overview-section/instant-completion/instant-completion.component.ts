@@ -15,6 +15,7 @@ export class InstantCompletionComponent {
   @Output() changesSaved = new EventEmitter<any>();
   @Output() completeTask = new EventEmitter<string>();
   @Output() showCompletionHistory = new EventEmitter<CompletionHistoryItem[]>();
+  @Output() showTaskDetails = new EventEmitter<Task>();
 
   saving = false;
 

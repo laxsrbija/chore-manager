@@ -19,6 +19,8 @@ import {FormsModule} from "@angular/forms";
 import { CompletionModalComponent } from './core/main-content/overview/completion-modal/completion-modal.component';
 import { InstantCompletionComponent } from './core/main-content/overview/overview-section/instant-completion/instant-completion.component';
 import { HistoryModalComponent } from './core/main-content/overview/history-modal/history-modal.component';
+import { DateUnitPipe } from './util/date-unit.pipe';
+import { TaskModalComponent } from './shared/task-modal/task-modal.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { HistoryModalComponent } from './core/main-content/overview/history-moda
     OverviewSectionComponent,
     CompletionModalComponent,
     InstantCompletionComponent,
-    HistoryModalComponent
+    HistoryModalComponent,
+    DateUnitPipe,
+    TaskModalComponent
   ],
   imports: [
     BrowserModule,

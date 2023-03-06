@@ -14,5 +14,6 @@ export class OverviewSectionComponent {
 
   @Output() instantlyCompleteTask = new EventEmitter<any>();
   @Output() completeTask = new EventEmitter<string>();
+  @Output() showTaskDetails = new EventEmitter<Task>();
   @Output() showCompletionHistory = new EventEmitter<CompletionHistoryItem[]>();
 }
