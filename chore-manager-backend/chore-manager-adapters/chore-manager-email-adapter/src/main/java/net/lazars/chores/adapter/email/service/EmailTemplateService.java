@@ -4,7 +4,6 @@ import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import net.lazars.chores.core.model.Task;
 import net.lazars.chores.core.model.User;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -18,13 +17,9 @@ class EmailTemplateService {
       "task-complete-different-user.html";
   private final TemplateEngine templateEngine;
 
-  @Value("${chores.server}")
-  private String server;
-
   public String parseTaskReminderEmailTemplate(final Task task, final User user) {
     final Map<String, Object> variables =
         Map.of(
-            "server", server,
             "task", task,
             "user", user);
 
