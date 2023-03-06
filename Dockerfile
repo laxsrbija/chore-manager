@@ -3,7 +3,7 @@ FROM maven:3.9-eclipse-temurin-17 as build
 WORKDIR /tmp
 COPY . .
 
-RUN mvn clean package
+RUN mvn -B clean package
 
 FROM eclipse-temurin:17-jre
 
