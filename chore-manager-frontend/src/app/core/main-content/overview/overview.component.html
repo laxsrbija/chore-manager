@@ -2,18 +2,22 @@
 
   <app-overview-section sectionTitle="Overdue chores"
                         [tasks]="overview?.overdue"
-                        (completeTask)="modal.openModal($event)"
+                        (completeTask)="completionModal.openModal($event)"
+                        (showCompletionHistory)="completionHistoryModal.historyItems = $event"
                         (instantlyCompleteTask)="loadOverview()"></app-overview-section>
 
   <app-overview-section sectionTitle="Upcoming chores"
                         [tasks]="overview?.upcoming"
-                        (completeTask)="modal.openModal($event)"
+                        (completeTask)="completionModal.openModal($event)"
+                        (showCompletionHistory)="completionHistoryModal.historyItems = $event"
                         (instantlyCompleteTask)="loadOverview()"></app-overview-section>
 
   <app-overview-section sectionTitle="Disabled chores"
                         [tasks]="overview?.disabled"
-                        (completeTask)="modal.openModal($event)"
+                        (completeTask)="completionModal.openModal($event)"
+                        (showCompletionHistory)="completionHistoryModal.historyItems = $event"
                         (instantlyCompleteTask)="loadOverview()"></app-overview-section>
 
 </main>
-<app-completion-modal #modal (changesSaved)="loadOverview()"></app-completion-modal>
+<app-completion-modal #completionModal (changesSaved)="loadOverview()"></app-completion-modal>
+<app-history-modal #completionHistoryModal></app-history-modal>

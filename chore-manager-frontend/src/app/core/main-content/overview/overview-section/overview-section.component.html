@@ -2,7 +2,7 @@
   <h6 class="pb-2 mb-2 text-muted">{{sectionTitle}}</h6>
   <div class="container">
 
-    <div class="row align-items-center border-bottom py-3"
+    <div class="row align-items-center py-3"
          [class.border-bottom]="tasks && indexOfTask !== tasks.length - 1"
          *ngFor="let task of tasks; let indexOfTask = index;">
       <div class="col mb-3 mb-md-0">
@@ -26,9 +26,10 @@
       </div>
 
       <div class="col-auto">
-        <app-instant-completion [taskId]="task.id"
+        <app-instant-completion [task]="task"
                                 (changesSaved)="instantlyCompleteTask.emit()"
-                                (completeTask)="completeTask.emit($event)"></app-instant-completion>
+                                (completeTask)="completeTask.emit($event)"
+                                (showCompletionHistory)="showCompletionHistory.emit($event)"></app-instant-completion>
       </div>
     </div>
   </div>

@@ -9,10 +9,17 @@
             data-bs-toggle="dropdown" aria-expanded="false">
     </button>
     <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-             data-bs-target="#taskCompletionModal"
-             (click)="completeTask.emit(taskId)"><i class="bi bi-check-circle text-muted"></i> Complete...</a></li>
-      <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle text-muted"></i> Task information</a></li>
+      <li class="dropdown-item" data-bs-toggle="modal"
+          data-bs-target="#taskCompletionModal"
+          (click)="completeTask.emit(task?.id)"><i class="bi bi-check-circle text-muted"></i>
+        Complete...
+      </li>
+      <li class="dropdown-item" [class.disabled]="!task?.history" data-bs-toggle="modal"
+          data-bs-target="#taskCompletionHistoryModal"
+          (click)="showCompletionHistory.emit(task?.history)"><i
+        class="bi bi-clock-history text-muted"></i>
+        Completion history
+      </li>
     </ul>
   </div>
 </div>
