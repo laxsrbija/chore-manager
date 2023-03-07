@@ -14,4 +14,6 @@ import lombok.experimental.SuperBuilder;
 public class UserDto extends BaseDto {
 
   private String email;
+
+  private String image;
 }

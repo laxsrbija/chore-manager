@@ -13,5 +13,5 @@ public abstract class EntityRepository<E extends BaseModel> implements CrudOpera
     return get(object.getId());
   }
 
-  protected abstract void saveEntity(final E entity);
+  protected abstract void saveEntity(final E object);
 }

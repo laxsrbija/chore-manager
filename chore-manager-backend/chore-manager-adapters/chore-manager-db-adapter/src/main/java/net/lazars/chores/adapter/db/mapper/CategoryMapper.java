@@ -2,24 +2,14 @@ package net.lazars.chores.adapter.db.mapper;
 
 import net.lazars.chores.adapter.db.entity.CategoryDocument;
 import net.lazars.chores.core.model.Category;
-import org.springframework.stereotype.Component;
+import net.lazars.chores.core.model.Household;
+import org.mapstruct.Mapper;import org.mapstruct.Mapping;
 
-@Component
-public class CategoryMapper {
+@Mapper
+public interface CategoryMapper {
 
-  public Category toCategory(final CategoryDocument category) {
-    return Category.builder()
-        .id(category.getId())
-        .name(category.getName())
-        .image(category.getImage())
-        .build();
-  }
+  Category toCategory(CategoryDocument category, Household household);
 
-  public CategoryDocument toCategoryDocument(final Category category) {
-    return CategoryDocument.builder()
-        .id(category.getId())
-        .name(category.getName())
-        .image(category.getImage())
-        .build();
-  }
+  @Mapping(target = "householdId", source = "household.id")
+  CategoryDocument toCategoryDocument(Category category);
 }

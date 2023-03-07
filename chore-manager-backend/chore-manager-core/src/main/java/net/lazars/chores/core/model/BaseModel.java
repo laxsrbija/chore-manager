@@ -14,6 +14,4 @@ public abstract class BaseModel {
   private String id;
 
   private String name;
-
-  private String image;
 }

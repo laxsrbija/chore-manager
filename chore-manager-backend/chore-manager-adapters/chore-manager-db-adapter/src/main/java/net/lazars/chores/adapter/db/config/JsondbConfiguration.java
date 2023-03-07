@@ -4,6 +4,7 @@ import io.jsondb.JsonDBTemplate;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import net.lazars.chores.adapter.db.entity.CategoryDocument;
+import net.lazars.chores.adapter.db.entity.HouseholdDocument;
 import net.lazars.chores.adapter.db.entity.ItemDocument;
 import net.lazars.chores.adapter.db.entity.TaskDocument;
 import net.lazars.chores.adapter.db.entity.UserDocument;
@@ -20,11 +21,13 @@ public class JsondbConfiguration {
   private String storeDirectory;
 
   private static void registerCollections(final JsonDBTemplate jsonDBTemplate) {
-    final List<Class<?>> classes = List.of(
-        UserDocument.class,
-        TaskDocument.class,
-        CategoryDocument.class,
-        ItemDocument.class);
+    final List<Class<?>> classes =
+        List.of(
+            UserDocument.class,
+            TaskDocument.class,
+            CategoryDocument.class,
+            ItemDocument.class,
+            HouseholdDocument.class);
 
     for (final Class<?> clazz : classes) {
       if (!jsonDBTemplate.collectionExists(clazz)) {

@@ -9,14 +9,15 @@ import net.lazars.chores.core.model.Category;
 import net.lazars.chores.core.model.Item;
 import net.lazars.chores.core.port.in.CategoryService;
 import net.lazars.chores.core.port.out.ItemRepository;
+import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
 class ItemRepositoryImpl extends EntityRepository<Item> implements ItemRepository {
 
+  private final ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
   private final ItemJsondbRepository itemRepository;
-  private final ItemMapper itemMapper;
   private final CategoryService categoryService;
 
   @Override

@@ -19,6 +19,8 @@ public class User extends BaseModel {
 
   private String encodedPassword;
 
+  private String image;
+
   private List<Permission> permissions = new ArrayList<>();
 
   private List<Household> households = new ArrayList<>();

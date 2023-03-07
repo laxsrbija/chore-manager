@@ -9,13 +9,11 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor
-@Document(collection = "categories", schemaVersion = "1.0")
-public class CategoryDocument {
+@Document(collection = "households", schemaVersion = "1.0")
+public class HouseholdDocument {
 
   @Id
   private String id;
 
   private String name;
-
-  private String householdId;
 }
