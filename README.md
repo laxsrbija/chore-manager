@@ -1,8 +1,9 @@
-![](./resources/logo.png)
+<p align="center">
+<img src="chore-manager-frontend/src/assets/icon.png" width="150">
+</p>
+
 
 ## About the project
-
-![](./resources/chore-manager.png)
 
 Chore Manager is a project that aims to help you keep track of your recurring 
 household tasks. The application allows users to create a customized list of chores, 
@@ -32,6 +33,8 @@ The binded host directory must contain an `application.properties` file used to 
 A sample configuration can be found [here](chore-manager-backend/chore-manager-application/src/main/resources/application-dev.properties).
 
 ### Updates
+
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/laxsrbija/chore-manager/publish.yml?label=deployment&style=for-the-badge)
 
 Chore Manager utilises a rolling release; the `main` branch is considered stable, 
 and each new push will publish a new Docker image.
@@ -69,4 +72,4 @@ Alternative notification providers can also be added (e.g. [ntfy](https://github
 ## License
 
 Distributed under the MIT License. See [LICENSE](LICENSE) for more information.  
-Icon by Adrien Coquet from Noun Project.
+Icon by [alimasykurm](https://thenounproject.com/alimasykurm/) from Noun Project.

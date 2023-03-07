@@ -7,6 +7,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import net.lazars.chores.adapter.rest.dto.TaskDto;
 import net.lazars.chores.adapter.rest.mapper.DtoMapper;
+import net.lazars.chores.adapter.rest.service.AuthService;
 import net.lazars.chores.core.model.Task;
 import net.lazars.chores.core.port.CrudOperations;
 import net.lazars.chores.core.port.in.TaskService;
@@ -14,6 +15,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -30,6 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TaskRestController implements CrudOperations<TaskDto> {
 
   private final TaskService taskService;
+  private final AuthService authService;
 
   @Override
   @GetMapping("{id}")
@@ -61,9 +64,10 @@ public class TaskRestController implements CrudOperations<TaskDto> {
   @PatchMapping("{taskId}")
   public TaskDto markComplete(
       @PathVariable final String taskId,
-      @RequestParam final String userId,
-      @DateTimeFormat(iso = ISO.DATE) @RequestParam(required = false)
-          final LocalDate dateCompleted) {
-    return DtoMapper.INSTANCE.toTaskDto(taskService.markComplete(taskId, userId, dateCompleted));
+      @RequestParam(required = false) final String userId,
+      @DateTimeFormat(iso = ISO.DATE) @RequestParam(required = false) final LocalDate dateCompleted,
+      final Authentication authentication) {
+    final String user = userId == null ? authService.getCurrentUserId(authentication) : userId;
+    return DtoMapper.INSTANCE.toTaskDto(taskService.markComplete(taskId, user, dateCompleted));
   }
 }

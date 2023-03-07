@@ -17,8 +17,6 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class EmailSenderImpl implements EmailSender {
-
-  private static final String EMAIL_SUBJECT_PREFIX = "[CM] ";
   private static final int NUMBER_OF_RETRIES = 10;
 
   private final JavaMailSender mailSender;
@@ -57,7 +55,7 @@ public class EmailSenderImpl implements EmailSender {
     try {
       messageHelper.setFrom("Chore Manager <cm@example.com>");
       messageHelper.setTo(recipient);
-      messageHelper.setSubject(EMAIL_SUBJECT_PREFIX + subject);
+      messageHelper.setSubject(subject);
       messageHelper.setText(content, true);
     } catch (final MessagingException e) {
       log.error("Unable to create an email reminder", e);

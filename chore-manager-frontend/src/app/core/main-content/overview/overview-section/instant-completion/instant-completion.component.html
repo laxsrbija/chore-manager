@@ -1,0 +1,31 @@
+<div class="btn-group" role="group">
+  <button type="button" class="btn btn-outline-success" (click)="markCompleted()">
+    <i class="bi bi-clipboard-check-fill" [class.d-none]="saving"></i>
+    <span class="spinner-border spinner-border-sm" [class.d-none]="!saving" role="status"
+          aria-hidden="true"></span>
+  </button>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-outline-success dropdown-toggle"
+            data-bs-toggle="dropdown" aria-expanded="false">
+    </button>
+    <ul class="dropdown-menu">
+      <li class="dropdown-item" data-bs-toggle="modal"
+          data-bs-target="#taskCompletionModal"
+          (click)="completeTask.emit(task?.id)"><i class="bi bi-check-circle text-muted"></i>
+        Complete...
+      </li>
+      <li class="dropdown-item" data-bs-toggle="modal"
+          data-bs-target="#taskDetailsModal"
+          (click)="showTaskDetails.emit(task)"><i
+        class="bi bi-info-circle text-muted"></i>
+        Task details
+      </li>
+      <li class="dropdown-item" [class.disabled]="!task?.history" data-bs-toggle="modal"
+          data-bs-target="#taskCompletionHistoryModal"
+          (click)="showCompletionHistory.emit(task?.history)"><i
+        class="bi bi-clock-history text-muted"></i>
+        Completion history
+      </li>
+    </ul>
+  </div>
+</div>

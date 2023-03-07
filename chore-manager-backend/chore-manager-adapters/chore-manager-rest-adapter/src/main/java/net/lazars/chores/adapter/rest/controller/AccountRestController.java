@@ -6,7 +6,8 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import net.lazars.chores.adapter.rest.dto.UserDto;
 import net.lazars.chores.adapter.rest.mapper.DtoMapper;
-import net.lazars.chores.adapter.rest.util.AuthenticationUtils;
+import net.lazars.chores.adapter.rest.service.AuthService;
+import net.lazars.chores.core.model.User;
 import net.lazars.chores.core.port.in.UserService;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -21,12 +22,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/api/service/account", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AccountRestController {
 
+  private static final DtoMapper MAPPER = DtoMapper.INSTANCE;
+
+  private final AuthService authService;
   private final UserService userService;
 
   @PostMapping
   public UserDto account(final Authentication authentication) {
-    final String userEmail = AuthenticationUtils.getAuthenticatedUserEmail(authentication);
-    return DtoMapper.INSTANCE.toUserDto(userService.findByEmail(userEmail).orElseThrow());
+    final User user = authService.getCurrentUser(authentication);
+    return MAPPER.toUserDto(user);
   }
 
   @GetMapping("users")

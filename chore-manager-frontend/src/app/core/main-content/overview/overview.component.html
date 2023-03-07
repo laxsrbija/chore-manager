@@ -1,0 +1,28 @@
+<main class="container">
+
+  <app-overview-section sectionTitle="Overdue chores"
+                        [tasks]="overview?.overdue"
+                        (completeTask)="completionModal.openModal($event)"
+                        (showCompletionHistory)="completionHistoryModal.historyItems = $event"
+                        (showTaskDetails)="taskModal.task = $event"
+                        (instantlyCompleteTask)="loadOverview()"></app-overview-section>
+
+  <app-overview-section sectionTitle="Upcoming chores"
+                        [tasks]="overview?.upcoming"
+                        (completeTask)="completionModal.openModal($event)"
+                        (showCompletionHistory)="completionHistoryModal.historyItems = $event"
+                        (showTaskDetails)="taskModal.task = $event"
+                        (instantlyCompleteTask)="loadOverview()"></app-overview-section>
+
+  <app-overview-section sectionTitle="Disabled chores"
+                        [tasks]="overview?.disabled"
+                        (completeTask)="completionModal.openModal($event)"
+                        (showCompletionHistory)="completionHistoryModal.historyItems = $event"
+                        (showTaskDetails)="taskModal.task = $event"
+                        (instantlyCompleteTask)="loadOverview()"></app-overview-section>
+
+</main>
+<app-completion-modal #completionModal [users]="users"
+                      (changesSaved)="loadOverview()"></app-completion-modal>
+<app-history-modal #completionHistoryModal></app-history-modal>
+<app-task-modal #taskModal [users]="users"></app-task-modal>
