@@ -9,7 +9,9 @@ import org.mapstruct.Mapping;
 @Mapper
 public interface ItemMapper {
 
-  Item toItem(ItemDocument itemEntity, Category category);
+  @Mapping(target = "id", source = "itemDocument.id")
+  @Mapping(target = "name", source = "itemDocument.name")
+  Item toItem(ItemDocument itemDocument, Category category);
 
   @Mapping(target = "categoryId", source = "category.id")
   ItemDocument toItemDocument(Item item);

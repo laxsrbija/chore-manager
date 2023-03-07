@@ -1,8 +1,8 @@
 {"schemaVersion":"1.0"}
-{"id":"dd179b1a-95f6-4db9-b059-76c5dbf2d38d","name":"Air dehumidifier","image":null,"categoryId":"447b5ed9-a2d3-4725-844e-9a476c24da9f"}
-{"id":"1f56f517-91a7-4b45-8c9a-f88af0343aab","name":"Dishwasher","image":null,"categoryId":"447b5ed9-a2d3-4725-844e-9a476c24da9f"}
-{"id":"f8808d50-aa3b-4d0f-b7bc-e02325ed745e","name":"Toaster","image":null,"categoryId":"447b5ed9-a2d3-4725-844e-9a476c24da9f"}
-{"id":"7b20d297-78c1-4271-a9f5-9b712d773464","name":"Water purifier","image":null,"categoryId":"447b5ed9-a2d3-4725-844e-9a476c24da9f"}
-{"id":"3eeca7a9-06e6-4adc-850a-c0c0c2fc02e8","name":"Toothbrush","image":null,"categoryId":"942f8426-155c-470d-86d4-53a4538cbffc"}
-{"id":"0ad0f186-7fe0-4b42-8973-5e9a63133c29","name":"Family car","image":null,"categoryId":"f8f7c8ba-b4b8-41c7-ad9c-a256075598e0"}
-{"id":"3470c3d2-eb86-48b1-a339-acaa5b03b3b0","name":"Washing machine","image":null,"categoryId":"447b5ed9-a2d3-4725-844e-9a476c24da9f"}
+{"id":"dd179b1a-95f6-4db9-b059-76c5dbf2d38d","name":"Air dehumidifier","categoryId":"447b5ed9-a2d3-4725-844e-9a476c24da9f"}
+{"id":"1f56f517-91a7-4b45-8c9a-f88af0343aab","name":"Dishwasher","categoryId":"447b5ed9-a2d3-4725-844e-9a476c24da9f"}
+{"id":"f8808d50-aa3b-4d0f-b7bc-e02325ed745e","name":"Toaster","categoryId":"447b5ed9-a2d3-4725-844e-9a476c24da9f"}
+{"id":"7b20d297-78c1-4271-a9f5-9b712d773464","name":"Water purifier","categoryId":"447b5ed9-a2d3-4725-844e-9a476c24da9f"}
+{"id":"3eeca7a9-06e6-4adc-850a-c0c0c2fc02e8","name":"Toothbrush","categoryId":"942f8426-155c-470d-86d4-53a4538cbffc"}
+{"id":"0ad0f186-7fe0-4b42-8973-5e9a63133c29","name":"Family car","categoryId":"f8f7c8ba-b4b8-41c7-ad9c-a256075598e0"}
+{"id":"3470c3d2-eb86-48b1-a339-acaa5b03b3b0","name":"Washing machine","categoryId":"447b5ed9-a2d3-4725-844e-9a476c24da9f"}

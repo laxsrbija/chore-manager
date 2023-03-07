@@ -1,10 +1,10 @@
 package net.lazars.chores.adapter.rest.dto;
 
-import lombok.AllArgsConstructor;
+import java.util.List;import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import lombok.experimental.SuperBuilder;import net.lazars.chores.core.model.Permission;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -16,4 +16,8 @@ public class UserDto extends BaseDto {
   private String email;
 
   private String image;
+
+  private List<Permission> permissions;
+
+  private List<HouseholdDto> households;
 }

@@ -2,6 +2,7 @@ package net.lazars.chores.adapter.rest.mapper;
 
 import net.lazars.chores.adapter.rest.dto.CategoryDto;
 import net.lazars.chores.adapter.rest.dto.CompleteUserDto;
+import net.lazars.chores.adapter.rest.dto.HouseholdDto;
 import net.lazars.chores.adapter.rest.dto.ItemDto;
 import net.lazars.chores.adapter.rest.dto.TaskDto;
 import net.lazars.chores.adapter.rest.dto.UserDto;
@@ -9,6 +10,7 @@ import net.lazars.chores.adapter.rest.dto.recurrence.DynamicRecurrenceDto;
 import net.lazars.chores.adapter.rest.dto.recurrence.FixedRecurrenceDto;
 import net.lazars.chores.adapter.rest.dto.recurrence.RecurrenceDto;
 import net.lazars.chores.core.model.Category;
+import net.lazars.chores.core.model.Household;
 import net.lazars.chores.core.model.Item;
 import net.lazars.chores.core.model.Task;
 import net.lazars.chores.core.model.User;
@@ -24,6 +26,10 @@ import org.mapstruct.factory.Mappers;
 public interface DtoMapper {
 
   DtoMapper INSTANCE = Mappers.getMapper(DtoMapper.class);
+
+  Household toHousehold(HouseholdDto householdDto);
+
+  HouseholdDto toHouseholdDto(Household household);
 
   Category toCategory(CategoryDto categoryDto);
 

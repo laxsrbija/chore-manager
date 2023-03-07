@@ -9,4 +9,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class CategoryDto extends BaseDto {}
+public class CategoryDto extends BaseDto {
+
+  private HouseholdDto household;
+}

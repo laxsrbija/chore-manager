@@ -8,7 +8,9 @@ import org.mapstruct.Mapper;import org.mapstruct.Mapping;
 @Mapper
 public interface CategoryMapper {
 
-  Category toCategory(CategoryDocument category, Household household);
+  @Mapping(target = "id", source = "categoryDocument.id")
+  @Mapping(target = "name", source = "categoryDocument.name")
+  Category toCategory(CategoryDocument categoryDocument, Household household);
 
   @Mapping(target = "householdId", source = "household.id")
   CategoryDocument toCategoryDocument(Category category);
