@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection = "objects", schemaVersion = "1.0")
+@Document(collection = "items", schemaVersion = "1.0")
 public class ItemDocument {
 
   @Id

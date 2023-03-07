@@ -25,5 +25,7 @@ public class UserDocument {
 
   private String image;
 
+  private List<String> householdIds;
+
   private List<Permission> permissions;
 }

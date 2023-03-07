@@ -1,13 +1,14 @@
 package net.lazars.chores.adapter.db.service;
 
-import static net.lazars.chores.core.util.ListUtil.forEach;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import net.lazars.chores.adapter.db.entity.UserDocument;
 import net.lazars.chores.adapter.db.mapper.UserMapper;
 import net.lazars.chores.adapter.db.repository.UserJsondbRepository;
+import net.lazars.chores.core.model.Household;
 import net.lazars.chores.core.model.User;
+import net.lazars.chores.core.port.in.HouseholdService;
 import net.lazars.chores.core.port.out.UserRepository;
 import org.springframework.stereotype.Component;
 
@@ -17,16 +18,27 @@ class UserRepositoryImpl extends EntityRepository<User> implements UserRepositor
 
   private final UserJsondbRepository userRepository;
   private final UserMapper userMapper;
+  private final HouseholdService householdService;
 
   @Override
   public User get(final String id) {
     final UserDocument userEntity = userRepository.findById(id);
-    return userMapper.toUser(userEntity);
+    final List<Household> households =
+        userEntity.getHouseholdIds().stream().map(householdService::get).toList();
+
+    return userMapper.toUser(userEntity, households);
   }
 
   @Override
   public List<User> getAll() {
-    return forEach(userRepository.findAll(), userMapper::toUser);
+    return userRepository.findAll().stream()
+        .map(
+            userDocument -> {
+              final List<Household> households =
+                  userDocument.getHouseholdIds().stream().map(householdService::get).toList();
+              return userMapper.toUser(userDocument, households);
+            })
+        .toList();
   }
 
   @Override

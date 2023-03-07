@@ -2,13 +2,14 @@ package net.lazars.chores.adapter.db.mapper;
 
 import java.util.List;
 import net.lazars.chores.adapter.db.entity.UserDocument;
+import net.lazars.chores.core.model.Household;
 import net.lazars.chores.core.model.User;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserMapper {
 
-  public User toUser(final UserDocument userEntity) {
+  public User toUser(final UserDocument userEntity, final List<Household> households) {
     return User.builder()
         .id(userEntity.getId())
         .name(userEntity.getName())
@@ -16,6 +17,7 @@ public class UserMapper {
         .encodedPassword(userEntity.getEncodedPassword())
         .image(userEntity.getImage())
         .permissions(userEntity.getPermissions() != null ? userEntity.getPermissions() : List.of())
+        .households(households)
         .build();
   }
 
@@ -27,6 +29,10 @@ public class UserMapper {
         .encodedPassword(user.getEncodedPassword())
         .image(user.getImage())
         .permissions(user.getPermissions())
+        .householdIds(
+            user.getHouseholds() != null
+                ? user.getHouseholds().stream().map(Household::getId).toList()
+                : List.of())
         .build();
   }
 }
