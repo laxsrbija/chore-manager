@@ -9,13 +9,13 @@ export class DateUnitPipe implements PipeTransform {
   transform(value?: DateUnit): string {
     switch (value) {
       case DateUnit.DAY:
-        return 'days';
+        return 'day(s)';
       case DateUnit.WEEK:
-        return 'weeks';
+        return 'week(s)';
       case DateUnit.MONTH:
-        return 'months';
+        return 'month(s)';
       case DateUnit.YEAR:
-        return 'years';
+        return 'year(s)';
       default:
         return '';
     }

@@ -25,7 +25,8 @@ public class EmailSenderImpl implements EmailSender {
   @Override
   public void sendTaskReminder(final Task task) {
     final List<User> usersToNotify = task.getReminder().getUsersToNotify();
-    final String subject = task.getName() + " - " + task.getOccurrence().getNextOccurrence();
+    final String subject =
+        "\uD83D\uDCC5 " + task.getName() + " - " + task.getOccurrence().getNextOccurrence();
 
     for (final User user : usersToNotify) {
       final String text = emailTemplateService.parseTaskReminderEmailTemplate(task, user);
@@ -39,7 +40,7 @@ public class EmailSenderImpl implements EmailSender {
         task.getReminder().getUsersToNotify().stream()
             .filter(userToNotify -> !userToNotify.getId().equals(user.getId()))
             .toList();
-    final String subject = task.getName() + " completed by " + user.getName();
+    final String subject = "✅ " + task.getName() + " completed by " + user.getName();
 
     for (final User otherUser : otherUsers) {
       final String text =

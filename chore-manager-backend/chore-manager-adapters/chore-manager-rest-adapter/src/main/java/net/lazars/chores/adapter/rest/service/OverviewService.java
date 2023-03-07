@@ -34,14 +34,14 @@ public class OverviewService {
     final List<Task> upcoming =
         tasks.stream()
             .filter(Task::isEnabled)
-            .filter(task -> task.getOccurrence().getDaysUntilNextOccurrence() >= 0)
+            .filter(task -> task.getOccurrence().getDaysUntilNextOccurrence() > 0)
             .sorted(OCCURRENCE_COMPARATOR.thenComparingInt(task -> task.getHistory().size()))
             .toList();
 
     final List<Task> overdue =
         tasks.stream()
             .filter(Task::isEnabled)
-            .filter(task -> task.getOccurrence().getDaysUntilNextOccurrence() < 0)
+            .filter(task -> task.getOccurrence().getDaysUntilNextOccurrence() <= 0)
             .sorted(OCCURRENCE_COMPARATOR)
             .toList();
 

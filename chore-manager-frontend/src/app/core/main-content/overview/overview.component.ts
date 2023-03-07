@@ -22,10 +22,6 @@ export class OverviewComponent implements OnInit {
   }
 
   loadOverview() {
-    this.requestsService.getOverview().subscribe(overview => {
-      this.overview = overview;
-      const task = overview.overdue[0];
-      console.log(task);
-    });
+    this.requestsService.getOverview().subscribe(overview => this.overview = overview);
   }
 }
