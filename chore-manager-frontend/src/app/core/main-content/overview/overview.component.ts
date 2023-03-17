@@ -11,14 +11,14 @@ import {User} from "../../../model/dto/user";
 export class OverviewComponent implements OnInit {
 
   overview?: Overview;
-  users?: User[];
+  users?: Map<string, User[]>;
 
   constructor(private requestsService: RequestsService) {
   }
 
   ngOnInit(): void {
     this.loadOverview();
-    this.requestsService.getUsers().subscribe(users => this.users = users);
+    this.requestsService.getUsersPerHousehold().subscribe(users => this.users = users);
   }
 
   loadOverview() {

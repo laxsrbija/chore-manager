@@ -25,5 +25,4 @@ export class MainContentComponent {
       router.navigate(['/login'], {}).then();
     }
   }
-
 }

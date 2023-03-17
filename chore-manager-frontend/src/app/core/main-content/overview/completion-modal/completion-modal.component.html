@@ -9,7 +9,7 @@
                  value="2023-01-01">
         </div>
         <label class="form-label">Completed by</label>
-        <div *ngFor="let user of users">
+        <div *ngFor="let user of getUsers()">
           <div class="form-check">
             <input class="form-check-input" type="radio" name="{{user.id}}"
                    [value]="user.id" [checked]="user.id === authService.user?.id"
@@ -34,3 +34,4 @@
       </div>
     </div>
   </div>
+</div>

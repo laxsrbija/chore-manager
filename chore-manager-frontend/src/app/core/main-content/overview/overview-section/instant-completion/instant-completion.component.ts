@@ -13,7 +13,7 @@ export class InstantCompletionComponent {
 
   @Input() task?: Task;
   @Output() changesSaved = new EventEmitter<any>();
-  @Output() completeTask = new EventEmitter<string>();
+  @Output() completeTask = new EventEmitter<Task>();
   @Output() showCompletionHistory = new EventEmitter<CompletionHistoryItem[]>();
   @Output() showTaskDetails = new EventEmitter<Task>();
 

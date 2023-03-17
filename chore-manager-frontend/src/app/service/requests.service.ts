@@ -13,19 +13,19 @@ export class RequestsService {
   }
 
   account() {
-    return this.http.post<User>('/api/account', {});
+    return this.http.post<User>('/api/service/account', {});
   }
 
   accountWithOptions(httpOptions: any) {
-    return this.http.post<any>('/api/account', {}, httpOptions);
+    return this.http.post<any>('/api/service/account', {}, httpOptions);
   }
 
   getOverview() {
-    return this.http.get<Overview>('/api/overview');
+    return this.http.get<Overview>('/api/service/overview');
   }
 
-  getUsers() {
-    return this.http.get<User[]>('/api/users');
+  getUsersPerHousehold() {
+    return this.http.get<Map<string, User[]>>('/api/service/account/users');
   }
 
   markTaskComplete(taskId: string, userId?: string, dateCompleted?: string) {

@@ -2,6 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@an
 import {AuthService} from "../../../../service/auth.service";
 import {User} from "../../../../model/dto/user";
 import {RequestsService} from "../../../../service/requests.service";
+import {Task} from "../../../../model/dto/task";
 
 @Component({
   selector: 'app-completion-modal',
@@ -12,30 +13,34 @@ export class CompletionModalComponent {
 
   saving = false;
 
-  taskId?: string;
+  task?: Task;
   userId?: string;
   dateCompleted: string = new Date().toISOString().slice(0, 10);
 
-  @Input() users?: User[];
+  @Input() users?: Map<string, User[]>;
   @Output() changesSaved = new EventEmitter<any>();
   @ViewChild('close') close?: ElementRef;
 
   constructor(public authService: AuthService, public requestsService: RequestsService) {
   }
 
-  openModal(taskId: string) {
+  openModal(task: Task) {
     this.saving = false;
-    this.taskId = taskId;
+    this.task = task;
     this.userId = this.authService.user?.id;
     this.dateCompleted = new Date().toISOString().slice(0, 10);
   }
 
   completeTask() {
     this.saving = true;
-    this.requestsService.markTaskComplete(this.taskId!, this.userId, this.dateCompleted).subscribe(() => {
+    this.requestsService.markTaskComplete(this.task!.id, this.userId, this.dateCompleted).subscribe(() => {
       this.close?.nativeElement.click();
       this.saving = false;
       this.changesSaved.emit();
     });
+  }
+
+  getUsers(): User[] {
+    return this.users && this.task ? this.users.get(this.task.item.category.household.id) || [] : [];
   }
 }

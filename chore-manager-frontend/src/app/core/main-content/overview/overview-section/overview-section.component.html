@@ -6,8 +6,14 @@
          [class.border-bottom]="tasks && indexOfTask !== tasks.length - 1"
          *ngFor="let task of tasks; let indexOfTask = index;">
       <div class="col mb-3 mb-md-0">
-        <div><strong><span class="badge rounded-pill bg-secondary">Home</span> {{task.name}}
-        </strong></div>
+        <div>
+          <strong>
+            <span *ngIf="authService.user?.household?.length"
+                  class="badge rounded-pill bg-secondary">{{task.item.category.household.name}}
+            </span>
+            {{task.name}}
+          </strong>
+        </div>
         <div class="small text-muted">{{task.item.category.name}} · {{task.item.name}}</div>
       </div>
 

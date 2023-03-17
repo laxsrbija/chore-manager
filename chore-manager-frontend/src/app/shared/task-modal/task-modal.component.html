@@ -111,7 +111,7 @@
           <div class="mb-3 row">
             <label class="col-lg-2 col-form-label text-muted">Users to notify</label>
             <div class="col-lg-10">
-              <div class="form-check" *ngFor="let user of users">
+              <div class="form-check" *ngFor="let user of users?.get(task!.item!.category!.household!.id)">
                 <input class="form-check-input" type="checkbox" disabled
                        [checked]="userShouldBeReminded(user, task)">
                 <label class="form-check-label">
