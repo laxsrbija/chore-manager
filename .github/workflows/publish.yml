@@ -21,3 +21,10 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
           tags: "latest"
           platforms: linux/amd64,linux/arm64
+      - name: Publish readme to DockerHub
+        uses: ms-jpq/sync-dockerhub-readme@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: laxsrbija/chore-manager
+          readme: "./README.md"
