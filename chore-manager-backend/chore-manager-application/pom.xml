@@ -15,7 +15,7 @@
 
   <dependencies>
     <dependency>
-      <artifactId>chore-manager-db-adapter</artifactId>
+      <artifactId>chore-manager-redis-adapter</artifactId>
       <groupId>net.lazars.chores</groupId>
       <version>${project.version}</version>
     </dependency>

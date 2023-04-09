@@ -4,6 +4,13 @@ services:
     ports:
       - "1080:1080"
       - "1025:1025"
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --save 10 1 --loglevel warning
+    volumes:
+      - ./resources/dev-data:/data
   chore-manager:
     build: .
     ports:
