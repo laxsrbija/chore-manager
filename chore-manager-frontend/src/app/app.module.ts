@@ -22,6 +22,7 @@ import { HistoryModalComponent } from './core/main-content/overview/history-moda
 import { DateUnitPipe } from './util/date-unit.pipe';
 import { TaskModalComponent } from './shared/task-modal/task-modal.component';
 import { HouseholdsComponent } from './core/main-content/households/households.component';
+import { CategoriesComponent } from './core/main-content/categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { HouseholdsComponent } from './core/main-content/households/households.c
     HistoryModalComponent,
     DateUnitPipe,
     TaskModalComponent,
-    HouseholdsComponent
+    HouseholdsComponent,
+    CategoriesComponent
   ],
   imports: [
     BrowserModule,
