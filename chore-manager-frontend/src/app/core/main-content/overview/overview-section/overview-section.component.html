@@ -1,4 +1,4 @@
-<div class="my-3 p-3 bg-body rounded shadow-sm" [class.d-none]="!tasks">
+<div class="my-3 p-3 bg-body rounded shadow-sm" *ngIf="tasks?.length">
   <h6 class="pb-2 mb-2 text-muted">{{sectionTitle}}</h6>
   <div class="container">
 
