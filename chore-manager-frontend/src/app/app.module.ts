@@ -21,6 +21,7 @@ import { InstantCompletionComponent } from './core/main-content/overview/overvie
 import { HistoryModalComponent } from './core/main-content/overview/history-modal/history-modal.component';
 import { DateUnitPipe } from './util/date-unit.pipe';
 import { TaskModalComponent } from './shared/task-modal/task-modal.component';
+import { HouseholdsComponent } from './core/main-content/households/households.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { TaskModalComponent } from './shared/task-modal/task-modal.component';
     InstantCompletionComponent,
     HistoryModalComponent,
     DateUnitPipe,
-    TaskModalComponent
+    TaskModalComponent,
+    HouseholdsComponent
   ],
   imports: [
     BrowserModule,
