@@ -33,7 +33,7 @@ export class CompletionModalComponent {
 
   completeTask() {
     this.saving = true;
-    this.requestsService.markTaskComplete(this.task!.id, this.userId, this.dateCompleted).subscribe(() => {
+    this.requestsService.markTaskComplete(this.task!.id!, this.userId, this.dateCompleted).subscribe(() => {
       this.close?.nativeElement.click();
       this.saving = false;
       this.changesSaved.emit();
@@ -41,6 +41,6 @@ export class CompletionModalComponent {
   }
 
   getUsers(): User[] {
-    return this.users && this.task ? this.users[this.task.item.category.household.id] : [];
+    return this.users && this.task ? this.users[this.task.item.category.household.id!] : [];
   }
 }

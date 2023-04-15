@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {Overview} from "../model/dto/overview";
 import {User} from "../model/dto/user";
+import {Household} from "../model/dto/household";
 import {Task} from "../model/dto/task";
 
 @Injectable({
@@ -24,8 +25,16 @@ export class RequestsService {
     return this.http.get<Overview>('/api/service/overview');
   }
 
+  getHouseholds() {
+    return this.http.get<Household[]>('/api/service/management/households');
+  }
+
+  saveHousehold(household: Household) {
+    return this.http.post<void>('/api/service/management/households', household);
+  }
+
   getUsersPerHousehold() {
-    return this.http.get<Record<string, User[]>>('/api/service/account/users');
+    return this.http.get<Record<string, User[]>>('/api/service/management/users');
   }
 
   markTaskComplete(taskId: string, userId?: string, dateCompleted?: string) {

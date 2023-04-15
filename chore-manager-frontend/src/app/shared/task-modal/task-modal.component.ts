@@ -17,6 +17,6 @@ export class TaskModalComponent {
   }
 
   getUsers(): User[] {
-    return this.users && this.task ? this.users[this.task.item.category.household.id] : [];
+    return this.users && this.task ? this.users[this.task.item.category.household.id!] : [];
   }
 }

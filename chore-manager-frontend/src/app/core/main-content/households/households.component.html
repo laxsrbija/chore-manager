@@ -1,1 +1,31 @@
-<p>households works!</p>
+<main class="container">
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+
+    <div class="container">
+      <div class="row align-items-center py-3">
+        <div class="col">
+          <h5 class="pt-2 text-muted">Households</h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row align-items-center py-3"
+           [class.border-bottom]="households && indexOfHousehold !== households.length - 1"
+           *ngFor="let household of households; let indexOfHousehold = index;">
+        <div class="col">
+          <input type="text" class="form-control" [(ngModel)]="household.name"
+                 placeholder="Household name">
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-secondary"
+                  (click)="saveHousehold(household)">Save
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+

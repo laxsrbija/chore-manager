@@ -24,7 +24,7 @@ export class InstantCompletionComponent {
 
   markCompleted() {
     this.saving = true;
-    this.requestsService.markTaskComplete(this.task!.id, this.authService.user!.id).subscribe(() => {
+    this.requestsService.markTaskComplete(this.task!.id!, this.authService.user!.id).subscribe(() => {
       this.saving = false;
       this.changesSaved.emit();
     });
