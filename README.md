@@ -1,5 +1,5 @@
 <p align="center">
-<img src="chore-manager-frontend/src/assets/icon.png" width="150">
+<img src="https://raw.githubusercontent.com/laxsrbija/chore-manager/main/chore-manager-frontend/src/assets/icon.png" width="150">
 </p>
 
 

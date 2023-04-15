@@ -14,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +45,11 @@ public class ItemRestController implements CrudOperations<ItemDto> {
   public ItemDto save(@RequestBody final ItemDto itemDto) {
     final Item item = DtoMapper.INSTANCE.toItem(itemDto);
     return DtoMapper.INSTANCE.toItemDto(itemService.save(item));
+  }
+
+  @PostMapping
+  public List<ItemDto> saveAll(@RequestBody final List<ItemDto> items) {
+    return items.stream().map(this::save).toList();
   }
 
   @Override

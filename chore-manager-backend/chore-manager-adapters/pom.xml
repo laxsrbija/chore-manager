@@ -15,7 +15,7 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>chore-manager-db-adapter</module>
+    <module>chore-manager-redis-adapter</module>
     <module>chore-manager-email-adapter</module>
     <module>chore-manager-rest-adapter</module>
     <module>chore-manager-scheduler-adapter</module>

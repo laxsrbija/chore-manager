@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +53,11 @@ public class TaskRestController implements CrudOperations<TaskDto> {
   public TaskDto save(@RequestBody final TaskDto taskDto) {
     final Task task = DtoMapper.INSTANCE.toTask(taskDto);
     return DtoMapper.INSTANCE.toTaskDto(taskService.save(task));
+  }
+
+  @PostMapping
+  public List<TaskDto> saveAll(@RequestBody final List<TaskDto> tasks) {
+    return tasks.stream().map(this::save).toList();
   }
 
   @Override

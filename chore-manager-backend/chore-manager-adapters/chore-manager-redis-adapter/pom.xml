@@ -10,7 +10,14 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
 
-  <artifactId>chore-manager-scheduler-adapter</artifactId>
-  <name>Chore Manager :: Scheduler Adapter</name>
+  <artifactId>chore-manager-redis-adapter</artifactId>
+  <name>Chore Manager :: Redis Adapter</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
+  </dependencies>
 
 </project>
