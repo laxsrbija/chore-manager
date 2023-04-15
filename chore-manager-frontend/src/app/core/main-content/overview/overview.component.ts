@@ -11,7 +11,7 @@ import {User} from "../../../model/dto/user";
 export class OverviewComponent implements OnInit {
 
   overview?: Overview;
-  users?: Map<string, User[]>;
+  users?: Record<string, User[]>;
 
   constructor(private requestsService: RequestsService) {
   }

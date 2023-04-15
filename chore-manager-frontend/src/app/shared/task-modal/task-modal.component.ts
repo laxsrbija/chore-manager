@@ -10,9 +10,13 @@ import {User} from "../../model/dto/user";
 export class TaskModalComponent {
 
   public task?: Task;
-  @Input() users?: Map<string, User[]>;
+  @Input() users?: Record<string, User[]>;
 
   userShouldBeReminded(user: User, task?: Task) {
     return task?.reminder.usersToNotify.map(u => u.id).includes(user.id);
+  }
+
+  getUsers(): User[] {
+    return this.users && this.task ? this.users[this.task.item.category.household.id] : [];
   }
 }

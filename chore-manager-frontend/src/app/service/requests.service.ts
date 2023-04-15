@@ -25,7 +25,7 @@ export class RequestsService {
   }
 
   getUsersPerHousehold() {
-    return this.http.get<Map<string, User[]>>('/api/service/account/users');
+    return this.http.get<Record<string, User[]>>('/api/service/account/users');
   }
 
   markTaskComplete(taskId: string, userId?: string, dateCompleted?: string) {
@@ -39,7 +39,7 @@ export class RequestsService {
       params = params.append('dateCompleted', dateCompleted);
     }
 
-    return this.http.patch<Task>('/api/tasks/' + taskId, undefined, {
+    return this.http.patch<Task>('/api/rest/tasks/' + taskId, undefined, {
         params: params
       }
     );

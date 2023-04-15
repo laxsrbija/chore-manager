@@ -17,7 +17,7 @@ export class CompletionModalComponent {
   userId?: string;
   dateCompleted: string = new Date().toISOString().slice(0, 10);
 
-  @Input() users?: Map<string, User[]>;
+  @Input() users?: Record<string, User[]>;
   @Output() changesSaved = new EventEmitter<any>();
   @ViewChild('close') close?: ElementRef;
 
@@ -41,6 +41,6 @@ export class CompletionModalComponent {
   }
 
   getUsers(): User[] {
-    return this.users && this.task ? this.users.get(this.task.item.category.household.id) || [] : [];
+    return this.users && this.task ? this.users[this.task.item.category.household.id] : [];
   }
 }
