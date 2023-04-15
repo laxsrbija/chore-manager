@@ -2,10 +2,11 @@
 <img src="https://raw.githubusercontent.com/laxsrbija/chore-manager/main/chore-manager-frontend/src/assets/icon.png" width="150">
 </p>
 
+![](https://raw.githubusercontent.com/laxsrbija/chore-manager/main/resources/chore-manager.png)
 
 ## About the project
 
-Chore Manager is a project that aims to help you keep track of your recurring 
+Chore Manager aims to help you keep track of your recurring 
 household tasks. The application allows users to create a customized list of chores, 
 set reminders for when they need to be completed, and track their progress over time.
 
@@ -29,7 +30,7 @@ docker run -d -p 8080:8080 --name chore-manager \
     -t laxsrbija/chore-manager:latest
 ```
 
-The binded host directory must contain an `application.properties` file used to configure the application.
+The mounted host directory must contain an `application.properties` file used to configure the application.
 A sample configuration can be found [here](chore-manager-backend/chore-manager-application/src/main/resources/application-dev.properties).
 
 ### Updates
