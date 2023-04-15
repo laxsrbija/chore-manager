@@ -1,6 +1,5 @@
 package net.lazars.chores.adapter.redis.service;
 
-import static net.lazars.chores.core.util.ListUtil.forEach;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package net.lazars.chores.adapter.redis.mapper;
 
-import net.lazars.chores.adapter.redis.document.UserDocument;
 import java.util.List;
+import net.lazars.chores.adapter.redis.document.UserDocument;
 import net.lazars.chores.core.model.Household;
 import net.lazars.chores.core.model.User;
 import org.springframework.stereotype.Component;

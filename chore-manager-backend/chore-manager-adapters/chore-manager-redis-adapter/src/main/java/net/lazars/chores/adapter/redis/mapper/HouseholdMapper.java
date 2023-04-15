@@ -1,6 +1,6 @@
 package net.lazars.chores.adapter.redis.mapper;
 
-import net.lazars.chores.adapter.db.entity.HouseholdDocument;
+import net.lazars.chores.adapter.redis.document.HouseholdDocument;
 import net.lazars.chores.core.model.Household;
 import org.mapstruct.Mapper;
 
