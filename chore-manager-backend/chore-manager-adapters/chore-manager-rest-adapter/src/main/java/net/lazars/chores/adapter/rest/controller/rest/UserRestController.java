@@ -1,14 +1,14 @@
-package net.lazars.chores.adapter.rest.controller;
+package net.lazars.chores.adapter.rest.controller.rest;
 
 import static net.lazars.chores.core.util.ListUtil.forEach;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import net.lazars.chores.adapter.rest.dto.CategoryDto;
+import net.lazars.chores.adapter.rest.dto.CompleteUserDto;
 import net.lazars.chores.adapter.rest.mapper.DtoMapper;
-import net.lazars.chores.core.model.Category;
+import net.lazars.chores.core.model.User;
 import net.lazars.chores.core.port.CrudOperations;
-import net.lazars.chores.core.port.in.CategoryService;
+import net.lazars.chores.core.port.in.UserService;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,38 +23,38 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @PreAuthorize("hasAuthority('MANAGE')")
-@RequestMapping(path = "/api/rest/categories", produces = MediaType.APPLICATION_JSON_VALUE)
-public class CategoryRestController implements CrudOperations<CategoryDto> {
+@RequestMapping(path = "/api/rest/users", produces = MediaType.APPLICATION_JSON_VALUE)
+public class UserRestController implements CrudOperations<CompleteUserDto> {
 
-  private final CategoryService categoryService;
+  private final UserService userService;
 
   @Override
   @GetMapping("{id}")
-  public CategoryDto get(@PathVariable final String id) {
-    return DtoMapper.INSTANCE.toCategoryDto(categoryService.get(id));
+  public CompleteUserDto get(@PathVariable final String id) {
+    return DtoMapper.INSTANCE.toCompleteUserDto(userService.get(id));
   }
 
   @Override
   @GetMapping
-  public List<CategoryDto> getAll() {
-    return forEach(categoryService.getAll(), DtoMapper.INSTANCE::toCategoryDto);
+  public List<CompleteUserDto> getAll() {
+    return forEach(userService.getAll(), DtoMapper.INSTANCE::toCompleteUserDto);
   }
 
   @Override
   @PutMapping
-  public CategoryDto save(@RequestBody final CategoryDto categoryDto) {
-    final Category category = DtoMapper.INSTANCE.toCategory(categoryDto);
-    return DtoMapper.INSTANCE.toCategoryDto(categoryService.save(category));
+  public CompleteUserDto save(@RequestBody final CompleteUserDto userDto) {
+    final User user = DtoMapper.INSTANCE.toUser(userDto);
+    return DtoMapper.INSTANCE.toCompleteUserDto(userService.save(user));
   }
 
   @PostMapping
-  public List<CategoryDto> saveAll(@RequestBody final List<CategoryDto> categories) {
-    return categories.stream().map(this::save).toList();
+  public List<CompleteUserDto> saveAll(@RequestBody final List<CompleteUserDto> users) {
+    return users.stream().map(this::save).toList();
   }
 
   @Override
   @DeleteMapping("{id}")
   public void delete(@PathVariable final String id) {
-    categoryService.delete(id);
+    userService.delete(id);
   }
 }

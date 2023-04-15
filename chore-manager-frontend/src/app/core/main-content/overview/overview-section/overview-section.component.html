@@ -8,8 +8,9 @@
       <div class="col mb-3 mb-md-0">
         <div>
           <strong>
-            <span *ngIf="authService.user?.household?.length"
-                  class="badge rounded-pill bg-secondary">{{task.item.category.household.name}}
+            <span
+              *ngIf="authService.user?.households?.length && authService.user?.households!.length > 1"
+              class="badge rounded-pill bg-secondary">{{task.item.category.household.name}}
             </span>
             {{task.name}}
           </strong>

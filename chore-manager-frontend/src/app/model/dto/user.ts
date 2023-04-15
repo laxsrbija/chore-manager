@@ -4,5 +4,5 @@ import {Household} from "./household";
 export interface User extends BaseDto {
   email: string;
   image: string;
-  household: Household[];
+  households: Household[];
 }

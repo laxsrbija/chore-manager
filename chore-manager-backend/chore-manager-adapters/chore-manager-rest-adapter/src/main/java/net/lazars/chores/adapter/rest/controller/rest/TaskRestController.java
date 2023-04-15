@@ -1,4 +1,4 @@
-package net.lazars.chores.adapter.rest.controller;
+package net.lazars.chores.adapter.rest.controller.rest;
 
 import static net.lazars.chores.core.util.ListUtil.forEach;
 

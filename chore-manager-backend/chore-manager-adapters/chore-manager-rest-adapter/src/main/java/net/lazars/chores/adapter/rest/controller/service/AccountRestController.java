@@ -1,4 +1,4 @@
-package net.lazars.chores.adapter.rest.controller;
+package net.lazars.chores.adapter.rest.controller.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
