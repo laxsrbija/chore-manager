@@ -11,4 +11,7 @@ export class NavbarComponent {
   constructor(public authService: AuthService) {
   }
 
+  signOut() {
+    this.authService.removeAuthToken();
+  }
 }

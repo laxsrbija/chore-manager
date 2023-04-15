@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../service/auth.service";
 import {Router} from "@angular/router";
 import {RequestsService} from "../../service/requests.service";
@@ -9,7 +9,7 @@ import {HttpHeaders} from "@angular/common/http";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   failed = false;
   email = "";
@@ -19,6 +19,12 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router,
     private requestsService: RequestsService) {
+  }
+
+  ngOnInit(): void {
+    if (this.authService.user !== undefined) {
+      this.router.navigate(['/'], {}).then();
+    }
   }
 
   login() {

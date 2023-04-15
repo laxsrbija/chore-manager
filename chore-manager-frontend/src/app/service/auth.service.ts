@@ -21,4 +21,9 @@ export class AuthService {
   public storeAuthToken(key: string) {
     this.cookieService.set(this.cookieKey, key);
   }
+
+  public removeAuthToken() {
+    this.cookieService.delete(this.cookieKey);
+    this.user = undefined;
+  }
 }
