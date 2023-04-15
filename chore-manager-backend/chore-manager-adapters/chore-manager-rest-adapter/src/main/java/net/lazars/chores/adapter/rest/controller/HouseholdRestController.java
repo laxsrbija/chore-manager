@@ -14,7 +14,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,6 +45,11 @@ public class HouseholdRestController implements CrudOperations<HouseholdDto> {
   public HouseholdDto save(final HouseholdDto householdDto) {
     final Household household = DtoMapper.INSTANCE.toHousehold(householdDto);
     return DtoMapper.INSTANCE.toHouseholdDto(householdService.save(household));
+  }
+
+  @PostMapping
+  public List<HouseholdDto> saveAll(@RequestBody final List<HouseholdDto> households) {
+    return households.stream().map(this::save).toList();
   }
 
   @Override

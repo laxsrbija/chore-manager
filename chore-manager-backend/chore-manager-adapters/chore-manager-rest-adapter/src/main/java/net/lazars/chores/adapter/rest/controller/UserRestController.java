@@ -48,7 +48,7 @@ public class UserRestController implements CrudOperations<CompleteUserDto> {
   }
 
   @PostMapping
-  public List<UserDto> saveAll(@RequestBody final List<UserDto> users) {
+  public List<CompleteUserDto> saveAll(@RequestBody final List<CompleteUserDto> users) {
     return users.stream().map(this::save).toList();
   }
 

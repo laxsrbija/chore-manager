@@ -1,6 +1,7 @@
 package net.lazars.chores.adapter.redis.service;
 
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import net.lazars.chores.adapter.redis.document.UserDocument;
 import net.lazars.chores.adapter.redis.mapper.UserMapper;
@@ -23,7 +24,9 @@ class UserRepositoryImpl extends EntityRepository<User> implements UserRepositor
   public User get(final String id) {
     final UserDocument userEntity = userRepository.findById(id).orElseThrow();
     final List<Household> households =
-        userEntity.getHouseholdIds().stream().map(householdService::get).toList();
+        Optional.ofNullable(userEntity.getHouseholdIds())
+            .map(householdIds -> householdIds.stream().map(householdService::get).toList())
+            .orElse(List.of());
 
     return userMapper.toUser(userEntity, households);
   }
@@ -32,11 +35,14 @@ class UserRepositoryImpl extends EntityRepository<User> implements UserRepositor
   public List<User> getAll() {
     return userRepository.findAll().stream()
         .map(
-            userDocument -> {
-              final List<Household> households =
-                  userDocument.getHouseholdIds().stream().map(householdService::get).toList();
-              return userMapper.toUser(userDocument, households);
-            })
+            userDocument ->
+                userMapper.toUser(
+                    userDocument,
+                    Optional.ofNullable(userDocument.getHouseholdIds())
+                        .map(
+                            householdIds ->
+                                householdIds.stream().map(householdService::get).toList())
+                        .orElse(List.of())))
         .toList();
   }
 
