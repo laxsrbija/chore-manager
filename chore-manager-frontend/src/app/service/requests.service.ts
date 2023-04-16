@@ -4,6 +4,7 @@ import {Overview} from "../model/dto/overview";
 import {User} from "../model/dto/user";
 import {Household} from "../model/dto/household";
 import {Task} from "../model/dto/task";
+import {Category} from "../model/dto/category";
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,22 @@ export class RequestsService {
 
   saveHousehold(household: Household) {
     return this.http.post<void>('/api/service/management/households', household);
+  }
+
+  getCategories(householdId: string | null) {
+    let params = new HttpParams();
+
+    if (householdId) {
+      params = params.append('householdId', householdId);
+    }
+
+    return this.http.get<Category[]>('/api/service/management/categories', {
+      params: params
+    });
+  }
+
+  saveCategory(category: Category) {
+    return this.http.post<void>('/api/service/management/categories', category);
   }
 
   getUsersPerHousehold() {

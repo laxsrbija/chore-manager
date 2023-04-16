@@ -19,7 +19,8 @@
         </div>
         <div class="col-auto">
           <button type="button" class="btn btn-secondary"
-                  (click)="saveHousehold(household)">Save
+                  (click)="saveHousehold(household)"
+                  [disabled]="!household.name">Save
           </button>
         </div>
       </div>

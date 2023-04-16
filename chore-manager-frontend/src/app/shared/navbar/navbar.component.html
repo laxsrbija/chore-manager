@@ -21,14 +21,12 @@
         <li>
           <a routerLink="/households" routerLinkActive=""
              #householdsLink="routerLinkActive"
-             [routerLinkActiveOptions]="{ exact: true }"
              [ngClass]="householdsLink.isActive ? 'link-secondary': 'link-light'"
              class="nav-link px-2">Households</a>
         </li>
         <li>
           <a routerLink="/categories" routerLinkActive=""
              #categoriesLink="routerLinkActive"
-             [routerLinkActiveOptions]="{ exact: true }"
              [ngClass]="categoriesLink.isActive ? 'link-secondary': 'link-light'"
              class="nav-link px-2">Categories</a>
         </li>
