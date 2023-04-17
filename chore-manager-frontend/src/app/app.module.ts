@@ -23,6 +23,7 @@ import { DateUnitPipe } from './util/date-unit.pipe';
 import { TaskModalComponent } from './shared/task-modal/task-modal.component';
 import { HouseholdsComponent } from './core/main-content/households/households.component';
 import { CategoriesComponent } from './core/main-content/categories/categories.component';
+import { ItemsComponent } from './core/main-content/items/items.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { CategoriesComponent } from './core/main-content/categories/categories.c
     DateUnitPipe,
     TaskModalComponent,
     HouseholdsComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    ItemsComponent
   ],
   imports: [
     BrowserModule,

@@ -6,7 +6,7 @@
         <div class="col">
           <h5 class="pt-2 text-muted">
             Categories
-            <span *ngIf="selectedHousehold()">({{selectedHousehold()?.name}})</span>
+            <span *ngIf="selectedHousehold() as selectedHousehold">({{selectedHousehold?.name}})</span>
           </h5>
         </div>
         <div class="col-auto">
