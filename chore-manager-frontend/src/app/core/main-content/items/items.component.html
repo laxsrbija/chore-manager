@@ -32,9 +32,9 @@
         <div class="col-md-auto col-sm-12 py-1">
           <label class="form-label small">Category</label>
           <select class="form-select" [(ngModel)]="item.category.id">
-            <option *ngFor="let category of categories"
-                    [ngValue]="category.id">{{category.household.name}}
-              &rsaquo; {{category.name}}</option>
+            <option *ngFor="let category of categories" [ngValue]="category.id">
+              {{category.household.name}} &rsaquo; {{category.name}}
+            </option>
           </select>
         </div>
 
