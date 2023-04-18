@@ -87,4 +87,13 @@ export class RequestsService {
       }
     );
   }
+
+  deferTask(taskId: string, deferDate: string) {
+    let params = new HttpParams().append('deferDate', deferDate);
+
+    return this.http.patch<Task>('/api/service/management/tasks/defer/' + taskId, undefined, {
+        params: params
+      }
+    );
+  }
 }

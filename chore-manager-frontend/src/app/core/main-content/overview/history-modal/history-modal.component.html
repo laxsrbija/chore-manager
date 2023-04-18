@@ -13,7 +13,9 @@
             </div>
             <div class="col">
               <div class="small text-muted">{{item.user.name}}</div>
-              <div [class.fw-bold]="indexOfTask === 0">{{item.dateCompleted}}</div>
+              <div [class.fw-bold]="indexOfTask === 0">
+                {{item.dateCompleted | date: 'dd.MM.yyyy.'}}
+              </div>
             </div>
           </div>
         </div>

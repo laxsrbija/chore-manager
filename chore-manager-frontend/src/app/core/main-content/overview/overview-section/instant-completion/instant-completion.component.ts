@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {AuthService} from "../../../../../service/auth.service";
 import {RequestsService} from "../../../../../service/requests.service";
-import {CompletionHistoryItem} from "../../../../../model/completion-history-item";
 import {Task} from 'src/app/model/dto/task';
+import {TaskAction} from "../../task-action.enum";
 
 @Component({
   selector: 'app-instant-completion',
@@ -12,10 +12,7 @@ import {Task} from 'src/app/model/dto/task';
 export class InstantCompletionComponent {
 
   @Input() task?: Task;
-  @Output() changesSaved = new EventEmitter<any>();
-  @Output() completeTask = new EventEmitter<Task>();
-  @Output() showCompletionHistory = new EventEmitter<CompletionHistoryItem[]>();
-  @Output() showTaskDetails = new EventEmitter<Task>();
+  @Output() taskAction = new EventEmitter<[TaskAction, Task]>();
 
   saving = false;
 
@@ -26,7 +23,9 @@ export class InstantCompletionComponent {
     this.saving = true;
     this.requestsService.markTaskComplete(this.task!.id!, this.authService.user!.id).subscribe(() => {
       this.saving = false;
-      this.changesSaved.emit();
+      this.taskAction.emit([TaskAction.SAVED, this.task!]);
     });
   }
+
+  protected readonly TaskAction = TaskAction;
 }

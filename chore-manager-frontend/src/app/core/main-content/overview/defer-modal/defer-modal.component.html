@@ -1,0 +1,26 @@
+<div class="modal fade" id="deferModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        <div class="h6 text-muted mb-3">Postpone task</div>
+        <div class="container">
+          <div *ngIf="task?.defer" class="col">
+            Already postponed to {{ task!.defer!.deferDate | date: 'dd.MM.yyyy.' }}
+            by {{ task!.defer!.user.name }}.
+          </div>
+
+          <div class="input-group my-3">
+            <input type="text" class="form-control" placeholder="Enter defer date"
+                   [(ngModel)]="deferDate">
+            <button class="btn btn-outline-primary" type="button" (click)="deferTask()">
+              <i class="bi bi-pause-fill"></i> Postpone
+            </button>
+          </div>
+
+          <div data-bs-dismiss="modal" #close></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

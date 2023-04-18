@@ -24,6 +24,7 @@ import { TaskModalComponent } from './shared/task-modal/task-modal.component';
 import { HouseholdsComponent } from './core/main-content/households/households.component';
 import { CategoriesComponent } from './core/main-content/categories/categories.component';
 import { ItemsComponent } from './core/main-content/items/items.component';
+import { DeferModalComponent } from './core/main-content/overview/defer-modal/defer-modal.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ItemsComponent } from './core/main-content/items/items.component';
     TaskModalComponent,
     HouseholdsComponent,
     CategoriesComponent,
-    ItemsComponent
+    ItemsComponent,
+    DeferModalComponent
   ],
   imports: [
     BrowserModule,

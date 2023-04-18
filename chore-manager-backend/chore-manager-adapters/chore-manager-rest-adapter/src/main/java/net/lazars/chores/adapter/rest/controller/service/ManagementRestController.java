@@ -150,10 +150,10 @@ public class ManagementRestController {
   @PatchMapping("tasks/defer/{taskId}")
   public TaskDto deferTask(
       @PathVariable final String taskId,
-      @DateTimeFormat(iso = ISO.DATE) @RequestParam(required = false) final LocalDate dateCompleted,
+      @DateTimeFormat(iso = ISO.DATE) @RequestParam(required = false) final LocalDate deferDate,
       final Authentication authentication) {
     final User user = authService.getCurrentUser(authentication);
-    return DtoMapper.INSTANCE.toTaskDto(taskService.defer(taskId, user, dateCompleted));
+    return DtoMapper.INSTANCE.toTaskDto(taskService.defer(taskId, user, deferDate));
   }
 
   @GetMapping("users")

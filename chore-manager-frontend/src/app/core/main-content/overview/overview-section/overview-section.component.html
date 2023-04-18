@@ -49,11 +49,9 @@
       </div>
 
       <div class="col-auto">
-        <app-instant-completion [task]="task"
-                                (changesSaved)="instantlyCompleteTask.emit()"
-                                (completeTask)="completeTask.emit($event)"
-                                (showTaskDetails)="showTaskDetails.emit($event)"
-                                (showCompletionHistory)="showCompletionHistory.emit($event)"></app-instant-completion>
+        <app-instant-completion
+          [task]="task" (taskAction)="taskAction.emit($event)">
+        </app-instant-completion>
       </div>
     </div>
   </div>

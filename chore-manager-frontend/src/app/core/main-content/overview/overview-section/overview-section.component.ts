@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Task} from "../../../../model/dto/task";
-import {CompletionHistoryItem} from "../../../../model/completion-history-item";
 import {AuthService} from "../../../../service/auth.service";
+import {TaskAction} from "../task-action.enum";
 
 @Component({
   selector: 'app-overview-section',
@@ -16,8 +16,5 @@ export class OverviewSectionComponent {
   @Input() tasks?: Task[];
   @Input() sectionTitle?: string;
 
-  @Output() instantlyCompleteTask = new EventEmitter<any>();
-  @Output() completeTask = new EventEmitter<Task>();
-  @Output() showTaskDetails = new EventEmitter<Task>();
-  @Output() showCompletionHistory = new EventEmitter<CompletionHistoryItem[]>();
+  @Output() taskAction = new EventEmitter<[TaskAction, Task]>();
 }
