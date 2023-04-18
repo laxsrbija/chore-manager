@@ -15,6 +15,11 @@ import net.lazars.chores.core.util.Commons;
 public class OccurrenceHelper {
 
   public static LocalDate getNextOccurrence(final Task task) {
+    if (task.getDefer() != null && task.getDefer().getDeferDate() != null) {
+      // The task has been deferred, so the next occurrence is the defer date
+      return task.getDefer().getDeferDate();
+    }
+
     final LocalDate latestCompletion =
         task.getHistory() != null && !task.getHistory().isEmpty()
             ? task.getHistory().get(task.getHistory().size() - 1).getDateCompleted()

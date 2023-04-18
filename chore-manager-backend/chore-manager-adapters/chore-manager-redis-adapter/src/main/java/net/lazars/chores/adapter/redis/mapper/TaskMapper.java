@@ -7,12 +7,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import net.lazars.chores.adapter.redis.document.CompletionHistoryItemPart;
+import net.lazars.chores.adapter.redis.document.DeferInfoPart;
 import net.lazars.chores.adapter.redis.document.RecurrenceType;
 import net.lazars.chores.adapter.redis.document.ReminderInfoPart;
 import net.lazars.chores.adapter.redis.document.TaskDocument;
 import net.lazars.chores.adapter.redis.document.TaskDocument.TaskDocumentBuilder;
 import net.lazars.chores.core.helper.OccurrenceHelper;
 import net.lazars.chores.core.model.CompletionHistoryItem;
+import net.lazars.chores.core.model.DeferInfo;
 import net.lazars.chores.core.model.Item;
 import net.lazars.chores.core.model.OccurrenceInfo;
 import net.lazars.chores.core.model.ReminderInfo;
@@ -39,6 +41,8 @@ public class TaskMapper {
             .recurrence(toRecurrence(taskEntity))
             .reminder(toReminderInfo(taskEntity.getReminder(), users))
             .item(item)
+            .defer(
+                taskEntity.getDefer() != null ? toDeferInfo(taskEntity.getDefer(), users) : null)
             .build();
 
     final OccurrenceInfo occurrenceInfo =
@@ -61,7 +65,8 @@ public class TaskMapper {
             .enabled(task.isEnabled())
             .history(forEach(task.getHistory(), this::toCompletionHistoryItemEntity))
             .reminder(toReminderInfoEntity(task.getReminder()))
-            .itemId(task.getItem().getId());
+            .itemId(task.getItem().getId())
+            .defer(task.getDefer() != null ? toDeferInfoPart(task.getDefer()) : null);
 
     if (task.getRecurrence() instanceof FixedRecurrence fixedRecurrence) {
       builder
@@ -79,6 +84,24 @@ public class TaskMapper {
     }
 
     return builder.build();
+  }
+
+  private DeferInfo toDeferInfo(final DeferInfoPart deferInfoPart, final List<User> users) {
+    return DeferInfo.builder()
+        .deferDate(deferInfoPart.getDeferDate())
+        .user(
+            users.stream()
+                .filter(user -> user.getId().equals(deferInfoPart.getUserId()))
+                .findFirst()
+                .orElse(null))
+        .build();
+  }
+
+  private DeferInfoPart toDeferInfoPart(final DeferInfo deferInfo) {
+    return DeferInfoPart.builder()
+        .deferDate(deferInfo.getDeferDate())
+        .userId(deferInfo.getUser().getId())
+        .build();
   }
 
   private CompletionHistoryItem toCompletionHistoryItem(

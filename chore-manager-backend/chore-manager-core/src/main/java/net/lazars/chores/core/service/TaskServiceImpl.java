@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import net.lazars.chores.core.model.CompletionHistoryItem;
+import net.lazars.chores.core.model.DeferInfo;
 import net.lazars.chores.core.model.Task;
 import net.lazars.chores.core.model.User;
 import net.lazars.chores.core.port.in.TaskService;
@@ -18,14 +19,14 @@ class TaskServiceImpl implements TaskService {
   private static final int HISTORY_SIZE = 5;
 
   private final TaskRepository taskRepository;
-  private final UserService userOutboundPort;
+  private final UserService userService;
   private final EmailSender emailSender;
 
   @Override
   public Task markComplete(
       final String taskId, final String userId, final LocalDate dateCompleted) {
     final Task task = get(taskId);
-    final User user = userOutboundPort.get(userId);
+    final User user = userService.get(userId);
 
     final List<CompletionHistoryItem> completionHistory = task.getHistory();
     completionHistory.add(
@@ -34,8 +35,17 @@ class TaskServiceImpl implements TaskService {
             .dateCompleted(dateCompleted == null ? LocalDate.now() : dateCompleted)
             .build());
     task.setHistory(ListUtil.trimList(completionHistory, HISTORY_SIZE));
+    task.setDefer(null);
 
-    emailSender.sendTaskCompleteByDifferentUserNotification(task, user);
+    new Thread(() -> emailSender.sendTaskCompleteByDifferentUserNotification(task, user)).start();
+    return taskRepository.save(task);
+  }
+
+  @Override
+  public Task defer(final String taskId, final User user, final LocalDate deferDate) {
+    final Task task = get(taskId);
+
+    task.setDefer(DeferInfo.builder().deferDate(deferDate).user(user).build());
     return taskRepository.save(task);
   }
 

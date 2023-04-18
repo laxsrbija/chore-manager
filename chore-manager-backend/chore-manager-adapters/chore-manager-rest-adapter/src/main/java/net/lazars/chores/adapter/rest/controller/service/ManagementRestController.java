@@ -138,13 +138,22 @@ public class ManagementRestController {
   }
 
   @PatchMapping("tasks/complete/{taskId}")
-  public TaskDto markComplete(
+  public TaskDto completeTask(
       @PathVariable final String taskId,
       @RequestParam(required = false) final String userId,
       @DateTimeFormat(iso = ISO.DATE) @RequestParam(required = false) final LocalDate dateCompleted,
       final Authentication authentication) {
     final String user = userId == null ? authService.getCurrentUserId(authentication) : userId;
     return DtoMapper.INSTANCE.toTaskDto(taskService.markComplete(taskId, user, dateCompleted));
+  }
+
+  @PatchMapping("tasks/defer/{taskId}")
+  public TaskDto deferTask(
+      @PathVariable final String taskId,
+      @DateTimeFormat(iso = ISO.DATE) @RequestParam(required = false) final LocalDate dateCompleted,
+      final Authentication authentication) {
+    final User user = authService.getCurrentUser(authentication);
+    return DtoMapper.INSTANCE.toTaskDto(taskService.defer(taskId, user, dateCompleted));
   }
 
   @GetMapping("users")

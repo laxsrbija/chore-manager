@@ -26,6 +26,8 @@ public class Task extends BaseModel {
 
   private OccurrenceInfo occurrence;
 
+  private DeferInfo defer;
+
   private List<CompletionHistoryItem> history;
 
   private ReminderInfo reminder;

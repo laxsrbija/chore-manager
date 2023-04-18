@@ -26,6 +26,8 @@ public class TaskDto extends BaseDto {
 
   private OccurrenceInfoDto occurrence;
 
+  private DeferInfoDto defer;
+
   private List<CompletionHistoryItemDto> history;
 
   private ReminderInfoDto reminder;

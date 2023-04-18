@@ -36,5 +36,7 @@ public class TaskDocument {
 
   private ReminderInfoPart reminder;
 
+  private DeferInfoPart defer;
+
   private boolean enabled;
 }
