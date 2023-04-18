@@ -42,7 +42,10 @@
 
       <div class="col-md-2 col text-end">
         <div class="pe-md-3"
-             [class.text-danger]="task.occurrence.daysUntilNextOccurrence < 0">{{task | occurrence}}</div>
+             [class.text-danger]="task.occurrence.daysUntilNextOccurrence < 0"
+             [class.text-primary]="task.defer && task.occurrence.daysUntilNextOccurrence >= 0">
+          {{task | occurrence}}
+        </div>
       </div>
 
       <div class="col-auto">
