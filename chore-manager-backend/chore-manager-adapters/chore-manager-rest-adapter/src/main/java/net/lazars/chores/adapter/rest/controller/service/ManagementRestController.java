@@ -4,6 +4,7 @@ import static net.lazars.chores.adapter.rest.util.AuthenticationUtils.isUserInHo
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import net.lazars.chores.adapter.rest.dto.TaskDto;
 import net.lazars.chores.adapter.rest.dto.UserDto;
 import net.lazars.chores.adapter.rest.mapper.DtoMapper;
 import net.lazars.chores.adapter.rest.service.AuthService;
+import net.lazars.chores.core.model.BaseModel;
 import net.lazars.chores.core.model.Category;
 import net.lazars.chores.core.model.Household;
 import net.lazars.chores.core.model.Item;
@@ -58,6 +60,7 @@ public class ManagementRestController {
     final User user = authService.getCurrentUser(authentication);
     return householdService.getAll().stream()
         .filter(household -> isUserInHousehold(user, household))
+        .sorted(Comparator.comparing(BaseModel::getName))
         .map(mapper::toHouseholdDto)
         .toList();
   }
@@ -85,6 +88,9 @@ public class ManagementRestController {
         .filter(category -> isUserInHousehold(user, category.getHousehold()))
         .filter(
             category -> householdId == null || category.getHousehold().getId().equals(householdId))
+        .sorted(
+            Comparator.<Category, String>comparing(category -> category.getHousehold().getName())
+                .thenComparing(BaseModel::getName))
         .map(mapper::toCategoryDto)
         .toList();
   }
@@ -111,6 +117,9 @@ public class ManagementRestController {
     return itemService.getAll().stream()
         .filter(item -> isUserInHousehold(user, item.getCategory().getHousehold()))
         .filter(item -> categoryId == null || item.getCategory().getId().equals(categoryId))
+        .sorted(
+            Comparator.<Item, String>comparing(item -> item.getCategory().getName())
+                .thenComparing(BaseModel::getName))
         .map(mapper::toItemDto)
         .toList();
   }
