@@ -1,1 +1,56 @@
-<p>items works!</p>
+<main class="container">
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+
+    <div class="container">
+      <div class="row py-3">
+        <div class="col">
+          <h5 class="pt-2 text-muted">
+            Items
+            <span *ngIf="selectedCategory() as selectedCategory">({{selectedCategory?.name}})</span>
+          </h5>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-outline-success" (click)="addItem()">
+            <i class="bi bi-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row align-items-center py-3"
+           [class.border-bottom]="items && indexOfItem !== items.length - 1"
+           *ngFor="let item of items; let indexOfItem = index;">
+        <div class="col">
+          <label class="form-label small">Item name</label>
+          <input type="text" class="form-control" [(ngModel)]="item.name"
+                 placeholder="Item name">
+        </div>
+
+        <div class="w-100 d-md-none d-sm-block"></div>
+
+        <div class="col-md-auto col-sm-12 py-1">
+          <label class="form-label small">Category</label>
+          <select class="form-select" [(ngModel)]="item.category.id">
+            <option *ngFor="let category of categories"
+                    [ngValue]="category.id">{{category.household.name}}
+              &rsaquo; {{category.name}}</option>
+          </select>
+        </div>
+
+        <div class="w-100 d-md-none d-sm-block"></div>
+
+        <div class="col-md-auto col-sm-12 mt-md-3">
+          <button type="button" class="btn btn-secondary mt-3"
+                  (click)="saveItem(item)"
+                  [disabled]="!item.name || !item.category.id">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+

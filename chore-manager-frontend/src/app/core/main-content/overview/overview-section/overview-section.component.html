@@ -18,7 +18,16 @@
             {{task.name}}
           </strong>
         </div>
-        <div class="small text-muted">{{task.item.category.name}} · {{task.item.name}}</div>
+        <div class="small text-muted">
+          <a
+            class="text-decoration-none pointer-event text-muted"
+            routerLink="/items"
+            [queryParams]="{'categoryId': task.item.category.id}">
+            {{task.item.category.name}}
+          </a>
+          ·
+          {{task.item.name}}
+        </div>
       </div>
 
       <div class="w-100 d-md-none d-sm-block"></div>

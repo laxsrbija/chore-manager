@@ -30,7 +30,12 @@
              [ngClass]="categoriesLink.isActive ? 'link-secondary': 'link-light'"
              class="nav-link px-2">Categories</a>
         </li>
-        <li><a href="#" class="nav-link px-2 link-light">Items</a></li>
+        <li>
+          <a routerLink="/items" routerLinkActive=""
+             #itemsLink="routerLinkActive"
+             [ngClass]="itemsLink.isActive ? 'link-secondary': 'link-light'"
+             class="nav-link px-2">Items</a>
+        </li>
         <li><a href="#" class="nav-link px-2 link-light">Tasks</a></li>
       </ul>
     </div>
