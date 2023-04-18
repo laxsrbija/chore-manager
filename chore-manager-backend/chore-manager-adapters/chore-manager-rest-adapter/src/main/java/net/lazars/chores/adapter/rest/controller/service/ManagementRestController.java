@@ -2,6 +2,7 @@ package net.lazars.chores.adapter.rest.controller.service;
 
 import static net.lazars.chores.adapter.rest.util.AuthenticationUtils.isUserInHousehold;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import net.lazars.chores.adapter.rest.dto.CategoryDto;
 import net.lazars.chores.adapter.rest.dto.HouseholdDto;
 import net.lazars.chores.adapter.rest.dto.ItemDto;
+import net.lazars.chores.adapter.rest.dto.TaskDto;
 import net.lazars.chores.adapter.rest.dto.UserDto;
 import net.lazars.chores.adapter.rest.mapper.DtoMapper;
 import net.lazars.chores.adapter.rest.service.AuthService;
@@ -20,11 +22,16 @@ import net.lazars.chores.core.model.User;
 import net.lazars.chores.core.port.in.CategoryService;
 import net.lazars.chores.core.port.in.HouseholdService;
 import net.lazars.chores.core.port.in.ItemService;
+import net.lazars.chores.core.port.in.TaskService;
 import net.lazars.chores.core.port.in.UserService;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +51,7 @@ public class ManagementRestController {
   private final CategoryService categoryService;
   private final UserService userService;
   private final ItemService itemService;
+  private final TaskService taskService;
 
   @GetMapping("households")
   public List<HouseholdDto> getHouseholds(final Authentication authentication) {
@@ -118,6 +126,16 @@ public class ManagementRestController {
     }
 
     itemService.save(item);
+  }
+
+  @PatchMapping("tasks/complete/{taskId}")
+  public TaskDto markComplete(
+      @PathVariable final String taskId,
+      @RequestParam(required = false) final String userId,
+      @DateTimeFormat(iso = ISO.DATE) @RequestParam(required = false) final LocalDate dateCompleted,
+      final Authentication authentication) {
+    final String user = userId == null ? authService.getCurrentUserId(authentication) : userId;
+    return DtoMapper.INSTANCE.toTaskDto(taskService.markComplete(taskId, user, dateCompleted));
   }
 
   @GetMapping("users")

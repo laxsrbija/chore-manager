@@ -82,7 +82,7 @@ export class RequestsService {
       params = params.append('dateCompleted', dateCompleted);
     }
 
-    return this.http.patch<Task>('/api/rest/tasks/' + taskId, undefined, {
+    return this.http.patch<Task>('/api/service/management/tasks/complete/' + taskId, undefined, {
         params: params
       }
     );
