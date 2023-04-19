@@ -3,6 +3,7 @@ package net.lazars.chores.adapter.redis.mapper;
 import static net.lazars.chores.core.util.ListUtil.forEach;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -30,6 +31,14 @@ import org.springframework.stereotype.Component;
 public class TaskMapper {
 
   public Task toTask(final TaskDocument taskEntity, final Item item, final List<User> users) {
+    final List<CompletionHistoryItem> completionHistory =
+        taskEntity.getHistory() != null
+            ? taskEntity.getHistory().stream()
+                .map(historyItem -> toCompletionHistoryItem(historyItem, users))
+                .sorted(Comparator.comparing(CompletionHistoryItem::getDateCompleted).reversed())
+                .toList()
+            : null;
+
     final Task task =
         Task.builder()
             .id(taskEntity.getId())
@@ -37,12 +46,11 @@ public class TaskMapper {
             .dateCreated(taskEntity.getDateCreated())
             .description(taskEntity.getDescription())
             .enabled(taskEntity.isEnabled())
-            .history(forEach(taskEntity.getHistory(), users, this::toCompletionHistoryItem))
+            .history(completionHistory)
             .recurrence(toRecurrence(taskEntity))
             .reminder(toReminderInfo(taskEntity.getReminder(), users))
             .item(item)
-            .defer(
-                taskEntity.getDefer() != null ? toDeferInfo(taskEntity.getDefer(), users) : null)
+            .defer(taskEntity.getDefer() != null ? toDeferInfo(taskEntity.getDefer(), users) : null)
             .build();
 
     final OccurrenceInfo occurrenceInfo =
