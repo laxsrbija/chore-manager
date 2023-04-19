@@ -1,7 +1,10 @@
 package net.lazars.chores.adapter.rest.mapper;
 
+import java.util.Comparator;
+import java.util.List;
 import net.lazars.chores.adapter.rest.dto.CategoryDto;
 import net.lazars.chores.adapter.rest.dto.CompleteUserDto;
+import net.lazars.chores.adapter.rest.dto.CompletionHistoryItemDto;
 import net.lazars.chores.adapter.rest.dto.HouseholdDto;
 import net.lazars.chores.adapter.rest.dto.ItemDto;
 import net.lazars.chores.adapter.rest.dto.TaskDto;
@@ -17,8 +20,10 @@ import net.lazars.chores.core.model.User;
 import net.lazars.chores.core.model.recurrence.DynamicRecurrence;
 import net.lazars.chores.core.model.recurrence.FixedRecurrence;
 import net.lazars.chores.core.model.recurrence.Recurrence;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 import org.mapstruct.factory.Mappers;
 
@@ -44,6 +49,14 @@ public interface DtoMapper {
 
   @Mapping(source = "recurrence", target = "recurrence", qualifiedByName = "toRecurrenceDto")
   TaskDto toTaskDto(Task task);
+
+  @AfterMapping
+  default void sortCompletionHistory(@MappingTarget TaskDto taskDto) {
+    final List<CompletionHistoryItemDto> history = taskDto.getHistory();
+    if (history != null) {
+      history.sort(Comparator.comparing(CompletionHistoryItemDto::getDateCompleted).reversed());
+    }
+  }
 
   User toUser(CompleteUserDto userDto);
 
