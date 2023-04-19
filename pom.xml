@@ -24,7 +24,6 @@
 
   <properties>
     <java.version>17</java.version>
-    <jsondb-core.version>1.0.115-j11</jsondb-core.version>
     <springdoc-openapi-starter.version>2.1.0</springdoc-openapi-starter.version>
     <mapstruct.version>1.5.4.Final</mapstruct.version>
 
