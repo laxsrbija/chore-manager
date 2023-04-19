@@ -34,6 +34,11 @@ export class ItemsComponent implements OnInit {
   }
 
   addItem() {
-    this.items.push({category: this.categories[0]});
+    this.items.unshift({
+      category: {
+        id: this.categories[0].id,
+        household: {}
+      }
+    });
   }
 }

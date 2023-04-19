@@ -101,11 +101,13 @@ public class ManagementRestController {
       @RequestBody final CategoryDto categoryDto, final Authentication authentication) {
     final User user = authService.getCurrentUser(authentication);
     final Category category = mapper.toCategory(categoryDto);
+    final Household household = householdService.get(category.getHousehold().getId());
 
-    if (!isUserInHousehold(user, category.getHousehold())) {
+    if (!isUserInHousehold(user, household)) {
       throw new IllegalArgumentException("Category cannot be created or updated by current user");
     }
 
+    category.setHousehold(household);
     categoryService.save(category);
   }
 
@@ -129,11 +131,13 @@ public class ManagementRestController {
   public void saveItem(@RequestBody final ItemDto itemDto, final Authentication authentication) {
     final User user = authService.getCurrentUser(authentication);
     final Item item = mapper.toItem(itemDto);
+    final Category category = categoryService.get(item.getCategory().getId());
 
-    if (!isUserInHousehold(user, item.getCategory().getHousehold())) {
+    if (!isUserInHousehold(user, category.getHousehold())) {
       throw new IllegalArgumentException("Category cannot be created or updated by current user");
     }
 
+    item.setCategory(category);
     itemService.save(item);
   }
 

@@ -34,6 +34,10 @@ export class CategoriesComponent implements OnInit {
   }
 
   addCategory() {
-    this.categories.push({household: this.households[0]});
+    this.categories.unshift({
+      household: {
+        id: this.households[0].id
+      }
+    });
   }
 }
