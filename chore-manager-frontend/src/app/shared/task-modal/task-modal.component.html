@@ -1,25 +1,24 @@
 <div class="modal fade" id="taskDetailsModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
 
-      <div class="modal-body">
-        <div class="container">
+      <div class="modal-body mt-3">
+        <div *ngIf="task" class="container">
 
           <div class="mb-3 row">
             <label for="name" class="col-lg-2 col-form-label text-muted">Task name</label>
             <div class="col-lg-10">
-              <input type="text" class="form-control" id="name" [value]="task?.name" disabled>
+              <input type="text" class="form-control" id="name" [(ngModel)]="task.name">
             </div>
           </div>
 
           <div class="mb-3 row">
-            <label for="description" class="col-lg-2 col-form-label text-muted">Task description</label>
+            <label for="description" class="col-lg-2 col-form-label text-muted">
+              Task description
+            </label>
             <div class="col-lg-10">
-          <textarea class="form-control" id="description" style="height: 100px"
-                    disabled>{{task?.description}}</textarea>
+              <textarea class="form-control" id="description" style="height: 100px"
+                        [(ngModel)]="task.description"></textarea>
             </div>
           </div>
 
@@ -28,25 +27,13 @@
           <div class="mb-3 row">
             <label for="item" class="col-lg-2 col-form-label text-muted">Item</label>
             <div class="col-lg-10">
-              <select id="item" class="form-select" disabled>
-                <option selected>{{task?.item?.name}}</option>
+              <select id="item" class="form-select">
+                <option *ngFor="let item of items"
+                        [selected]="task.item.id === item.id" (click)="onItemChange(item)">
+                  {{item.category.household.name}} &rsaquo; {{item.category.name}}
+                  &rsaquo; {{item.name}}
+                </option>
               </select>
-            </div>
-          </div>
-
-          <div class="mb-3 row">
-            <label for="category" class="col-lg-2 col-form-label text-muted">Category</label>
-            <div class="col-lg-10">
-              <input id="category" type="text" readonly class="form-control-plaintext"
-                     [value]="task?.item?.category?.name">
-            </div>
-          </div>
-
-          <div class="mb-3 row">
-            <label for="category" class="col-lg-2 col-form-label text-muted">Household</label>
-            <div class="col-lg-10">
-              <input id="household" type="text" readonly class="form-control-plaintext"
-                     [value]="task?.item?.category?.household?.name">
             </div>
           </div>
 
@@ -57,26 +44,31 @@
             <div class="col-lg-10">
               <div class="btn-group" role="group">
                 <input type="radio" class="btn-check" name="options" id="option1"
-                       [checked]="task?.recurrence?.type === 'dynamic'" disabled>
+                       (click)="task.recurrence.type = RecurrenceType.DYNAMIC"
+                       [checked]="task.recurrence.type === 'dynamic'">
                 <label class="btn btn-secondary px-3" for="option1">Dynamic</label>
 
                 <input type="radio" class="btn-check" name="options" id="option2"
-                       [checked]="task?.recurrence?.type === 'fixed'" disabled>
+                       (click)="task.recurrence.type = RecurrenceType.FIXED"
+                       [checked]="task.recurrence.type === 'fixed'">
                 <label class="btn btn-secondary px-3" for="option2">Fixed</label>
               </div>
             </div>
           </div>
 
-          <div *ngIf="task?.recurrence?.type === 'dynamic'">
+          <div *ngIf="task.recurrence.type === 'dynamic'">
             <div class="mb-3 row">
 
               <label class="col-lg-2 col-form-label text-muted">Dynamic recurrence</label>
               <div class="col-lg-10">
                 <div class="input-group">
                   <label class="input-group-text">Every</label>
-                  <input type="text" class="form-control" [value]="task?.recurrence?.frequency" disabled>
-                  <select class="form-select" disabled>
-                    <option selected>{{task?.recurrence?.dateUnit | readableDateUnit}}</option>
+                  <input type="text" class="form-control" [(ngModel)]="task.recurrence.frequency">
+                  <select class="form-select" [(ngModel)]="task.recurrence.dateUnit">
+                    <option *ngFor="let dateUnit of DateUnit | keyvalue"
+                            [ngValue]="dateUnit.value">
+                      {{dateUnit.value | readableDateUnit}}
+                    </option>
                   </select>
                 </div>
               </div>
@@ -84,18 +76,18 @@
             </div>
           </div>
 
-          <div *ngIf="task?.recurrence?.type === 'fixed'">
+          <div *ngIf="task.recurrence.type === 'fixed'">
             <div class="mb-3 row">
               <label class="col-lg-2 col-form-label text-muted">Day</label>
               <div class="col-lg-10">
-                <input type="text" class="form-control" [value]="task?.recurrence?.day" disabled>
+                <input type="text" class="form-control" [(ngModel)]="task.recurrence.day">
               </div>
             </div>
 
             <div class="mb-3 row">
               <label class="col-lg-2 col-form-label text-muted">Month</label>
               <div class="col-lg-10">
-                <input type="text" class="form-control" [value]="task?.recurrence?.month" disabled>
+                <input type="text" class="form-control" [(ngModel)]="task.recurrence.month">
               </div>
             </div>
           </div>
@@ -106,10 +98,12 @@
             <label class="col-lg-2 col-form-label text-muted">Reminder date</label>
             <div class="col-lg-10">
               <div class="input-group">
-                <input type="text" class="form-control" [value]="task?.reminder?.reminderDate?.frequency"
-                       disabled>
-                <select class="form-select" disabled>
-                  <option selected>{{task?.reminder?.reminderDate?.dateUnit | readableDateUnit}}</option>
+                <input type="text" class="form-control"
+                       [(ngModel)]="task.reminder.reminderDate.frequency">
+                <select class="form-select" [(ngModel)]="task.reminder.reminderDate.dateUnit">
+                  <option *ngFor="let dateUnit of DateUnit | keyvalue" [ngValue]="dateUnit.value">
+                    {{dateUnit.value | readableDateUnit}}
+                  </option>
                 </select>
                 <label class="input-group-text">in advance</label>
               </div>
@@ -119,8 +113,9 @@
           <div class="mb-3 row">
             <label class="col-lg-2 col-form-label text-muted">Users to notify</label>
             <div class="col-lg-10">
-              <div class="form-check" *ngFor="let user of getUsers()">
-                <input class="form-check-input" type="checkbox" disabled
+              <div class="form-check"
+                   *ngFor="let user of this.users![this.task.item.category.household.id!]">
+                <input class="form-check-input" type="checkbox" (change)="onUserToggle($event, user)"
                        [checked]="userShouldBeReminded(user, task)">
                 <label class="form-check-label">
                   {{user.name}}
@@ -131,19 +126,19 @@
 
           <hr>
 
-          <div class="mb-3 row" *ngIf="task?.dateCreated">
+          <div class="mb-3 row" *ngIf="task.dateCreated">
             <label class="col-lg-2 col-form-label text-muted">Date created</label>
             <div class="col-lg-10">
-              <input type="text" readonly class="form-control-plaintext"
-                     [value]="task?.dateCreated">
+              <input type="text" readonly class="form-control-plaintext" [value]="task.dateCreated">
             </div>
           </div>
 
           <div class="mb-3 row">
             <label for="name" class="col-lg-2 col-form-label text-muted">Enabled</label>
             <div class="col-lg-10">
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" [checked]="task?.enabled" disabled>
+              <div class="form-check pt-2">
+                <input class="form-check-input" type="checkbox"
+                       [checked]="task.enabled" (change)="task.enabled = !task.enabled">
               </div>
             </div>
           </div>

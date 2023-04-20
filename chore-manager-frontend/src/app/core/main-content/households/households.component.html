@@ -18,9 +18,11 @@
                  placeholder="Household name">
         </div>
         <div class="col-auto">
-          <button type="button" class="btn btn-secondary"
+          <button type="button" class="btn btn-outline-secondary"
                   (click)="saveHousehold(household)"
-                  [disabled]="!household.name">Save
+                  [disabled]="!household.name">
+            <i class="bi bi-cloud-upload"></i>
+            Save
           </button>
         </div>
       </div>

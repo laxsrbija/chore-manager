@@ -48,7 +48,7 @@
     <div class="dropstart">
       <a href="#" class="d-block link-light text-decoration-none" data-bs-toggle="dropdown"
          aria-expanded="false">
-        <img [ngSrc]="authService.user!.image" alt="" width="36" height="36"
+        <img *ngIf="authService.user" [ngSrc]="authService.user!.image" alt="" width="36" height="36"
              class="rounded-circle border border-2 border-white">
       </a>
       <ul class="dropdown-menu text-small">

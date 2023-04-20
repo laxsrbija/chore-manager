@@ -16,16 +16,22 @@ import {
 import {AuthInterceptor} from "./service/auth.interceptor";
 import {CookieService} from "ngx-cookie-service";
 import {FormsModule} from "@angular/forms";
-import { CompletionModalComponent } from './core/main-content/overview/completion-modal/completion-modal.component';
-import { InstantCompletionComponent } from './core/main-content/overview/overview-section/instant-completion/instant-completion.component';
-import { HistoryModalComponent } from './core/main-content/overview/history-modal/history-modal.component';
-import { DateUnitPipe } from './util/date-unit.pipe';
-import { TaskModalComponent } from './shared/task-modal/task-modal.component';
-import { HouseholdsComponent } from './core/main-content/households/households.component';
-import { CategoriesComponent } from './core/main-content/categories/categories.component';
-import { ItemsComponent } from './core/main-content/items/items.component';
-import { DeferModalComponent } from './core/main-content/overview/defer-modal/defer-modal.component';
-import { TasksComponent } from './core/main-content/tasks/tasks.component';
+import {
+  CompletionModalComponent
+} from './core/main-content/overview/completion-modal/completion-modal.component';
+import {
+  InstantCompletionComponent
+} from './core/main-content/overview/overview-section/instant-completion/instant-completion.component';
+import {
+  HistoryModalComponent
+} from './core/main-content/overview/history-modal/history-modal.component';
+import {DateUnitPipe} from './util/date-unit.pipe';
+import {TaskModalComponent} from './shared/task-modal/task-modal.component';
+import {HouseholdsComponent} from './core/main-content/households/households.component';
+import {CategoriesComponent} from './core/main-content/categories/categories.component';
+import {ItemsComponent} from './core/main-content/items/items.component';
+import {DeferModalComponent} from './core/main-content/overview/defer-modal/defer-modal.component';
+import {TasksComponent} from './core/main-content/tasks/tasks.component';
 import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({

@@ -33,7 +33,7 @@
         <div class="col-md-5 col-sm-12 py-1">
           <label class="form-label small">Task name</label>
           <input type="text" readonly class="form-control-plaintext" placeholder="Task name"
-                 value="{{task.item.name}} &rsaquo; {{task.item.category.name}} &rsaquo; {{task.item.category.household.name}}">
+                 value="{{task.item.category.household.name}} &rsaquo; {{task.item.category.name}} &rsaquo; {{task.item.name}}">
         </div>
 
         <div class="w-100 d-md-none d-sm-block"></div>
@@ -47,7 +47,7 @@
               Edit
             </button>
             <button type="button" class="btn btn-outline-secondary">
-              <i class="bi bi-trash"></i>
+              <i class="bi bi-trash text-danger"></i>
               Delete
             </button>
           </div>

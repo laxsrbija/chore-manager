@@ -40,9 +40,10 @@
         <div class="w-100 d-md-none d-sm-block"></div>
 
         <div class="col-md-auto col-sm-12 mt-md-3">
-          <button type="button" class="btn btn-secondary mt-3"
+          <button type="button" class="btn btn-outline-secondary mt-3"
                   (click)="saveCategory(category)"
                   [disabled]="!category.name || !category.household">
+            <i class="bi bi-cloud-upload"></i>
             Save
           </button>
         </div>
