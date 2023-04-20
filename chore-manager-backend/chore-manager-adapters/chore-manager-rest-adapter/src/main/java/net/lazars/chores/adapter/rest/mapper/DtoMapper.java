@@ -1,12 +1,13 @@
 package net.lazars.chores.adapter.rest.mapper;
 
 import java.util.Comparator;
-import java.util.List;
+import java.util.Optional;
 import net.lazars.chores.adapter.rest.dto.CategoryDto;
 import net.lazars.chores.adapter.rest.dto.CompleteUserDto;
 import net.lazars.chores.adapter.rest.dto.CompletionHistoryItemDto;
 import net.lazars.chores.adapter.rest.dto.HouseholdDto;
 import net.lazars.chores.adapter.rest.dto.ItemDto;
+import net.lazars.chores.adapter.rest.dto.ReminderInfoDto;
 import net.lazars.chores.adapter.rest.dto.TaskDto;
 import net.lazars.chores.adapter.rest.dto.UserDto;
 import net.lazars.chores.adapter.rest.dto.recurrence.DynamicRecurrenceDto;
@@ -52,10 +53,15 @@ public interface DtoMapper {
 
   @AfterMapping
   default void sortCompletionHistory(@MappingTarget TaskDto taskDto) {
-    final List<CompletionHistoryItemDto> history = taskDto.getHistory();
-    if (history != null) {
-      history.sort(Comparator.comparing(CompletionHistoryItemDto::getDateCompleted).reversed());
-    }
+    Optional.ofNullable(taskDto.getHistory())
+        .ifPresent(
+            history ->
+                history.sort(
+                    Comparator.comparing(CompletionHistoryItemDto::getDateCompleted).reversed()));
+
+    Optional.ofNullable(taskDto.getReminder())
+        .map(ReminderInfoDto::getUsersToNotify)
+        .ifPresent(users -> users.sort(Comparator.comparing(UserDto::getName)));
   }
 
   User toUser(CompleteUserDto userDto);
