@@ -129,7 +129,8 @@
           <div class="mb-3 row" *ngIf="task.dateCreated">
             <label class="col-lg-2 col-form-label text-muted">Date created</label>
             <div class="col-lg-10">
-              <input type="text" readonly class="form-control-plaintext" [value]="task.dateCreated">
+              <input type="text" readonly class="form-control-plaintext"
+                     [value]="task.dateCreated | date: 'dd.MM.yyyy.'">
             </div>
           </div>
 

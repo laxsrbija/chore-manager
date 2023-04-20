@@ -5,6 +5,8 @@ import {RequestsService} from "../../../service/requests.service";
 import {ActivatedRoute} from "@angular/router";
 import {User} from "../../../model/dto/user";
 import {TaskModalComponent} from "../../../shared/task-modal/task-modal.component";
+import {RecurrenceType} from "../../../model/recurrence-type.enum";
+import {DateUnit} from "../../../model/date-unit.enum";
 
 @Component({
   selector: 'app-tasks',
@@ -43,7 +45,16 @@ export class TasksComponent implements OnInit {
   }
 
   addTask() {
-
+    const task: Task = {
+      description: '',
+      occurrence: {daysUntilNextOccurrence: 0, nextOccurrence: '1970-01-01'},
+      history: [],
+      reminder: {reminderDate: {dateUnit: DateUnit.DAY, frequency: 0}, usersToNotify: []},
+      item: this.items[0],
+      enabled: true,
+      recurrence: {type: RecurrenceType.DYNAMIC}
+    };
+    this.taskModal?.loadModalData(task, this.items, this.users!);
   }
 
   editTask(task: Task) {

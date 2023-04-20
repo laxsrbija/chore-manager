@@ -8,7 +8,7 @@ import {DeferInfo} from "../defer";
 
 export interface Task extends BaseDto {
   description: string;
-  dateCreated: string;
+  dateCreated?: string;
   item: Item;
   recurrence: Recurrence;
   occurrence: OccurrenceInfo;
