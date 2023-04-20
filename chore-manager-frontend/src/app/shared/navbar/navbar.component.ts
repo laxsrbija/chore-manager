@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthService} from "../../service/auth.service";
+import {Permission} from "../../model/permission.enum";
 
 @Component({
   selector: 'app-navbar',
@@ -14,4 +15,6 @@ export class NavbarComponent {
   signOut() {
     this.authService.removeAuthToken();
   }
+
+  protected readonly Permission = Permission;
 }

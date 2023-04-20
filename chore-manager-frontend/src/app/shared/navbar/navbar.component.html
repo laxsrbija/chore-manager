@@ -1,7 +1,7 @@
 <nav class="navbar p-2 p-lg-3 mb-3 navbar-expand-lg text-bg-dark navbar-dark border-bottom">
   <div class="container">
     <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03"
+            data-bs-target="#navbarToggler" aria-controls="navbarToggler"
             aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -9,7 +9,8 @@
        class="navbar-brand align-items-center me-0 me-lg-2 mb-1 text-dark text-decoration-none">
       <img class="bi me-lg-2" ngSrc="assets/icon-white.png" alt="" height="36" width="36">
     </a>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <div class="collapse navbar-collapse" id="navbarToggler"
+         *ngIf="authService.user && authService.user.permissions.indexOf(Permission.EDIT) > -1">
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li>
           <a routerLink="/" routerLinkActive=""
