@@ -32,8 +32,28 @@
 
         <div class="col-md-5 col-sm-12 py-1">
           <label class="form-label small">Task name</label>
-          <input type="text" readonly class="form-control-plaintext" placeholder="Task name"
-                 value="{{task.item.category.household.name}} &rsaquo; {{task.item.category.name}} &rsaquo; {{task.item.name}}">
+          <div>
+            <a
+              class="text-decoration-none pointer-event text-black"
+              routerLink="/categories"
+              [queryParams]="{'householdId': task.item.category.household.id}">
+              {{task.item.category.household.name}}
+            </a>
+            &rsaquo;
+            <a
+              class="text-decoration-none pointer-event text-black"
+              routerLink="/items"
+              [queryParams]="{'categoryId': task.item.category.id}">
+              {{task.item.category.name}}
+            </a>
+            &rsaquo;
+            <a
+              class="text-decoration-none pointer-event text-black"
+              routerLink="/tasks"
+              [queryParams]="{'itemId': task.item.id}">
+              {{task.item.name}}
+            </a>
+          </div>
         </div>
 
         <div class="w-100 d-md-none d-sm-block"></div>

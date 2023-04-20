@@ -19,9 +19,12 @@ export class ItemsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.categoryId = this.route.snapshot.queryParamMap.get('categoryId');
+    this.route.queryParams.subscribe(parameters => {
+      this.categoryId = parameters['categoryId'];
 
-    this.requestsService.getItems(this.categoryId).subscribe(items => this.items = items);
+      this.requestsService.getItems(this.categoryId).subscribe(items => this.items = items);
+    });
+
     this.requestsService.getCategories().subscribe(categories => this.categories = categories);
   }
 

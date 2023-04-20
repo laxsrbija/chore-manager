@@ -21,15 +21,20 @@ export class TasksComponent implements OnInit {
   itemId: string | null = null;
 
   constructor(private requestsService: RequestsService, private route: ActivatedRoute) {
+
   }
 
   ngOnInit(): void {
-    this.itemId = this.route.snapshot.queryParamMap.get('itemId');
+    this.route.queryParams.subscribe(parameters => {
+      this.itemId = parameters['itemId'];
 
-    this.requestsService.getTasks(this.itemId).subscribe(tasks => {
-      this.tasks = tasks;
-      this.requestsService.getUsersPerHousehold().subscribe(users => this.users = users);
+      this.requestsService.getTasks(this.itemId).subscribe(tasks => {
+        this.tasks = tasks;
+        this.requestsService.getUsersPerHousehold().subscribe(users => this.users = users);
+      });
     });
+
+
     this.requestsService.getItems().subscribe(item => this.items = item);
   }
 
