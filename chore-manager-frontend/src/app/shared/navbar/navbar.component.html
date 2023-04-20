@@ -7,7 +7,7 @@
     </button>
     <a href="/"
        class="navbar-brand align-items-center me-0 me-lg-2 mb-1 text-dark text-decoration-none">
-      <img class="bi me-lg-2" src="assets/icon-white.png" alt="" height="36">
+      <img class="bi me-lg-2" ngSrc="assets/icon-white.png" alt="" height="36" width="36">
     </a>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
@@ -48,7 +48,7 @@
     <div class="dropstart">
       <a href="#" class="d-block link-light text-decoration-none" data-bs-toggle="dropdown"
          aria-expanded="false">
-        <img [src]="authService.user?.image" alt="" width="36" height="36"
+        <img [ngSrc]="authService.user!.image" alt="" width="36" height="36"
              class="rounded-circle border border-2 border-white">
       </a>
       <ul class="dropdown-menu text-small">

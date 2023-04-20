@@ -1,6 +1,7 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 import {Task} from 'src/app/model/dto/task';
 import {User} from "../../model/dto/user";
+import {Item} from "../../model/dto/item";
 
 @Component({
   selector: 'app-task-modal',
@@ -9,8 +10,15 @@ import {User} from "../../model/dto/user";
 })
 export class TaskModalComponent {
 
-  public task?: Task;
-  @Input() users?: Record<string, User[]>;
+  task?: Task;
+  items?: Item[];
+  users?: Record<string, User[]>;
+
+  loadModalData(task: Task, items: Item[], users: Record<string, User[]>) {
+    this.task = task;
+    this.users = users;
+    this.items = items;
+  }
 
   userShouldBeReminded(user: User, task?: Task) {
     return task?.reminder.usersToNotify.map(u => u.id).includes(user.id);

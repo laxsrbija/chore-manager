@@ -19,5 +19,5 @@
 <app-completion-modal #completionModal [users]="users"
                       (changesSaved)="loadOverview()"></app-completion-modal>
 <app-history-modal #completionHistoryModal></app-history-modal>
-<app-task-modal #taskModal [users]="users"></app-task-modal>
+<app-task-modal #taskModal></app-task-modal>
 <app-defer-modal #deferModal (taskAction)="handleAction($event)"></app-defer-modal>

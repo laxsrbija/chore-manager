@@ -40,7 +40,9 @@
 
         <div class="col-md-2 col-sm-12 mt-md-3 text-end">
           <div class="btn-group mt-3" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-outline-secondary" (click)="editTask(task)">
+            <button type="button" class="btn btn-outline-secondary"
+                    data-bs-toggle="modal" data-bs-target="#taskDetailsModal"
+                    (click)="editTask(task)">
               <i class="bi bi-pencil-square"></i>
               Edit
             </button>
@@ -58,3 +60,4 @@
 
 </main>
 
+<app-task-modal #taskModal></app-task-modal>

@@ -26,6 +26,7 @@ import { CategoriesComponent } from './core/main-content/categories/categories.c
 import { ItemsComponent } from './core/main-content/items/items.component';
 import { DeferModalComponent } from './core/main-content/overview/defer-modal/defer-modal.component';
 import { TasksComponent } from './core/main-content/tasks/tasks.component';
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { TasksComponent } from './core/main-content/tasks/tasks.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgOptimizedImage
   ],
   providers: [
     CookieService,
