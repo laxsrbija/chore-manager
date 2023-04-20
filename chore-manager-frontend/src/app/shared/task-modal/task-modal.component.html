@@ -149,8 +149,16 @@
 
       <div class="modal-footer"
            *ngIf="authService.user && authService.user.permissions.indexOf(Permission.EDIT) > -1">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" #close>
+          Close
+        </button>
+        <button type="button" class="btn btn-success" (click)="saveTask()">
+          <span [class.d-none]="saving">Save changes</span>
+          <span [class.d-none]="!saving">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Saving...
+          </span>
+        </button>
       </div>
 
     </div>

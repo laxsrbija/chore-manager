@@ -61,18 +61,19 @@ class TaskServiceImpl implements TaskService {
 
   @Override
   public Task save(final Task task) {
-    retainUnmodifiableFields(task);
-    return taskRepository.save(task);
-  }
-
-  private void retainUnmodifiableFields(final Task task) {
     if (task.getId() == null) {
-      return;
+      return taskRepository.save(task);
     }
 
     final Task storedTask = get(task.getId());
-    task.setHistory(storedTask.getHistory());
-    task.setDateCreated(storedTask.getDateCreated());
+    storedTask.setName(task.getName());
+    storedTask.setDescription(task.getDescription());
+    storedTask.setItem(task.getItem());
+    storedTask.setRecurrence(task.getRecurrence());
+    storedTask.setReminder(task.getReminder());
+    storedTask.setEnabled(task.isEnabled());
+
+    return taskRepository.save(storedTask);
   }
 
   @Override

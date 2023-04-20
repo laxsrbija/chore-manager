@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Output, ViewChild} from '@angular/core';
 import {Task} from 'src/app/model/dto/task';
 import {User} from "../../model/dto/user";
 import {Item} from "../../model/dto/item";
@@ -6,6 +6,7 @@ import {RecurrenceType} from "../../model/recurrence-type.enum";
 import {DateUnit} from "../../model/date-unit.enum";
 import {AuthService} from "../../service/auth.service";
 import {Permission} from "../../model/permission.enum";
+import {RequestsService} from "../../service/requests.service";
 
 @Component({
   selector: 'app-task-modal',
@@ -17,11 +18,15 @@ export class TaskModalComponent {
   protected readonly RecurrenceType = RecurrenceType;
   protected readonly DateUnit = DateUnit;
 
+  @ViewChild('close') close?: ElementRef;
+  @Output() taskSaved = new EventEmitter<void>();
+
   task?: Task;
   items?: Item[];
   users?: Record<string, User[]>;
+  saving: boolean = false;
 
-  constructor(protected authService: AuthService) {
+  constructor(protected authService: AuthService, private requestsService: RequestsService) {
   }
 
   loadModalData(task: Task, items: Item[], users: Record<string, User[]>) {
@@ -52,4 +57,13 @@ export class TaskModalComponent {
   }
 
   protected readonly Permission = Permission;
+
+  saveTask() {
+    this.saving = true;
+    this.requestsService.saveTask(this.task!).subscribe(() => {
+      this.saving = false;
+      this.taskSaved.emit();
+      this.close?.nativeElement.click();
+    });
+  }
 }

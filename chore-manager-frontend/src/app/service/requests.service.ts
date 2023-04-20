@@ -79,6 +79,10 @@ export class RequestsService {
     });
   }
 
+  saveTask(task: Task) {
+    return this.http.post<void>('/api/service/management/tasks', task);
+  }
+
   getUsersPerHousehold() {
     return this.http.get<Record<string, User[]>>('/api/service/management/users');
   }

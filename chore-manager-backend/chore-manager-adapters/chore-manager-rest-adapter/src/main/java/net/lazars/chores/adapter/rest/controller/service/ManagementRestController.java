@@ -160,6 +160,22 @@ public class ManagementRestController {
         .toList();
   }
 
+  @PostMapping("tasks")
+  @PreAuthorize("hasAuthority('EDIT')")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void saveTask(@RequestBody final TaskDto taskDto, final Authentication authentication) {
+    final User user = authService.getCurrentUser(authentication);
+    final Task task = mapper.toTask(taskDto);
+    final Item item = itemService.get(task.getItem().getId());
+
+    if (!isUserInHousehold(user, item.getCategory().getHousehold())) {
+      throw new IllegalArgumentException("Category cannot be created or updated by current user");
+    }
+
+    task.setItem(item);
+    taskService.save(task);
+  }
+
   @PatchMapping("tasks/complete/{taskId}")
   public TaskDto completeTask(
       @PathVariable final String taskId,
