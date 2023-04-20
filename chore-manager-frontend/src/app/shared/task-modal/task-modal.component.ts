@@ -4,6 +4,8 @@ import {User} from "../../model/dto/user";
 import {Item} from "../../model/dto/item";
 import {RecurrenceType} from "../../model/recurrence-type.enum";
 import {DateUnit} from "../../model/date-unit.enum";
+import {AuthService} from "../../service/auth.service";
+import {Permission} from "../../model/permission.enum";
 
 @Component({
   selector: 'app-task-modal',
@@ -18,6 +20,9 @@ export class TaskModalComponent {
   task?: Task;
   items?: Item[];
   users?: Record<string, User[]>;
+
+  constructor(protected authService: AuthService) {
+  }
 
   loadModalData(task: Task, items: Item[], users: Record<string, User[]>) {
     this.task = {...task};
@@ -45,4 +50,6 @@ export class TaskModalComponent {
       this.task!.reminder.usersToNotify = this.task!.reminder.usersToNotify.filter(u => u.id !== user.id);
     }
   }
+
+  protected readonly Permission = Permission;
 }

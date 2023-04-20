@@ -147,7 +147,8 @@
 
       </div>
 
-      <div class="modal-footer">
+      <div class="modal-footer"
+           *ngIf="authService.user && authService.user.permissions.indexOf(Permission.EDIT) > -1">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-success">Save changes</button>
       </div>

@@ -45,7 +45,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@PreAuthorize("hasAuthority('EDIT')")
 @RequestMapping(path = "/api/service/management", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ManagementRestController {
 
@@ -69,6 +68,7 @@ public class ManagementRestController {
   }
 
   @PostMapping("households")
+  @PreAuthorize("hasAuthority('EDIT')")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void saveHousehold(
       @RequestBody final HouseholdDto householdDto, final Authentication authentication) {
@@ -99,6 +99,7 @@ public class ManagementRestController {
   }
 
   @PostMapping("categories")
+  @PreAuthorize("hasAuthority('EDIT')")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void saveCategory(
       @RequestBody final CategoryDto categoryDto, final Authentication authentication) {
@@ -130,6 +131,7 @@ public class ManagementRestController {
   }
 
   @PostMapping("items")
+  @PreAuthorize("hasAuthority('EDIT')")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void saveItem(@RequestBody final ItemDto itemDto, final Authentication authentication) {
     final User user = authService.getCurrentUser(authentication);
