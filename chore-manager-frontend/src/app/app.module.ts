@@ -25,6 +25,7 @@ import { HouseholdsComponent } from './core/main-content/households/households.c
 import { CategoriesComponent } from './core/main-content/categories/categories.component';
 import { ItemsComponent } from './core/main-content/items/items.component';
 import { DeferModalComponent } from './core/main-content/overview/defer-modal/defer-modal.component';
+import { TasksComponent } from './core/main-content/tasks/tasks.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { DeferModalComponent } from './core/main-content/overview/defer-modal/de
     HouseholdsComponent,
     CategoriesComponent,
     ItemsComponent,
-    DeferModalComponent
+    DeferModalComponent,
+    TasksComponent
   ],
   imports: [
     BrowserModule,

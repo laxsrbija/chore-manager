@@ -1,0 +1,60 @@
+<main class="container">
+  <div class="my-3 p-3 bg-body rounded shadow-sm">
+
+    <div class="container">
+      <div class="row py-3">
+        <div class="col">
+          <h5 class="pt-2 text-muted">
+            Tasks
+            <span *ngIf="selectedItem() as selectedItem">({{selectedItem?.name}})</span>
+          </h5>
+        </div>
+        <div class="col-auto">
+          <button type="button" class="btn btn-outline-success" (click)="addTask()">
+            <i class="bi bi-plus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row align-items-center py-3"
+           [class.border-bottom]="tasks && indexOfTask !== tasks.length - 1"
+           *ngFor="let task of tasks; let indexOfTask = index;">
+
+        <div class="col-md-5">
+          <label class="form-label small">Item name</label>
+          <input type="text" readonly class="form-control-plaintext" [value]="task.name"
+                 placeholder="Task name">
+        </div>
+
+        <div class="w-100 d-md-none d-sm-block"></div>
+
+        <div class="col-md-5 col-sm-12 py-1">
+          <label class="form-label small">Task name</label>
+          <input type="text" readonly class="form-control-plaintext" placeholder="Task name"
+                 value="{{task.item.name}} &rsaquo; {{task.item.category.name}} &rsaquo; {{task.item.category.household.name}}">
+        </div>
+
+        <div class="w-100 d-md-none d-sm-block"></div>
+
+        <div class="col-md-2 col-sm-12 mt-md-3 text-end">
+          <div class="btn-group mt-3" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-secondary" (click)="editTask(task)">
+              <i class="bi bi-pencil-square"></i>
+              Edit
+            </button>
+            <button type="button" class="btn btn-outline-secondary">
+              <i class="bi bi-trash"></i>
+              Delete
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</main>
+

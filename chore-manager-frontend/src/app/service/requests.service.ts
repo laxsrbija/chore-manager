@@ -67,6 +67,18 @@ export class RequestsService {
     return this.http.post<void>('/api/service/management/items', item);
   }
 
+  getTasks(itemId?: string | null) {
+    let params = new HttpParams();
+
+    if (itemId) {
+      params = params.append('itemId', itemId);
+    }
+
+    return this.http.get<Task[]>('/api/service/management/tasks', {
+      params: params
+    });
+  }
+
   getUsersPerHousehold() {
     return this.http.get<Record<string, User[]>>('/api/service/management/users');
   }

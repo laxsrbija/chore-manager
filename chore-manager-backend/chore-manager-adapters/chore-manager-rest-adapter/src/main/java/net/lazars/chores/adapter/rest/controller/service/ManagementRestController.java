@@ -20,6 +20,7 @@ import net.lazars.chores.core.model.BaseModel;
 import net.lazars.chores.core.model.Category;
 import net.lazars.chores.core.model.Household;
 import net.lazars.chores.core.model.Item;
+import net.lazars.chores.core.model.Task;
 import net.lazars.chores.core.model.User;
 import net.lazars.chores.core.port.in.CategoryService;
 import net.lazars.chores.core.port.in.HouseholdService;
@@ -139,6 +140,20 @@ public class ManagementRestController {
 
     item.setCategory(category);
     itemService.save(item);
+  }
+
+  @GetMapping("tasks")
+  public List<TaskDto> getTasks(
+      @RequestParam(required = false) final String itemId, final Authentication authentication) {
+    final User user = authService.getCurrentUser(authentication);
+    return taskService.getAll().stream()
+        .filter(task -> isUserInHousehold(user, task.getItem().getCategory().getHousehold()))
+        .filter(task -> itemId == null || task.getItem().getId().equals(itemId))
+        .sorted(
+            Comparator.<Task, String>comparing(task -> task.getItem().getName())
+                .thenComparing(BaseModel::getName))
+        .map(mapper::toTaskDto)
+        .toList();
   }
 
   @PatchMapping("tasks/complete/{taskId}")

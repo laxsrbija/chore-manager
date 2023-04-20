@@ -6,6 +6,7 @@ import {MainContentComponent} from "./core/main-content/main-content.component";
 import {HouseholdsComponent} from "./core/main-content/households/households.component";
 import {CategoriesComponent} from "./core/main-content/categories/categories.component";
 import {ItemsComponent} from "./core/main-content/items/items.component";
+import {TasksComponent} from "./core/main-content/tasks/tasks.component";
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path: 'items',
         component: ItemsComponent
+      },
+      {
+        path: 'tasks',
+        component: TasksComponent
       }
     ]
   },

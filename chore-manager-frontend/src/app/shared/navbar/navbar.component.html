@@ -36,7 +36,12 @@
              [ngClass]="itemsLink.isActive ? 'link-secondary': 'link-light'"
              class="nav-link px-2">Items</a>
         </li>
-        <li><a href="#" class="nav-link px-2 link-light">Tasks</a></li>
+        <li>
+          <a routerLink="/tasks" routerLinkActive=""
+             #tasksLink="routerLinkActive"
+             [ngClass]="tasksLink.isActive ? 'link-secondary': 'link-light'"
+             class="nav-link px-2">Tasks</a>
+        </li>
       </ul>
     </div>
 
@@ -47,13 +52,27 @@
              class="rounded-circle border border-2 border-white">
       </a>
       <ul class="dropdown-menu text-small">
-        <li><a class="dropdown-item" href="#">New task</a></li>
-        <li><a class="dropdown-item" href="/swagger-ui.html">API documentation</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
+        <li>
+          <a class="dropdown-item" href="/swagger-ui.html">
+            <i class="bi bi-journal-code"></i>
+            API documentation
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#">
+            <i class="bi bi-person-gear"></i>
+            Settings
+          </a>
+        </li>
         <li>
           <hr class="dropdown-divider">
         </li>
-        <li><a class="dropdown-item" (click)="signOut()" href="/">Sign out</a></li>
+        <li>
+          <a class="dropdown-item" (click)="signOut()" href="/">
+            <i class="bi bi-box-arrow-left"></i>
+            Sign out
+          </a>
+        </li>
       </ul>
     </div>
   </div>
