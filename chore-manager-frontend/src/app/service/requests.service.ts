@@ -83,6 +83,10 @@ export class RequestsService {
     return this.http.post<void>('/api/service/management/tasks', task);
   }
 
+  deleteTask(taskId: string) {
+    return this.http.delete<void>('/api/service/management/tasks/' + taskId);
+  }
+
   getUsersPerHousehold() {
     return this.http.get<Record<string, User[]>>('/api/service/management/users');
   }

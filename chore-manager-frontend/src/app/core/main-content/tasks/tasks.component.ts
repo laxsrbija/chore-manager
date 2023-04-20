@@ -60,4 +60,10 @@ export class TasksComponent implements OnInit {
   editTask(task: Task) {
     this.taskModal?.loadModalData(task, this.items, this.users!);
   }
+
+  deleteTask(task: Task) {
+    this.requestsService.deleteTask(task.id!).subscribe(() => {
+      this.ngOnInit();
+    });
+  }
 }
