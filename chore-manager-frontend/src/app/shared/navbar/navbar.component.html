@@ -20,16 +20,10 @@
              class="nav-link px-2">Overview</a>
         </li>
         <li>
-          <a routerLink="/households" routerLinkActive=""
-             #householdsLink="routerLinkActive"
-             [ngClass]="householdsLink.isActive ? 'link-secondary': 'link-light'"
-             class="nav-link px-2">Households</a>
-        </li>
-        <li>
-          <a routerLink="/categories" routerLinkActive=""
-             #categoriesLink="routerLinkActive"
-             [ngClass]="categoriesLink.isActive ? 'link-secondary': 'link-light'"
-             class="nav-link px-2">Categories</a>
+          <a routerLink="/tasks" routerLinkActive=""
+             #tasksLink="routerLinkActive"
+             [ngClass]="tasksLink.isActive ? 'link-secondary': 'link-light'"
+             class="nav-link px-2">Tasks</a>
         </li>
         <li>
           <a routerLink="/items" routerLinkActive=""
@@ -38,10 +32,16 @@
              class="nav-link px-2">Items</a>
         </li>
         <li>
-          <a routerLink="/tasks" routerLinkActive=""
-             #tasksLink="routerLinkActive"
-             [ngClass]="tasksLink.isActive ? 'link-secondary': 'link-light'"
-             class="nav-link px-2">Tasks</a>
+          <a routerLink="/categories" routerLinkActive=""
+             #categoriesLink="routerLinkActive"
+             [ngClass]="categoriesLink.isActive ? 'link-secondary': 'link-light'"
+             class="nav-link px-2">Categories</a>
+        </li>
+        <li>
+          <a routerLink="/households" routerLinkActive=""
+             #householdsLink="routerLinkActive"
+             [ngClass]="householdsLink.isActive ? 'link-secondary': 'link-light'"
+             class="nav-link px-2">Households</a>
         </li>
       </ul>
     </div>
