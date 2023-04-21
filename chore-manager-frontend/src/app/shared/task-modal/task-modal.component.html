@@ -29,7 +29,7 @@
             <div class="col-lg-10">
               <select id="item" class="form-select">
                 <option *ngFor="let item of items"
-                        [selected]="task.item.id === item.id" (click)="onItemChange(item)">
+                        [selected]="task.item.id === item.id" (change)="onItemChange(item)">
                   {{item.category.household.name}} &rsaquo; {{item.category.name}}
                   &rsaquo; {{item.name}}
                 </option>
