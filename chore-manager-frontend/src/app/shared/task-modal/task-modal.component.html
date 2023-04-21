@@ -27,11 +27,14 @@
           <div class="mb-3 row">
             <label for="item" class="col-lg-2 col-form-label text-muted">Item</label>
             <div class="col-lg-10">
-              <select id="item" class="form-select">
-                <option *ngFor="let item of items"
-                        [selected]="task.item.id === item.id" (change)="onItemChange(item)">
-                  {{item.category.household.name}} &rsaquo; {{item.category.name}}
-                  &rsaquo; {{item.name}}
+              <select id="item" class="form-select" (ngModelChange)="onItemChange($event)"
+                      [ngModel]="task.item" [compareWith]="compareItems">
+                <option *ngFor="let item of items" [ngValue]="item">
+                  {{item.category.household.name}}
+                  &rsaquo;
+                  {{item.category.name}}
+                  &rsaquo;
+                  {{item.name}}
                 </option>
               </select>
             </div>

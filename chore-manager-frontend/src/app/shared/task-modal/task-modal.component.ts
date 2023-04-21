@@ -17,6 +17,7 @@ export class TaskModalComponent {
 
   protected readonly RecurrenceType = RecurrenceType;
   protected readonly DateUnit = DateUnit;
+  protected readonly Permission = Permission;
 
   @ViewChild('close') close?: ElementRef;
   @Output() taskSaved = new EventEmitter<void>();
@@ -47,6 +48,10 @@ export class TaskModalComponent {
     this.task!.item = item;
   }
 
+  compareItems(item1: Item, item2: Item) {
+    return item1 && item2 && item1.id === item2.id;
+  }
+
   onUserToggle($event: Event, user: User) {
     const checked = (<HTMLInputElement>$event.target).checked;
     if (checked) {
@@ -55,8 +60,6 @@ export class TaskModalComponent {
       this.task!.reminder.usersToNotify = this.task!.reminder.usersToNotify.filter(u => u.id !== user.id);
     }
   }
-
-  protected readonly Permission = Permission;
 
   saveTask() {
     this.saving = true;
