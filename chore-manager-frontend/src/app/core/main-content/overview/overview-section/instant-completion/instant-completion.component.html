@@ -24,8 +24,8 @@
           (click)="taskAction.emit([TaskAction.SHOW_DETAILS, task!])">
         <i class="bi bi-info-circle text-muted"></i> Task details
       </li>
-      <li class="dropdown-item" [class.disabled]="!task?.history" data-bs-toggle="modal"
-          data-bs-target="#taskCompletionHistoryModal"
+      <li class="dropdown-item" [class.disabled]="!task!.history || task!.history.length === 0"
+          data-bs-toggle="modal" data-bs-target="#taskCompletionHistoryModal"
           (click)="taskAction.emit([TaskAction.SHOW_HISTORY, task!])">
         <i class="bi bi-clock-history text-muted"></i> Completion history
       </li>
