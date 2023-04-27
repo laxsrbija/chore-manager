@@ -1,9 +1,9 @@
-package net.lazars.chores.core.port.out;
+package net.lazars.chores.core.port.in;
 
 import net.lazars.chores.core.model.Task;
 import net.lazars.chores.core.model.User;
 
-public interface EmailSender {
+public interface NotificationService {
 
   void sendTaskReminder(Task task);
 

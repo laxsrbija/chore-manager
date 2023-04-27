@@ -2,13 +2,13 @@ package net.lazars.chores.adapter.email.service;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.lazars.chores.core.model.NotificationChannel;
 import net.lazars.chores.core.model.Task;
 import net.lazars.chores.core.model.User;
-import net.lazars.chores.core.port.out.EmailSender;
+import net.lazars.chores.core.port.out.NotificationSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -16,37 +16,30 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class EmailSenderImpl implements EmailSender {
+public class EmailSenderImpl implements NotificationSender {
+
   private static final int NUMBER_OF_RETRIES = 10;
 
   private final JavaMailSender mailSender;
   private final EmailTemplateService emailTemplateService;
 
   @Override
-  public void sendTaskReminder(final Task task) {
-    final List<User> usersToNotify = task.getReminder().getUsersToNotify();
-    final String subject =
-        "\uD83D\uDCC5 " + task.getName() + " - " + task.getOccurrence().getNextOccurrence();
-
-    for (final User user : usersToNotify) {
-      final String text = emailTemplateService.parseTaskReminderEmailTemplate(task, user);
-      sendEmail(subject, text, user.getEmail());
-    }
+  public NotificationChannel getChannel() {
+    return NotificationChannel.EMAIL;
   }
 
   @Override
-  public void sendTaskCompleteByDifferentUserNotification(final Task task, final User user) {
-    final List<User> otherUsers =
-        task.getReminder().getUsersToNotify().stream()
-            .filter(userToNotify -> !userToNotify.getId().equals(user.getId()))
-            .toList();
-    final String subject = "✅ " + task.getName() + " completed by " + user.getName();
+  public void sendTaskReminder(final User user, final Task task, final String title) {
+    final String text = emailTemplateService.parseTaskReminderEmailTemplate(task, user);
+    sendEmail(title, text, user.getEmail());
+  }
 
-    for (final User otherUser : otherUsers) {
-      final String text =
-          emailTemplateService.parseTaskCompleteByDifferentUserEmailTemplate(task, user, otherUser);
-      sendEmail(subject, text, otherUser.getEmail());
-    }
+  @Override
+  public void sendTaskCompleteByDifferentUserNotification(
+      final User user, final Task task, final User otherUser, final String title) {
+    final String text =
+        emailTemplateService.parseTaskCompleteByDifferentUserEmailTemplate(task, otherUser, user);
+    sendEmail(title, text, user.getEmail());
   }
 
   private void sendEmail(final String subject, final String content, final String recipient) {

@@ -4,7 +4,9 @@ import java.util.List;import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;import net.lazars.chores.core.model.Permission;
+import lombok.experimental.SuperBuilder;
+import net.lazars.chores.core.model.NotificationChannel;
+import net.lazars.chores.core.model.Permission;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -20,4 +22,8 @@ public class UserDto extends BaseDto {
   private List<Permission> permissions;
 
   private List<HouseholdDto> households;
+
+  private String chanifyToken;
+
+  private List<NotificationChannel> notificationChannels;
 }

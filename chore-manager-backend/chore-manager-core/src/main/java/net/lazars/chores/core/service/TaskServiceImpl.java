@@ -7,9 +7,9 @@ import net.lazars.chores.core.model.CompletionHistoryItem;
 import net.lazars.chores.core.model.DeferInfo;
 import net.lazars.chores.core.model.Task;
 import net.lazars.chores.core.model.User;
+import net.lazars.chores.core.port.in.NotificationService;
 import net.lazars.chores.core.port.in.TaskService;
 import net.lazars.chores.core.port.in.UserService;
-import net.lazars.chores.core.port.out.EmailSender;
 import net.lazars.chores.core.port.out.TaskRepository;
 import net.lazars.chores.core.util.ListUtil;
 
@@ -20,7 +20,7 @@ class TaskServiceImpl implements TaskService {
 
   private final TaskRepository taskRepository;
   private final UserService userService;
-  private final EmailSender emailSender;
+  private final NotificationService notificationService;
 
   @Override
   public Task markComplete(
@@ -37,7 +37,7 @@ class TaskServiceImpl implements TaskService {
     task.setHistory(ListUtil.trimList(completionHistory, HISTORY_SIZE));
     task.setDefer(null);
 
-    new Thread(() -> emailSender.sendTaskCompleteByDifferentUserNotification(task, user)).start();
+    new Thread(() -> notificationService.sendTaskCompleteByDifferentUserNotification(task, user)).start();
     return taskRepository.save(task);
   }
 
