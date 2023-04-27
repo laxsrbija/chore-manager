@@ -18,6 +18,11 @@ public class UserMapper {
         .image(userEntity.getImage())
         .permissions(userEntity.getPermissions() != null ? userEntity.getPermissions() : List.of())
         .households(households)
+        .chanifyToken(userEntity.getChanifyToken())
+        .notificationChannels(
+            userEntity.getNotificationChannels() != null
+                ? userEntity.getNotificationChannels()
+                : List.of())
         .build();
   }
 
@@ -33,6 +38,8 @@ public class UserMapper {
             user.getHouseholds() != null
                 ? user.getHouseholds().stream().map(Household::getId).toList()
                 : List.of())
+        .chanifyToken(user.getChanifyToken())
+        .notificationChannels(user.getNotificationChannels())
         .build();
   }
 }
