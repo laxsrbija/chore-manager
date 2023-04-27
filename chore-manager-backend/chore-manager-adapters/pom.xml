@@ -19,6 +19,7 @@
     <module>chore-manager-email-adapter</module>
     <module>chore-manager-rest-adapter</module>
     <module>chore-manager-scheduler-adapter</module>
+    <module>chore-manager-chanify-adapter</module>
   </modules>
 
   <dependencies>

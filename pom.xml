@@ -26,6 +26,7 @@
     <java.version>17</java.version>
     <springdoc-openapi-starter.version>2.1.0</springdoc-openapi-starter.version>
     <mapstruct.version>1.5.5.Final</mapstruct.version>
+    <retrofit.version>2.9.0</retrofit.version>
 
     <node.version>v16.16.0</node.version>
     <npm.version>8.11.0</npm.version>
@@ -40,10 +41,15 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>io.jsondb</groupId>
-				<artifactId>jsondb-core</artifactId>
-				<version>${jsondb-core.version}</version>
-			</dependency>
+        <groupId>com.squareup.retrofit2</groupId>
+        <artifactId>retrofit</artifactId>
+        <version>${retrofit.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.squareup.retrofit2</groupId>
+        <artifactId>converter-jackson</artifactId>
+        <version>${retrofit.version}</version>
+      </dependency>
       <dependency>
         <groupId>org.springdoc</groupId>
         <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
