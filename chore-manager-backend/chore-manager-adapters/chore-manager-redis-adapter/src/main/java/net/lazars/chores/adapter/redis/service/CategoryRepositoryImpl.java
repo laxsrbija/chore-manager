@@ -10,6 +10,8 @@ import net.lazars.chores.core.model.Category;
 import net.lazars.chores.core.port.in.HouseholdService;
 import net.lazars.chores.core.port.out.CategoryRepository;
 import org.mapstruct.factory.Mappers;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -21,6 +23,7 @@ class CategoryRepositoryImpl extends EntityRepository<Category> implements Categ
   private final HouseholdService householdService;
 
   @Override
+  @Cacheable(value = "categories")
   public Category get(final String id) {
     final CategoryDocument categoryEntity = categoryRedisRepository.findById(id).orElseThrow();
     return categoryMapper.toCategory(
@@ -31,6 +34,7 @@ class CategoryRepositoryImpl extends EntityRepository<Category> implements Categ
   }
 
   @Override
+  @Cacheable(value = "categories")
   public List<Category> getAll() {
     return categoryRedisRepository.findAll().stream()
         .map(
@@ -44,12 +48,14 @@ class CategoryRepositoryImpl extends EntityRepository<Category> implements Categ
   }
 
   @Override
-  protected void saveEntity(final Category entity) {
+  @CacheEvict(value = "categories", allEntries = true)
+  public void saveEntity(final Category entity) {
     final CategoryDocument categoryEntity = categoryMapper.toCategoryDocument(entity);
     categoryRedisRepository.save(categoryEntity);
   }
 
   @Override
+  @CacheEvict(value = "categories", allEntries = true)
   public void delete(final String id) {
     categoryRedisRepository.deleteById(id);
   }

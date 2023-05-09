@@ -36,7 +36,7 @@ public class TaskRepositoryImpl extends EntityRepository<Task> implements TaskRe
   }
 
   @Override
-  protected void saveEntity(final Task entity) {
+  public void saveEntity(final Task entity) {
     final TaskDocument taskEntity = taskMapper.toTaskDocument(entity);
     taskRepository.save(taskEntity);
   }
