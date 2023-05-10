@@ -1,11 +1,15 @@
 package net.lazars.chores.adapter.redis.service;
 
+import static net.lazars.chores.adapter.redis.config.RedisCacheConfiguration.ITEM_CACHE;
+import static net.lazars.chores.adapter.redis.config.RedisCacheConfiguration.ITEM_GROUP_CACHE;
+
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.lazars.chores.adapter.redis.document.ItemDocument;
 import net.lazars.chores.adapter.redis.mapper.ItemMapper;
 import net.lazars.chores.adapter.redis.repository.ItemRedisRepository;
+import net.lazars.chores.adapter.redis.service.CacheEvictionService.CacheType;
 import net.lazars.chores.core.model.Category;
 import net.lazars.chores.core.model.Item;
 import net.lazars.chores.core.port.in.CategoryService;
@@ -23,20 +27,19 @@ class ItemRepositoryImpl extends EntityRepository<Item> implements ItemRepositor
   private final ItemMapper itemMapper = Mappers.getMapper(ItemMapper.class);
   private final ItemRedisRepository itemRepository;
   private final CategoryService categoryService;
+  private final CacheEvictionService cacheEvictionService;
 
   @Override
-  @Cacheable(value = "items")
+  @Cacheable(value = ITEM_CACHE, key = "#id")
   public Item get(final String id) {
-    log.info("Getting item with id: {}", id);
     final ItemDocument itemEntity = itemRepository.findById(id).orElseThrow();
     final Category category = categoryService.get(itemEntity.getCategoryId());
     return itemMapper.toItem(itemEntity, category);
   }
 
   @Override
-  @Cacheable(value = "items")
+  @Cacheable(value = ITEM_CACHE, key = ITEM_GROUP_CACHE)
   public List<Item> getAll() {
-    log.info("Getting all items");
     return itemRepository.findAll().stream()
         .map(
             itemEntity -> {
@@ -47,15 +50,16 @@ class ItemRepositoryImpl extends EntityRepository<Item> implements ItemRepositor
   }
 
   @Override
-  @CacheEvict(value = "items", allEntries = true)
   public void saveEntity(final Item entity) {
     final ItemDocument itemEntity = itemMapper.toItemDocument(entity);
     itemRepository.save(itemEntity);
+    cacheEvictionService.evictCache(CacheType.ITEM_CACHE, entity.getId());
   }
 
   @Override
-  @CacheEvict(value = "items", allEntries = true)
+  @CacheEvict(value = ITEM_CACHE)
   public void delete(final String id) {
     itemRepository.deleteById(id);
+    cacheEvictionService.evictCache(CacheType.ITEM_CACHE, id);
   }
 }
