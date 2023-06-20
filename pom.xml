@@ -31,7 +31,7 @@
     <node.version>v16.16.0</node.version>
     <npm.version>8.11.0</npm.version>
 
-    <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
+    <maven-clean-plugin.version>3.3.1</maven-clean-plugin.version>
     <frontend-maven-plugin.version>1.12.1</frontend-maven-plugin.version>
 
     <sonar.organization>laxsrbija</sonar.organization>
