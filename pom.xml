@@ -32,7 +32,7 @@
     <npm.version>8.11.0</npm.version>
 
     <maven-clean-plugin.version>3.3.1</maven-clean-plugin.version>
-    <frontend-maven-plugin.version>1.13.3</frontend-maven-plugin.version>
+    <frontend-maven-plugin.version>1.13.4</frontend-maven-plugin.version>
 
     <sonar.organization>laxsrbija</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
