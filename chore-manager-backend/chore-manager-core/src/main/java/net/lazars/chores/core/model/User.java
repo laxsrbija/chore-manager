@@ -3,6 +3,7 @@ package net.lazars.chores.core.model;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -21,11 +22,11 @@ public class User extends BaseModel {
 
   private String image;
 
-  private List<Permission> permissions = new ArrayList<>();
+  @Builder.Default private List<Permission> permissions = new ArrayList<>();
 
-  private List<Household> households = new ArrayList<>();
+  @Builder.Default private List<Household> households = new ArrayList<>();
 
   private String chanifyToken;
 
-  private List<NotificationChannel> notificationChannels = new ArrayList<>();
+  @Builder.Default private List<NotificationChannel> notificationChannels = new ArrayList<>();
 }
