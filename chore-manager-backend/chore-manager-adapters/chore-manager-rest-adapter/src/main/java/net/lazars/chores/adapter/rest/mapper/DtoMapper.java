@@ -69,6 +69,8 @@ public interface DtoMapper {
   @Named("toCompleteUserDto")
   CompleteUserDto toCompleteUserDto(User user);
 
+  User toUser(UserDto userDto);
+
   UserDto toUserDto(User user);
 
   @Named("toRecurrence")

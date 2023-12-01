@@ -23,13 +23,13 @@
   </modules>
 
   <properties>
-    <java.version>17</java.version>
+    <java.version>21</java.version>
     <springdoc-openapi-starter.version>2.2.0</springdoc-openapi-starter.version>
     <mapstruct.version>1.5.5.Final</mapstruct.version>
     <retrofit.version>2.9.0</retrofit.version>
 
-    <node.version>v16.16.0</node.version>
-    <npm.version>8.11.0</npm.version>
+    <node.version>v20.10.0</node.version>
+    <npm.version>10.2.4</npm.version>
 
     <maven-clean-plugin.version>3.3.2</maven-clean-plugin.version>
     <frontend-maven-plugin.version>1.15.0</frontend-maven-plugin.version>
@@ -70,8 +70,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.11.0</version>
         <configuration>
-          <source>${maven.compiler.source}</source>
-          <target>${maven.compiler.target}</target>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
           <annotationProcessorPaths>
             <path>
               <groupId>org.mapstruct</groupId>
