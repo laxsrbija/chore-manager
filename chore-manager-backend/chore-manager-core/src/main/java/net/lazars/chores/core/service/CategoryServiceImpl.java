@@ -1,5 +1,6 @@
 package net.lazars.chores.core.service;
 
+import java.util.Collection;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import net.lazars.chores.core.model.Category;
@@ -14,6 +15,11 @@ class CategoryServiceImpl implements CategoryService {
   @Override
   public Category get(final String id) {
     return categoryRepository.get(id);
+  }
+
+  @Override
+  public List<Category> get(final Collection<String> ids) {
+    return categoryRepository.get(ids);
   }
 
   @Override

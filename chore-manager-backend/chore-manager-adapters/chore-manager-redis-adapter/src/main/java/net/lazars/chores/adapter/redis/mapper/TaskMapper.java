@@ -29,19 +29,22 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaskMapper {
 
-  public Task toTask(final TaskDocument taskEntity, final Item item, final List<User> users) {
+  public Task toTask(final TaskDocument taskDocument, final Item item, final List<User> users) {
     final Task task =
         Task.builder()
-            .id(taskEntity.getId())
-            .name(taskEntity.getName())
-            .dateCreated(taskEntity.getDateCreated())
-            .description(taskEntity.getDescription())
-            .enabled(taskEntity.isEnabled())
-            .history(forEach(taskEntity.getHistory(), users, this::toCompletionHistoryItem))
-            .recurrence(toRecurrence(taskEntity))
-            .reminder(toReminderInfo(taskEntity.getReminder(), users))
+            .id(taskDocument.getId())
+            .name(taskDocument.getName())
+            .dateCreated(taskDocument.getDateCreated())
+            .description(taskDocument.getDescription())
+            .enabled(taskDocument.isEnabled())
+            .history(forEach(taskDocument.getHistory(), users, this::toCompletionHistoryItem))
+            .recurrence(toRecurrence(taskDocument))
+            .reminder(toReminderInfo(taskDocument.getReminder(), users))
             .item(item)
-            .defer(taskEntity.getDefer() != null ? toDeferInfo(taskEntity.getDefer(), users) : null)
+            .defer(
+                taskDocument.getDefer() != null
+                    ? toDeferInfo(taskDocument.getDefer(), users)
+                    : null)
             .build();
 
     final OccurrenceInfo occurrenceInfo =
@@ -62,8 +65,8 @@ public class TaskMapper {
             .dateCreated(task.getDateCreated() == null ? LocalDate.now() : task.getDateCreated())
             .description(task.getDescription())
             .enabled(task.isEnabled())
-            .history(forEach(task.getHistory(), this::toCompletionHistoryItemEntity))
-            .reminder(toReminderInfoEntity(task.getReminder()))
+            .history(forEach(task.getHistory(), this::toCompletionHistoryItemPart))
+            .reminder(toReminderInfoPart(task.getReminder()))
             .itemId(task.getItem().getId())
             .defer(task.getDefer() != null ? toDeferInfoPart(task.getDefer()) : null);
 
@@ -104,20 +107,20 @@ public class TaskMapper {
   }
 
   private CompletionHistoryItem toCompletionHistoryItem(
-      final CompletionHistoryItemPart completionHistoryItemEntity, final List<User> users) {
+      final CompletionHistoryItemPart completionHistoryItemPart, final List<User> users) {
     final User completionUser =
         users.stream()
-            .filter(user -> user.getId().equals(completionHistoryItemEntity.getUserId()))
+            .filter(user -> user.getId().equals(completionHistoryItemPart.getUserId()))
             .findFirst()
             .orElse(null);
 
     return CompletionHistoryItem.builder()
-        .dateCompleted(completionHistoryItemEntity.getDateCompleted())
+        .dateCompleted(completionHistoryItemPart.getDateCompleted())
         .user(completionUser)
         .build();
   }
 
-  private CompletionHistoryItemPart toCompletionHistoryItemEntity(
+  private CompletionHistoryItemPart toCompletionHistoryItemPart(
       final CompletionHistoryItem completionHistoryItem) {
     return CompletionHistoryItemPart.builder()
         .dateCompleted(completionHistoryItem.getDateCompleted())
@@ -125,8 +128,8 @@ public class TaskMapper {
         .build();
   }
 
-  private ReminderInfo toReminderInfo(final ReminderInfoPart entity, final List<User> users) {
-    final Set<String> usersIdsToNotify = entity.getUsersIdsToNotify();
+  private ReminderInfo toReminderInfo(final ReminderInfoPart document, final List<User> users) {
+    final Set<String> usersIdsToNotify = document.getUsersIdsToNotify();
     final List<User> usersToNotify =
         users.stream()
             .filter(user -> usersIdsToNotify != null && usersIdsToNotify.contains(user.getId()))
@@ -134,11 +137,11 @@ public class TaskMapper {
 
     return ReminderInfo.builder()
         .usersToNotify(usersToNotify)
-        .reminderDate(entity.getReminderDate())
+        .reminderDate(document.getReminderDate())
         .build();
   }
 
-  private ReminderInfoPart toReminderInfoEntity(final ReminderInfo reminderInfo) {
+  private ReminderInfoPart toReminderInfoPart(final ReminderInfo reminderInfo) {
     final Set<String> userIdsToNotify =
         reminderInfo.getUsersToNotify().stream().map(User::getId).collect(Collectors.toSet());
 

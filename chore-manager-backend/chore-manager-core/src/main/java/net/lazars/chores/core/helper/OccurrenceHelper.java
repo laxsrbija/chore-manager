@@ -22,7 +22,7 @@ public class OccurrenceHelper {
 
     final LocalDate latestCompletion =
         task.getHistory() != null && !task.getHistory().isEmpty()
-            ? task.getHistory().get(task.getHistory().size() - 1).getDateCompleted()
+            ? task.getHistory().getLast().getDateCompleted()
             : null;
 
     final Recurrence recurrence = task.getRecurrence();

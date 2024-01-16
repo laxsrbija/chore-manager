@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import net.lazars.chores.adapter.rest.dto.TaskDto;
 import net.lazars.chores.adapter.rest.mapper.DtoMapper;
 import net.lazars.chores.core.model.Task;
-import net.lazars.chores.core.port.CrudOperations;
 import net.lazars.chores.core.port.in.TaskService;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,23 +23,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @PreAuthorize("hasAuthority('MANAGE')")
 @RequestMapping(path = "/api/rest/tasks", produces = MediaType.APPLICATION_JSON_VALUE)
-public class TaskRestController implements CrudOperations<TaskDto> {
+public class TaskRestController {
 
   private final TaskService taskService;
 
-  @Override
   @GetMapping("{id}")
   public TaskDto get(@PathVariable final String id) {
     return DtoMapper.INSTANCE.toTaskDto(taskService.get(id));
   }
 
-  @Override
   @GetMapping
   public List<TaskDto> getAll() {
     return forEach(taskService.getAll(), DtoMapper.INSTANCE::toTaskDto);
   }
 
-  @Override
   @PutMapping
   public TaskDto save(@RequestBody final TaskDto taskDto) {
     final Task task = DtoMapper.INSTANCE.toTask(taskDto);
@@ -52,7 +48,6 @@ public class TaskRestController implements CrudOperations<TaskDto> {
     return tasks.stream().map(this::save).toList();
   }
 
-  @Override
   @DeleteMapping("{id}")
   public void delete(@PathVariable final String id) {
     taskService.delete(id);

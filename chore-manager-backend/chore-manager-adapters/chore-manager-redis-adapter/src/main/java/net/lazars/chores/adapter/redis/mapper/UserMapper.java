@@ -9,19 +9,20 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
 
-  public User toUser(final UserDocument userEntity, final List<Household> households) {
+  public User toUser(final UserDocument userDocument, final List<Household> households) {
     return User.builder()
-        .id(userEntity.getId())
-        .name(userEntity.getName())
-        .email(userEntity.getEmail())
-        .encodedPassword(userEntity.getEncodedPassword())
-        .image(userEntity.getImage())
-        .permissions(userEntity.getPermissions() != null ? userEntity.getPermissions() : List.of())
+        .id(userDocument.getId())
+        .name(userDocument.getName())
+        .email(userDocument.getEmail())
+        .encodedPassword(userDocument.getEncodedPassword())
+        .image(userDocument.getImage())
+        .permissions(
+            userDocument.getPermissions() != null ? userDocument.getPermissions() : List.of())
         .households(households)
-        .chanifyToken(userEntity.getChanifyToken())
+        .chanifyToken(userDocument.getChanifyToken())
         .notificationChannels(
-            userEntity.getNotificationChannels() != null
-                ? userEntity.getNotificationChannels()
+            userDocument.getNotificationChannels() != null
+                ? userDocument.getNotificationChannels()
                 : List.of())
         .build();
   }

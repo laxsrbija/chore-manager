@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import net.lazars.chores.adapter.rest.dto.CategoryDto;
 import net.lazars.chores.adapter.rest.mapper.DtoMapper;
 import net.lazars.chores.core.model.Category;
-import net.lazars.chores.core.port.CrudOperations;
 import net.lazars.chores.core.port.in.CategoryService;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,23 +23,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @PreAuthorize("hasAuthority('MANAGE')")
 @RequestMapping(path = "/api/rest/categories", produces = MediaType.APPLICATION_JSON_VALUE)
-public class CategoryRestController implements CrudOperations<CategoryDto> {
+public class CategoryRestController {
 
   private final CategoryService categoryService;
 
-  @Override
   @GetMapping("{id}")
   public CategoryDto get(@PathVariable final String id) {
     return DtoMapper.INSTANCE.toCategoryDto(categoryService.get(id));
   }
 
-  @Override
   @GetMapping
   public List<CategoryDto> getAll() {
     return forEach(categoryService.getAll(), DtoMapper.INSTANCE::toCategoryDto);
   }
 
-  @Override
   @PutMapping
   public CategoryDto save(@RequestBody final CategoryDto categoryDto) {
     final Category category = DtoMapper.INSTANCE.toCategory(categoryDto);
@@ -52,7 +48,6 @@ public class CategoryRestController implements CrudOperations<CategoryDto> {
     return categories.stream().map(this::save).toList();
   }
 
-  @Override
   @DeleteMapping("{id}")
   public void delete(@PathVariable final String id) {
     categoryService.delete(id);

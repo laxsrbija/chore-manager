@@ -1,5 +1,6 @@
 package net.lazars.chores.core.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,11 @@ class UserServiceImpl implements UserService {
   @Override
   public User get(final String userId) {
     return userRepository.get(userId);
+  }
+
+  @Override
+  public List<User> get(final Collection<String> ids) {
+    return userRepository.get(ids);
   }
 
   @Override

@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import net.lazars.chores.adapter.rest.dto.ItemDto;
 import net.lazars.chores.adapter.rest.mapper.DtoMapper;
 import net.lazars.chores.core.model.Item;
-import net.lazars.chores.core.port.CrudOperations;
 import net.lazars.chores.core.port.in.ItemService;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,23 +23,20 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @PreAuthorize("hasAuthority('MANAGE')")
 @RequestMapping(path = "/api/rest/items", produces = MediaType.APPLICATION_JSON_VALUE)
-public class ItemRestController implements CrudOperations<ItemDto> {
+public class ItemRestController {
 
   private final ItemService itemService;
 
-  @Override
   @GetMapping("{id}")
   public ItemDto get(@PathVariable final String id) {
     return DtoMapper.INSTANCE.toItemDto(itemService.get(id));
   }
 
-  @Override
   @GetMapping
   public List<ItemDto> getAll() {
     return forEach(itemService.getAll(), DtoMapper.INSTANCE::toItemDto);
   }
 
-  @Override
   @PutMapping
   public ItemDto save(@RequestBody final ItemDto itemDto) {
     final Item item = DtoMapper.INSTANCE.toItem(itemDto);
@@ -52,7 +48,6 @@ public class ItemRestController implements CrudOperations<ItemDto> {
     return items.stream().map(this::save).toList();
   }
 
-  @Override
   @DeleteMapping("{id}")
   public void delete(@PathVariable final String id) {
     itemService.delete(id);

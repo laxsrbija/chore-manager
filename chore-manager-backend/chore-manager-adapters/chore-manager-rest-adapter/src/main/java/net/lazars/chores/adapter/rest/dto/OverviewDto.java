@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class OverviewDto {
 
-  private List<TaskDto> upcoming;
   private List<TaskDto> overdue;
-  private List<TaskDto> disabled;
+  private List<TaskDto> upcoming;
 }

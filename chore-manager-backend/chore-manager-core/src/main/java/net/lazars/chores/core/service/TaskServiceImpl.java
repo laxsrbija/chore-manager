@@ -1,6 +1,7 @@
 package net.lazars.chores.core.service;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import net.lazars.chores.core.model.CompletionHistoryItem;
@@ -50,8 +51,18 @@ class TaskServiceImpl implements TaskService {
   }
 
   @Override
+  public List<Task> getAllInFocus() {
+    return taskRepository.getAllInFocus();
+  }
+
+  @Override
   public Task get(final String id) {
     return taskRepository.get(id);
+  }
+
+  @Override
+  public List<Task> get(final Collection<String> ids) {
+    return taskRepository.get(ids);
   }
 
   @Override

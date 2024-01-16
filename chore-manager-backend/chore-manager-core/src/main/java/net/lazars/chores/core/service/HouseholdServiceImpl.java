@@ -1,5 +1,6 @@
 package net.lazars.chores.core.service;
 
+import java.util.Collection;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import net.lazars.chores.core.model.Household;
@@ -14,6 +15,11 @@ public class HouseholdServiceImpl implements HouseholdService {
   @Override
   public Household get(final String id) {
     return householdRepository.get(id);
+  }
+
+  @Override
+  public List<Household> get(final Collection<String> ids) {
+    return householdRepository.get(ids);
   }
 
   @Override

@@ -1,5 +1,6 @@
 package net.lazars.chores.core.service;
 
+import java.util.Collection;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import net.lazars.chores.core.model.Item;
@@ -14,6 +15,11 @@ class ItemServiceImpl implements ItemService {
   @Override
   public Item get(final String id) {
     return itemRepository.get(id);
+  }
+
+  @Override
+  public List<Item> get(final Collection<String> ids) {
+    return itemRepository.get(ids);
   }
 
   @Override
