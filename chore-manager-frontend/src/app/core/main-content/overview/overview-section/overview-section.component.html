@@ -1,26 +1,26 @@
 <div class="my-3 p-3 bg-body rounded shadow-sm">
 
-  <div class="container px-0 pt-1 mb-2">
+  <div class="container px-0 pt-0">
     <div class="row">
       <div class="col">
-        <h6 class="pt-1 text-muted">{{ sectionTitle }}</h6>
+        <h6 class="text-muted">{{ sectionTitle }}</h6>
       </div>
       <div class="col-auto" *ngIf="tasks === undefined">
-        <button type="button" class="btn btn-outline-secondary btn-sm"
-                (click)="requestDataAction.emit()">
+        <span class="badge text-bg-light" (click)="requestDataAction.emit()"
+              style="cursor: pointer">
           <i class="bi bi-arrow-repeat"></i>
           Load tasks
-        </button>
+        </span>
       </div>
     </div>
   </div>
 
-  <h5 *ngIf="tasks?.length === 0">
+  <h5 *ngIf="tasks?.length === 0" class="mt-2">
     <i class="bi bi-stars text-warning"></i>
     No tasks
   </h5>
 
-  <div *ngIf="tasks && tasks.length > 0" class="container">
+  <div *ngIf="tasks && tasks.length > 0" class="container mt-2">
 
     <div class="row align-items-center py-3"
          [class.border-bottom]="tasks && indexOfTask !== tasks.length - 1"
