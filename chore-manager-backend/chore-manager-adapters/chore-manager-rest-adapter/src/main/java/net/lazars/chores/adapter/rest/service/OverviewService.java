@@ -25,19 +25,19 @@ public class OverviewService {
   public OverviewDto getOverview(final User currentUser) {
     final List<Task> tasks = taskService.getAllInFocus();
 
-    final List<TaskDto> upcoming =
-        tasks.stream()
-            .filter(task -> taskBelongsToUser(task, currentUser))
-            .filter(task -> task.getOccurrence().getDaysUntilNextOccurrence() > 0)
-            .sorted(OCCURRENCE_COMPARATOR.thenComparingInt(task -> task.getHistory().size()))
-            .map(DtoMapper.INSTANCE::toTaskDto)
-            .toList();
-
     final List<TaskDto> overdue =
         tasks.stream()
             .filter(task -> taskBelongsToUser(task, currentUser))
-            .filter(task -> task.getOccurrence().getDaysUntilNextOccurrence() <= 0)
+            .filter(task -> task.getOccurrence().getDaysUntilNextOccurrence() < 0)
             .sorted(OCCURRENCE_COMPARATOR)
+            .map(DtoMapper.INSTANCE::toTaskDto)
+            .toList();
+
+    final List<TaskDto> upcoming =
+        tasks.stream()
+            .filter(task -> taskBelongsToUser(task, currentUser))
+            .filter(task -> task.getOccurrence().getDaysUntilNextOccurrence() >= 0)
+            .sorted(OCCURRENCE_COMPARATOR.thenComparingInt(task -> task.getHistory().size()))
             .map(DtoMapper.INSTANCE::toTaskDto)
             .toList();
 

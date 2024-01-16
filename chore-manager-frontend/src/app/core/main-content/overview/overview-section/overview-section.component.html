@@ -1,6 +1,26 @@
-<div class="my-3 p-3 bg-body rounded shadow-sm" *ngIf="tasks?.length">
-  <h6 class="pb-2 mb-2 text-muted">{{sectionTitle}}</h6>
-  <div class="container">
+<div class="my-3 p-3 bg-body rounded shadow-sm">
+
+  <div class="container px-0 pt-1 mb-2">
+    <div class="row">
+      <div class="col">
+        <h6 class="pt-1 text-muted">{{ sectionTitle }}</h6>
+      </div>
+      <div class="col-auto" *ngIf="tasks === undefined">
+        <button type="button" class="btn btn-outline-primary btn-sm"
+                (click)="requestDataAction.emit()">
+          <i class="bi bi-arrow-repeat"></i>
+          Load tasks
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <h5 *ngIf="tasks?.length === 0">
+    <i class="bi bi-stars text-warning"></i>
+    No tasks
+  </h5>
+
+  <div *ngIf="tasks && tasks.length > 0" class="container">
 
     <div class="row align-items-center py-3"
          [class.border-bottom]="tasks && indexOfTask !== tasks.length - 1"
@@ -38,7 +58,7 @@
       <div class="w-100 d-md-none d-sm-block"></div>
 
       <div class="col-auto text-end me-3-md">
-        <img [src]="user.image" width="38" height="38"
+        <img [ngSrc]="user.image" width="38" height="38"
              [alt]="user.name"
              class="rounded-circle border border-2 border-white"
              *ngFor="let user of task.reminder.usersToNotify; let indexOfUser = index;"

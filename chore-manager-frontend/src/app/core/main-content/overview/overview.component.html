@@ -1,17 +1,24 @@
 <main class="container">
 
-  <app-overview-section sectionTitle="Overdue chores"
+  <app-overview-section sectionTitle="Overdue tasks"
                         [tasks]="overview?.overdue"
                         (taskAction)="handleAction($event)">
   </app-overview-section>
 
-  <app-overview-section sectionTitle="Upcoming chores"
+  <app-overview-section sectionTitle="Upcoming tasks"
                         [tasks]="overview?.upcoming"
                         (taskAction)="handleAction($event)">
   </app-overview-section>
 
-  <app-overview-section sectionTitle="Disabled chores"
-                        [tasks]="overview?.disabled"
+  <app-overview-section sectionTitle="Other tasks"
+                        [tasks]="otherTasks"
+                        (requestDataAction)="loadOtherTasks()"
+                        (taskAction)="handleAction($event)">
+  </app-overview-section>
+
+  <app-overview-section sectionTitle="Disabled tasks"
+                        [tasks]="disabledTasks"
+                        (requestDataAction)="loadDisabledTasks()"
                         (taskAction)="handleAction($event)">
   </app-overview-section>
 

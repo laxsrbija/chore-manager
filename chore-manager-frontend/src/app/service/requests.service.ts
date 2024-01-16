@@ -27,6 +27,14 @@ export class RequestsService {
     return this.http.get<Overview>('/api/service/overview');
   }
 
+  getOtherTasks() {
+    return this.http.get<Task[]>('/api/service/overview/other');
+  }
+
+  getDisabledTasks() {
+    return this.http.get<Task[]>('/api/service/overview/disabled');
+  }
+
   getHouseholds() {
     return this.http.get<Household[]>('/api/service/management/households');
   }

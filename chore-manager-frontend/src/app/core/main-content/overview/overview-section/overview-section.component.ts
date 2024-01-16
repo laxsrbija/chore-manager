@@ -17,4 +17,5 @@ export class OverviewSectionComponent {
   @Input() sectionTitle?: string;
 
   @Output() taskAction = new EventEmitter<[TaskAction, Task]>();
+  @Output() requestDataAction = new EventEmitter<void>();
 }

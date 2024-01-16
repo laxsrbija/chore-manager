@@ -23,6 +23,9 @@ export class OverviewComponent implements OnInit {
   @ViewChild('deferModal') deferModal?: DeferModalComponent;
 
   overview?: Overview;
+  otherTasks?: Task[];
+  disabledTasks?: Task[];
+
   users?: Record<string, User[]>;
   items?: Item[];
 
@@ -39,6 +42,14 @@ export class OverviewComponent implements OnInit {
 
   loadOverview() {
     this.requestsService.getOverview().subscribe(overview => this.overview = overview);
+
+    if (this.otherTasks !== undefined) {
+      this.loadOtherTasks();
+    }
+
+    if (this.disabledTasks !== undefined) {
+      this.loadDisabledTasks();
+    }
   }
 
   handleAction(event: [TaskAction, Task]) {
@@ -59,5 +70,13 @@ export class OverviewComponent implements OnInit {
         this.deferModal!.task = event[1];
         break;
     }
+  }
+
+  loadOtherTasks() {
+    this.requestsService.getOtherTasks().subscribe(tasks => this.otherTasks = tasks);
+  }
+
+  loadDisabledTasks() {
+    this.requestsService.getDisabledTasks().subscribe(tasks => this.disabledTasks = tasks);
   }
 }
