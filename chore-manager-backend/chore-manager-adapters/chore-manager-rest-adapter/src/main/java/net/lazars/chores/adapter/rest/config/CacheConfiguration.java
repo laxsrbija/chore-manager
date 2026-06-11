@@ -18,7 +18,7 @@ public class CacheConfiguration implements WebMvcConfigurer {
 
     registry
         .addResourceHandler("/index.html")
-        .addResourceLocations("classpath:/resources/index.html")
+        .addResourceLocations("classpath:/resources/")
         .setCacheControl(CacheControl.noStore());
   }
 }
