@@ -1,11 +1,11 @@
-FROM maven:3.9-eclipse-temurin-21 AS build
+FROM maven:3.9-eclipse-temurin-26 AS build
 
 WORKDIR /tmp
 COPY . .
 
 RUN mvn -B clean package
 
-FROM eclipse-temurin:21-jre
+FROM eclipse-temurin:26-jre
 
 WORKDIR /opt/chore-manager
 COPY --from=build /tmp/chore-manager-backend/chore-manager-application/target/chore-manager.jar .
