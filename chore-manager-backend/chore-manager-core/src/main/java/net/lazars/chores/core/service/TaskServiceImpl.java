@@ -38,7 +38,8 @@ class TaskServiceImpl implements TaskService {
     task.setHistory(ListUtil.trimList(completionHistory, HISTORY_SIZE));
     task.setDefer(null);
 
-    new Thread(() -> notificationService.sendTaskCompleteByDifferentUserNotification(task, user)).start();
+    new Thread(() -> notificationService.sendTaskCompleteByDifferentUserNotification(task, user))
+        .start();
     return taskRepository.save(task);
   }
 

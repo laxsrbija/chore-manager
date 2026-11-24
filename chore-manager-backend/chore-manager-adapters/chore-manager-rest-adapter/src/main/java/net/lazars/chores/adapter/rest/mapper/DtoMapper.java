@@ -54,10 +54,9 @@ public interface DtoMapper {
   @AfterMapping
   default void sortCompletionHistory(@MappingTarget TaskDto taskDto) {
     Optional.ofNullable(taskDto.getHistory())
-        .ifPresent(
-            history ->
-                history.sort(
-                    Comparator.comparing(CompletionHistoryItemDto::getDateCompleted).reversed()));
+        .ifPresent(history ->
+            history.sort(
+                Comparator.comparing(CompletionHistoryItemDto::getDateCompleted).reversed()));
 
     Optional.ofNullable(taskDto.getReminder())
         .map(ReminderInfoDto::getUsersToNotify)

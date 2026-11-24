@@ -22,16 +22,15 @@ public class UserAuthenticationService implements UserDetailsService {
   public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
     return userService
         .findByEmail(username)
-        .map(
-            user ->
-                User.builder()
-                    .username(user.getEmail())
-                    .password(user.getEncodedPassword())
-                    .authorities(
-                        user.getPermissions().stream()
-                            .map(permission -> new SimpleGrantedAuthority(permission.name()))
-                            .toList())
-                    .build())
+        .map(user ->
+            User.builder()
+                .username(user.getEmail())
+                .password(user.getEncodedPassword())
+                .authorities(
+                    user.getPermissions().stream()
+                        .map(permission -> new SimpleGrantedAuthority(permission.name()))
+                        .toList())
+                .build())
         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
   }
 

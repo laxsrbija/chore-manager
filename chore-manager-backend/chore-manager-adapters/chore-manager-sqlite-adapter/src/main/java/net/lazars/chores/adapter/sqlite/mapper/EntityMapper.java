@@ -114,8 +114,7 @@ public class EntityMapper {
         .email(entity.getEmail())
         .encodedPassword(entity.getEncodedPassword())
         .image(entity.getImage())
-        .households(
-            listOrEmpty(entity.getHouseholds()).stream().map(this::toHousehold).toList())
+        .households(listOrEmpty(entity.getHouseholds()).stream().map(this::toHousehold).toList())
         .permissions(listOrEmpty(entity.getPermissions()))
         .chanifyToken(entity.getChanifyToken())
         .notificationChannels(listOrEmpty(entity.getNotificationChannels()))
@@ -253,7 +252,10 @@ public class EntityMapper {
     if (entity == null) {
       return null;
     }
-    return DatePeriod.builder().frequency(entity.getFrequency()).dateUnit(entity.getDateUnit()).build();
+    return DatePeriod.builder()
+        .frequency(entity.getFrequency())
+        .dateUnit(entity.getDateUnit())
+        .build();
   }
 
   private Recurrence toRecurrence(final TaskEntity entity) {

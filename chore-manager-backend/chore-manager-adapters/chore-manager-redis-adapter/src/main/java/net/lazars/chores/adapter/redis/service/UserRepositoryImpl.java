@@ -41,15 +41,12 @@ class UserRepositoryImpl extends DocumentRepository<User> implements UserReposit
   @Override
   public List<User> getAll() {
     return userRepository.findAll().stream()
-        .map(
-            userDocument ->
-                userMapper.toUser(
-                    userDocument,
-                    Optional.ofNullable(userDocument.getHouseholdIds())
-                        .map(
-                            householdIds ->
-                                householdIds.stream().map(householdService::get).toList())
-                        .orElse(List.of())))
+        .map(userDocument ->
+            userMapper.toUser(
+                userDocument,
+                Optional.ofNullable(userDocument.getHouseholdIds())
+                    .map(householdIds -> householdIds.stream().map(householdService::get).toList())
+                    .orElse(List.of())))
         .toList();
   }
 

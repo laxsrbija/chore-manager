@@ -209,10 +209,9 @@ public class ManagementRestController {
 
     final List<UserDto> visibleUsers =
         userService.getAll().stream()
-            .filter(
-                otherUser ->
-                    otherUser.getHouseholds().stream()
-                        .anyMatch(household -> isUserInHousehold(user, household)))
+            .filter(otherUser ->
+                otherUser.getHouseholds().stream()
+                    .anyMatch(household -> isUserInHousehold(user, household)))
             .map(mapper::toUserDto)
             .toList();
 

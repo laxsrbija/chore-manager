@@ -24,8 +24,8 @@ public class SecurityConfiguration {
 
   @Bean
   public AuthenticationManager customAuthenticationManager(HttpSecurity http) {
-    final AuthenticationManagerBuilder builder = http.getSharedObject(
-        AuthenticationManagerBuilder.class);
+    final AuthenticationManagerBuilder builder =
+        http.getSharedObject(AuthenticationManagerBuilder.class);
 
     builder.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 
@@ -42,6 +42,7 @@ public class SecurityConfiguration {
     return http.csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(
             auth -> auth.requestMatchers("/api/**").authenticated().anyRequest().permitAll())
-        .httpBasic(Customizer.withDefaults()).build();
+        .httpBasic(Customizer.withDefaults())
+        .build();
   }
 }
