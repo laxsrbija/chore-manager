@@ -20,6 +20,7 @@
     <module>chore-manager-rest-adapter</module>
     <module>chore-manager-scheduler-adapter</module>
     <module>chore-manager-chanify-adapter</module>
+    <module>chore-manager-sqlite-adapter</module>
   </modules>
 
   <dependencies>

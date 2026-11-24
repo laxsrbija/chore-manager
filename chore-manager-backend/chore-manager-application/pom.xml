@@ -14,8 +14,13 @@
   <name>Chore Manager :: Application</name>
 
   <dependencies>
+<!--    <dependency>-->
+<!--      <artifactId>chore-manager-redis-adapter</artifactId>-->
+<!--      <groupId>net.lazars.chores</groupId>-->
+<!--      <version>${project.version}</version>-->
+<!--    </dependency>-->
     <dependency>
-      <artifactId>chore-manager-redis-adapter</artifactId>
+      <artifactId>chore-manager-sqlite-adapter</artifactId>
       <groupId>net.lazars.chores</groupId>
       <version>${project.version}</version>
     </dependency>

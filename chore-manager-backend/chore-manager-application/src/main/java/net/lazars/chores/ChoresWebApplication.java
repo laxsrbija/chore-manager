@@ -14,7 +14,7 @@ import org.springframework.context.annotation.FilterType;
             pattern = {"net.lazars.chores.core.service.*"}))
 public class ChoresWebApplication {
 
-  public static void main(final String[] args) {
+  static void main(final String[] args) {
     SpringApplication.run(ChoresWebApplication.class, args);
   }
 }
