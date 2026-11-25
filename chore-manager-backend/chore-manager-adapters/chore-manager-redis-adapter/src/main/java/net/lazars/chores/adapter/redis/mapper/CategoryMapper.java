@@ -3,7 +3,8 @@ package net.lazars.chores.adapter.redis.mapper;
 import net.lazars.chores.adapter.redis.document.CategoryDocument;
 import net.lazars.chores.core.model.Category;
 import net.lazars.chores.core.model.Household;
-import org.mapstruct.Mapper;import org.mapstruct.Mapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper
 public interface CategoryMapper {

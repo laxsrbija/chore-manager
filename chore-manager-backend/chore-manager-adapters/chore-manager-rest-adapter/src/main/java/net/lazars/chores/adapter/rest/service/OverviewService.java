@@ -1,6 +1,5 @@
 package net.lazars.chores.adapter.rest.service;
 
-
 import java.util.Comparator;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

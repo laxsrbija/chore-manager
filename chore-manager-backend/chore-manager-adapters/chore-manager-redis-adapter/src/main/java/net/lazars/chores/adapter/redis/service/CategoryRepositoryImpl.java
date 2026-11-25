@@ -57,9 +57,8 @@ class CategoryRepositoryImpl extends DocumentRepository<Category> implements Cat
     final Map<String, Household> households = collectById(householdService.get(householdIds));
 
     return categories.stream()
-        .map(
-            category ->
-                categoryMapper.toCategory(category, households.get(category.getHouseholdId())))
+        .map(category ->
+            categoryMapper.toCategory(category, households.get(category.getHouseholdId())))
         .toList();
   }
 }

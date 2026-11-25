@@ -1,22 +1,22 @@
 <p>
-  Hi <span th:text="${user.name}"></span>,
+    Hi <span th:text="${user.name}"></span>,
 </p>
 
 <p>
-  This is a reminder about the following task:<br>
-  <ul>
+    This is a reminder about the following task:<br>
+<ul>
     <li>
-      Task name: <strong th:text="${task.name}"></strong>
-      (<span th:text="${task.item.name}"></span>
-      /
-      <span th:text="${task.item.category.name}"></span>)
+        Task name: <strong th:text="${task.name}"></strong>
+        (<span th:text="${task.item.name}"></span>
+        /
+        <span th:text="${task.item.category.name}"></span>)
     </li>
     <li> Task description: <span th:text="${task.description}"></span></li>
     <li>
-      Due date: <strong th:text="${task.occurrence.nextOccurrence}"></strong>
-      (in <strong th:text="@{${task.occurrence.daysUntilNextOccurrence} + ' day(s)'}"></strong>)
+        Due date: <strong th:text="${task.occurrence.nextOccurrence}"></strong>
+        (in <strong th:text="@{${task.occurrence.daysUntilNextOccurrence} + ' day(s)'}"></strong>)
     </li>
-  </ul>
+</ul>
 </p>
 
 Chore Manager
