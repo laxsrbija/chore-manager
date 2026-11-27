@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import net.lazars.chores.adapter.sqlite.mapper.EntityMapper;
 import net.lazars.chores.adapter.sqlite.repository.HouseholdJpaRepository;
 import net.lazars.chores.core.model.Household;
-import net.lazars.chores.core.port.out.HouseholdRepository;
+import net.lazars.chores.core.port.HouseholdRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

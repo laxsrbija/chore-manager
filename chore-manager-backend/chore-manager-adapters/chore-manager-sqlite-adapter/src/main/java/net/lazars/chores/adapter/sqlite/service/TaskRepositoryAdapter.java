@@ -8,7 +8,7 @@ import net.lazars.chores.adapter.sqlite.mapper.EntityMapper;
 import net.lazars.chores.adapter.sqlite.repository.TaskJpaRepository;
 import net.lazars.chores.core.helper.FocusHelper;
 import net.lazars.chores.core.model.Task;
-import net.lazars.chores.core.port.out.TaskRepository;
+import net.lazars.chores.core.port.TaskRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

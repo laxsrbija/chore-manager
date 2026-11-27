@@ -10,7 +10,7 @@ import net.lazars.chores.adapter.redis.repository.UserRedisRepository;
 import net.lazars.chores.core.model.Household;
 import net.lazars.chores.core.model.User;
 import net.lazars.chores.core.port.in.HouseholdService;
-import net.lazars.chores.core.port.out.UserRepository;
+import net.lazars.chores.core.port.UserRepository;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -15,7 +15,7 @@ import net.lazars.chores.core.model.Task;
 import net.lazars.chores.core.model.User;
 import net.lazars.chores.core.port.in.ItemService;
 import net.lazars.chores.core.port.in.UserService;
-import net.lazars.chores.core.port.out.TaskRepository;
+import net.lazars.chores.core.port.TaskRepository;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
 

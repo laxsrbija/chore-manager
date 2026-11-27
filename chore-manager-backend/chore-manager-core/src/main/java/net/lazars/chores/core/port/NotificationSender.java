@@ -1,4 +1,4 @@
-package net.lazars.chores.core.port.out;
+package net.lazars.chores.core.port;
 
 import net.lazars.chores.core.model.NotificationChannel;
 import net.lazars.chores.core.model.Task;

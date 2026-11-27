@@ -1,17 +1,18 @@
 package net.lazars.chores.core.model;
 
+import java.util.UUID;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 @Data
-@SuperBuilder
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class Item extends BaseModel {
+public class Item {
 
-  private Category category;
+  private UUID id;
+  private String name;
+  private UUID categoryId;
 }

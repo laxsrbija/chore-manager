@@ -11,7 +11,7 @@ import net.lazars.chores.core.model.User;
 import net.lazars.chores.core.port.in.NotificationService;
 import net.lazars.chores.core.port.in.TaskService;
 import net.lazars.chores.core.port.in.UserService;
-import net.lazars.chores.core.port.out.TaskRepository;
+import net.lazars.chores.core.port.TaskRepository;
 import net.lazars.chores.core.util.ListUtil;
 
 @RequiredArgsConstructor

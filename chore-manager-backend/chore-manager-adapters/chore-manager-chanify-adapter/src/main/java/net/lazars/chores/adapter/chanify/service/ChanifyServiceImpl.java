@@ -8,7 +8,7 @@ import net.lazars.chores.adapter.chanify.model.ChanifyPayload;
 import net.lazars.chores.core.model.NotificationChannel;
 import net.lazars.chores.core.model.Task;
 import net.lazars.chores.core.model.User;
-import net.lazars.chores.core.port.out.NotificationSender;
+import net.lazars.chores.core.port.NotificationSender;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
 import retrofit2.Response;

@@ -8,7 +8,7 @@ import net.lazars.chores.core.model.NotificationChannel;
 import net.lazars.chores.core.model.Task;
 import net.lazars.chores.core.model.User;
 import net.lazars.chores.core.port.in.NotificationService;
-import net.lazars.chores.core.port.out.NotificationSender;
+import net.lazars.chores.core.port.NotificationSender;
 
 public class NotificationServiceImpl implements NotificationService {
 

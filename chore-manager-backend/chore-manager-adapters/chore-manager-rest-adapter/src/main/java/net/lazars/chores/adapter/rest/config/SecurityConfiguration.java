@@ -40,6 +40,7 @@ public class SecurityConfiguration {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) {
     return http
+        .csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(
             auth -> auth.requestMatchers("/api/**").authenticated().anyRequest().permitAll())
         .httpBasic(Customizer.withDefaults())

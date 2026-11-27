@@ -1,4 +1,4 @@
-package net.lazars.chores.core.port.out;
+package net.lazars.chores.core.port;
 
 import java.util.List;
 import net.lazars.chores.core.model.Task;

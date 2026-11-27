@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import net.lazars.chores.core.model.Household;
 import net.lazars.chores.core.port.in.HouseholdService;
-import net.lazars.chores.core.port.out.HouseholdRepository;
+import net.lazars.chores.core.port.HouseholdRepository;
 
 @RequiredArgsConstructor
 public class HouseholdServiceImpl implements HouseholdService {

@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import net.lazars.chores.core.model.Item;
 import net.lazars.chores.core.port.in.ItemService;
-import net.lazars.chores.core.port.out.ItemRepository;
+import net.lazars.chores.core.port.ItemRepository;
 
 @RequiredArgsConstructor
 class ItemServiceImpl implements ItemService {

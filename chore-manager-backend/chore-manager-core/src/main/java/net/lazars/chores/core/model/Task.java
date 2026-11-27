@@ -2,7 +2,9 @@ package net.lazars.chores.core.model;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -10,17 +12,19 @@ import lombok.experimental.SuperBuilder;
 import net.lazars.chores.core.model.recurrence.Recurrence;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
-@SuperBuilder
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Task extends BaseModel {
+public class Task {
+
+  private UUID id;
+  private String name;
 
   private String description;
 
   private LocalDate dateCreated;
 
-  private Item item;
+  private UUID itemId;
 
   private Recurrence recurrence;
 

@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.lazars.chores.core.model.NotificationChannel;
 import net.lazars.chores.core.model.Task;
 import net.lazars.chores.core.model.User;
-import net.lazars.chores.core.port.out.NotificationSender;
+import net.lazars.chores.core.port.NotificationSender;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;

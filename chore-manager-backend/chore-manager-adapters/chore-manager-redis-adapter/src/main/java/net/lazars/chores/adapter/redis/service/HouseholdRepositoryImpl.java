@@ -9,7 +9,7 @@ import net.lazars.chores.adapter.redis.document.HouseholdDocument;
 import net.lazars.chores.adapter.redis.mapper.HouseholdMapper;
 import net.lazars.chores.adapter.redis.repository.HouseholdRedisRepository;
 import net.lazars.chores.core.model.Household;
-import net.lazars.chores.core.port.out.HouseholdRepository;
+import net.lazars.chores.core.port.HouseholdRepository;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Service;
 

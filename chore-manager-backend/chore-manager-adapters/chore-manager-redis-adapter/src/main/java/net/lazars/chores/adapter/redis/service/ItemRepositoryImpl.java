@@ -12,7 +12,7 @@ import net.lazars.chores.adapter.redis.repository.ItemRedisRepository;
 import net.lazars.chores.core.model.Category;
 import net.lazars.chores.core.model.Item;
 import net.lazars.chores.core.port.in.CategoryService;
-import net.lazars.chores.core.port.out.ItemRepository;
+import net.lazars.chores.core.port.ItemRepository;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Component;
 

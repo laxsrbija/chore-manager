@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import net.lazars.chores.adapter.sqlite.mapper.EntityMapper;
 import net.lazars.chores.adapter.sqlite.repository.CategoryJpaRepository;
 import net.lazars.chores.core.model.Category;
-import net.lazars.chores.core.port.out.CategoryRepository;
+import net.lazars.chores.core.port.CategoryRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

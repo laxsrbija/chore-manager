@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import net.lazars.chores.core.exception.ChoreManagerException;
 import net.lazars.chores.core.model.User;
 import net.lazars.chores.core.port.in.UserService;
-import net.lazars.chores.core.port.out.UserRepository;
+import net.lazars.chores.core.port.UserRepository;
 
 @RequiredArgsConstructor
 class UserServiceImpl implements UserService {
